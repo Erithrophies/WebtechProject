@@ -1,0 +1,53 @@
+<html lang="en">
+    <head>
+        <title>User Authentication page</title>
+    </head>
+    <body>
+        <form action="" onsubmit="return check()" >
+            <div>
+                <label style="position: absolute; margin-top: 50px; margin-left: 150px; font-size: 30px;"><b>LOGIN</b></label>
+                
+                <label style="position: absolute; margin-top: 160px; margin-left: 30px; font-size: 20px;">Username</label><br/>
+                <input type="text" id = "username" name = "username" value ="" style="position: absolute; margin-top: 180px; margin-left: 30px;">
+                <i><p id ="msg" style="position: absolute; margin-top: 200px; margin-left: 30px; font-size: 10px;"></p></i>
+                <label style="position: absolute; margin-top: 230px; margin-left: 30px; font-size: 20px;">Password</label><br/>
+                <input type="password" id = "pass" name = "password" value="" style="position: absolute; margin-top: 250px; margin-left: 30px;"> <br/>
+                <i><p id ="msg1" style="position: absolute; margin-top: 260px; margin-left: 30px; font-size: 10px;"></p></i> 
+                <input type="submit" id = "button" name = "button" value = "Submit" style="position: absolute; margin-top: 290px; margin-left: 150px; font-size: 10px; height: 30px; width: 70px;">
+            </div>
+        </form>
+        <script>
+            document.getElementById("username").oninput = function() {
+            document.getElementById("msg").innerHTML = "";
+            };
+
+            document.getElementById("pass").oninput = function() {
+            document.getElementById("msg1").innerHTML = "";
+            };
+
+            function check(){
+                let username = document.getElementById('username').value;
+                let msg = document.getElementById('msg');
+
+                let password = document.getElementById('pass').value;
+                let msg1 = document.getElementById('msg1');
+
+                if(username==""){
+                    msg.innerHTML = "please type username first!";
+                    msg.style.color = 'red';
+                    
+                    return false;
+                }
+                
+
+                if(password==""){
+                    msg1.innerHTML = "please type password first!";
+                    msg1.style.color = 'red';
+                    return false;
+                }
+                
+                return true;
+            }
+        </script>
+    </body>
+</html>

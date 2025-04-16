@@ -1,0 +1,119 @@
+<html lang="en">
+    <head>
+        <title>Registration page</title>
+    </head>
+    <body>
+        <form action="" onsubmit="return check()" >
+            <div>
+                <label style="position: absolute; margin-top: 50px; margin-left: 150px; font-size: 30px;"><b>Sign Up</b></label>
+                
+                <label style="position: absolute; margin-top: 160px; margin-left: 30px; font-size: 20px;">Username</label><br/>
+                <input type="text" id = "username" name = "username" value ="" style="position: absolute; margin-top: 180px; margin-left: 30px;">
+                <i><p id ="msg" style="position: absolute; margin-top: 200px; margin-left: 30px; font-size: 10px;"></p></i>
+                <label style="position: absolute; margin-top: 230px; margin-left: 30px; font-size: 20px;">Password</label><br/>
+                <input type="password" id = "pass" name = "password" value="" style="position: absolute; margin-top: 250px; margin-left: 30px;"> <br/>
+                <i><p id ="msg1" style="position: absolute; margin-top: 260px; margin-left: 30px; font-size: 10px;"></p></i>
+                <label style="position: absolute; margin-top: 310px; margin-left: 30px; font-size: 20px;">Email</label>
+                <input type="email" id = "email" name = "email" value ="" style="position: absolute; margin-top: 350px; margin-left: 30px;">
+                <i><p id="msg3" style="position: absolute; margin-top: 370px; margin-left: 30px; font-size: 10px;"></p></i>
+                <input type="submit" id = "button" name = "button" value = "Submit" style="position: absolute; margin-top: 390px; margin-left: 150px; font-size: 10px; height: 30px; width: 70px;">
+            </div>
+        </form>
+        <script>
+            document.getElementById("username").oninput = function() {
+            document.getElementById("msg").innerHTML = "";
+            };
+
+            document.getElementById("pass").oninput = function() {
+            document.getElementById("msg1").innerHTML = "";
+            };
+
+            function check(){
+                let username = document.getElementById('username').value;
+                let msg = document.getElementById('msg');
+
+                let password = document.getElementById('pass').value;
+                let msg1 = document.getElementById('msg1');
+
+                    if(username==""){
+                        msg.innerHTML = "please type username first!";
+                        msg.style.color = 'red';
+                        
+                        return false;
+                    }
+                    
+                    if(!((username[0] >= 'a' && username[0] <= 'z') || (username[0] >= 'A' && username[0] <= 'Z')))
+                    {
+                        msg.innerHTML = "Username must start with a letter.";
+                        msg.style.color = 'red';
+                        return false;
+                    }
+
+                    let word = username.split(" ");
+                    if (word.length !== 2) {
+                        msg.innerHTML = "Must contain exactly two words.";
+                        msg.style.color = 'red';
+                        return false;
+                    }
+                        for (let i = 0; i < username.length; i++) {
+                        let x = username[i];
+
+                        if (!(
+                            (x >= 'a' && x <= 'z') ||
+                            (x >= 'A' && x <= 'Z') ||
+                            x == '.' ||
+                            x == '-' ||
+                            (x === ' ' && username[i - 1] !== ' ')
+                        )) {
+                            msg.innerHTML = "Username can only contain letters, dots (.), or dashes (-)";
+                            msg.style.color = 'red';
+                            return false;
+                        }
+                    }
+
+                    if(password==""){
+                        msg1.innerHTML = "please type password first!";
+                        msg1.style.color = 'red';
+                        return false;
+                    }
+
+                    if(password.length < 6){
+                    msg1.innerHTML = "Password must be at least 6 characters.";
+                    msg1.style.color = 'red';
+                    return false;
+                    }
+
+                let flag1= false;
+                let flag2 = false;
+
+                for(let i = 0; i < password.length; i++){
+                let ch = password[i];
+                if((ch >= 'a' && ch <= 'z') || (ch >= 'A' && ch <= 'Z')) flag1 = true;
+                else if(ch >= '0' && ch <= '9') flag2 = true;
+                }
+
+                if(!flag1 || !flag2){
+                msg1.innerHTML = "Password must contain letters and numbers.";
+                msg1.style.color = 'red';
+                return false;
+                }
+                            
+                let email = document.getElementById('email').value;
+                let msg3 = document.getElementById('msg3');
+
+                    if(email == ""){
+                        msg3.innerHTML = "cannot be empty";
+                        msg3.style.color = 'red';
+                        return false;
+                    }
+                    if (!email.endsWith("gmail.com")) {
+                        alert("Please enter a valid email address.");
+                        return false;
+                    }
+                    return true;
+            }
+
+            
+        </script>
+    </body>
+</html>
