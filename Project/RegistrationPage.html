@@ -2,34 +2,80 @@
 <html lang="en">
 <head>
     <title>Registration Page</title>
+    <style>
+        .input-container {
+            position: relative;
+            margin-top: 30px;
+            margin-left: 30px;
+            width: 250px;
+        }
+        .input-field {
+            width: 100%;
+            border: none;
+            border-bottom: 2px solid black;
+            background: transparent;
+            outline: none;
+            font-size: 16px;
+            padding: 5px 0;
+        }
+        .input-label {
+            position: absolute;
+            left: 0;
+            top: 5px;
+            font-size: 16px;
+            color: #555;
+            pointer-events: none;
+            transition: 0.2s ease all;
+        }
+        .input-field:focus ~ .input-label,
+        .input-field:not(:placeholder-shown) ~ .input-label {
+            top: -15px;
+            font-size: 12px;
+            color: black;
+        }
+        .input-field:focus ~ .input-label {
+            color: #4CAF50;
+        }
+    </style>
 </head>
-<body>
-    <form action="" onsubmit="return check()">
-        <div>
+<body style="margin: 0%; height: 100%; width: 100%; padding: 0%;">
+    <form action="" onsubmit="return check()" style="background-color:#F4EFD1; width: 1277px; height: 592px; padding: 0%; margin: 0%;">
+        <div style="width: 600px; height: 400px; background-color: #D3E3BE; position: absolute; left: 50px; top: 50px;">
             <label style="position: absolute; margin-top: 50px; margin-left: 150px; font-size: 30px;"><b>Sign Up</b></label>
 
-            
-            <label style="position: absolute; margin-top: 160px; margin-left: 30px; font-size: 20px;">Username</label><br/>
-            <input type="text" id="username" name="username" value="" style="position: absolute; margin-top: 180px; margin-left: 30px;">
-            <i><p id="msg" style="position: absolute; margin-top: 200px; margin-left: 30px; font-size: 10px;"></p></i>
+            <div class="input-container" style="margin-top: 120px;">
+                <input type="text" id="username" name="username" class="input-field" placeholder=" ">
+                <label class="input-label">Username</label>
+                <i><p id="msg" style="position: absolute; margin-top: 5px; font-size: 10px;"></p></i>
+            </div>
 
-            
-            <label style="position: absolute; margin-top: 230px; margin-left: 30px; font-size: 20px;">Password</label><br/>
-            <input type="password" id="pass" name="password" value="" style="position: absolute; margin-top: 250px; margin-left: 30px;">
-            <i><p id="msg1" style="position: absolute; margin-top: 270px; margin-left: 30px; font-size: 10px;"></p></i>
+            <div class="input-container" style="margin-top: 70px;">
+                <input type="email" id="email" name="email" class="input-field" placeholder=" ">
+                <label class="input-label">Email</label>
+                <i><p id="msg3" style="position: absolute; margin-top: 5px; font-size: 10px;"></p></i>
+            </div>
 
+            <div class="input-container" style="margin-top: 70px;">
+                <input type="password" id="pass" name="password" class="input-field" placeholder=" ">
+                <label class="input-label">Password</label>
+                <i><p id="msg1" style="position: absolute; margin-top: 5px; font-size: 10px;"></p></i>
+            </div>
             
-            <label style="position: absolute; margin-top: 310px; margin-left: 30px; font-size: 20px;">Email</label>
-            <input type="email" id="email" name="email" value="" style="position: absolute; margin-top: 340px; margin-left: 30px;">
-            <i><p id="msg3" style="position: absolute; margin-top: 360px; margin-left: 30px; font-size: 10px;"></p></i>
-
+            <div class="input-container" style="margin-top: 70px;">
+                <input type="password" id="cpass" name="password" class="input-field" placeholder=" ">
+                <label class="input-label">Confirm Password</label>
+                <i><p id="msg4" style="position: absolute; margin-top: 5px; font-size: 10px;"></p></i>
+            </div>
             
-            <input type="submit" id="button" name="button" value="Submit" style="position: absolute; margin-top: 410px; margin-left: 150px; font-size: 10px; height: 30px; width: 70px;">
+            <div style="text-align: center; margin-top: 30px;">
+                <input type="submit" id="button" name="button" value="Submit" 
+                       style="font-size: 16px; height: 40px; width: 100px; background-color: #4CAF50; color: white; border: none; border-radius: 4px; cursor: pointer;">
+              </div>
+              
         </div>
     </form>
 
     <script>
-        
         document.getElementById("username").onblur = function () {
             let username = this.value;
             let msg = document.getElementById("msg");
@@ -107,6 +153,27 @@
             msg1.innerHTML = ""; 
         };
 
+        document.getElementById("cpass").onblur = function () {
+                let cpassword = this.value;
+                let password = document.getElementById("pass").value;
+                let msg4 = document.getElementById("msg4");
+
+                if (cpassword === "") {
+                    msg4.innerHTML = "Field cannot be empty!";
+                    msg4.style.color = "red";
+                    return;
+                }
+
+                if (password !== cpassword) {
+                    msg4.innerHTML = "Passwords do not match!";
+                    msg4.style.color = "red";
+                    return;
+                }
+
+                msg4.innerHTML = "";
+            };
+
+
         document.getElementById("email").onblur = function () {
             let email = this.value;
             let msg3 = document.getElementById("msg3");
@@ -126,7 +193,6 @@
             msg3.innerHTML = ""; 
         };
 
-        
         function check() {
             let username = document.getElementById('username').value;
             let msg = document.getElementById('msg');
@@ -137,12 +203,14 @@
             let email = document.getElementById('email').value;
             let msg3 = document.getElementById('msg3');
 
-            if (msg.innerHTML !== "" || msg1.innerHTML !== "" || msg3.innerHTML !== "") {
+            let cpassword = document.getElementById('cpass').value;
+            let msg4 = document.getElementById('msg4');
+
+            if (msg.innerHTML !== "" || msg1.innerHTML !== "" || msg3.innerHTML !== "" || msg4.innerHTML!== "") {
                 return false;
             }
 
-            
-            if (username === "" || password === "" || email === "") {
+            if (username === "" || password === "" || email === "" || cpassword === "") {
                 alert("Please fill all fields correctly.");
                 return false;
             }
