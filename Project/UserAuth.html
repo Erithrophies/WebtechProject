@@ -109,6 +109,43 @@
             cursor: pointer;
             margin-top: 40px;
         }
+
+        .forgot-link {
+            margin-top: 14px;
+            color: brown;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 14px;
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        .forgot-link:hover {
+            color: darkred;
+            text-decoration: underline;
+            cursor: pointer;
+        }
+
+        .signup-text {
+            margin-top: 10px;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 17px;
+            color: black;
+        }
+
+        .signup-link {
+            color: #60769A; 
+            text-decoration: none;
+            font-weight: bold;
+            margin-left: 5px;
+            transition: color 0.2s ease;
+        }
+
+        .signup-link:hover {
+            text-decoration: underline;
+            color: #7d8fae; 
+            cursor: pointer;
+        }
+        
     </style>
 </head>
 <body>
@@ -132,6 +169,11 @@
                 </div>
 
                 <input type="submit" id="button" name="submit" value="Submit" class="submit-button">
+                <a href="ForgotPass.html" class="forgot-link">Forgot password?</a>
+
+                <div class="signup-text">
+                    Create new account <a href="RegistrationPage.html" class="signup-link">Sign Up</a>
+                </div>
             </div>
         </div>
     </form>
