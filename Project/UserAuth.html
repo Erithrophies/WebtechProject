@@ -1,53 +1,211 @@
 <html lang="en">
-    <head>
-        <title>User Authentication page</title>
-    </head>
-    <body>
-        <form action="" onsubmit="return check()" >
-            <div>
-                <label style="position: absolute; margin-top: 50px; margin-left: 150px; font-size: 30px;"><b>LOGIN</b></label>
-                
-                <label style="position: absolute; margin-top: 160px; margin-left: 30px; font-size: 20px;">Username</label><br/>
-                <input type="text" id = "username" name = "username" value ="" style="position: absolute; margin-top: 180px; margin-left: 30px;">
-                <i><p id ="msg" style="position: absolute; margin-top: 200px; margin-left: 30px; font-size: 10px;"></p></i>
-                <label style="position: absolute; margin-top: 230px; margin-left: 30px; font-size: 20px;">Password</label><br/>
-                <input type="password" id = "pass" name = "password" value="" style="position: absolute; margin-top: 250px; margin-left: 30px;"> <br/>
-                <i><p id ="msg1" style="position: absolute; margin-top: 260px; margin-left: 30px; font-size: 10px;"></p></i> 
-                <input type="submit" id = "button" name = "button" value = "Submit" style="position: absolute; margin-top: 290px; margin-left: 150px; font-size: 10px; height: 30px; width: 70px;">
+<head>
+    <title>User Authentication Page</title>
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            width: 100vw;
+            padding: 0;
+            background-color: #D5D8AB;
+            background-image: url('auraback.jpg');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+
+        .overlay-img {
+            position: absolute;
+            margin-left: 400px;
+            width: 300px;
+            top: 20px;
+            left: 20px;
+            z-index: 1;
+        }
+
+        .form-wrapper {
+            height: 100vh;
+            width: 100vw;
+            padding: 0;
+            margin: 0;
+        }
+
+        .form-box {
+            width: 600px;
+            height: 400px;
+            background-color: #D5D8AB;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            border-radius: 25px;
+        }
+
+        .form-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            border-radius: 20px;
+        }
+
+        .form-title {
+            font-size: 30px;
+            color: #60769A;
+            margin-bottom: 10px;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        .input-container {
+            position: relative;
+            margin-top: 40px;
+            margin-left: 30px;
+            width: 250px;
+        }
+
+        .input-field {
+            width: 100%;
+            border: none;
+            border-bottom: 2px solid #60769A;
+            background: transparent;
+            outline: none;
+            font-size: 16px;
+            padding: 5px 0;
+        }
+
+        .input-label {
+            position: absolute;
+            left: 0;
+            top: 5px;
+            font-size: 16px;
+            color: #555;
+            pointer-events: none;
+            transition: 0.2s ease all;
+        }
+
+        .input-field:focus ~ .input-label,
+        .input-field:not(:placeholder-shown) ~ .input-label {
+            top: -15px;
+            font-size: 15px;
+            color: #60769A;
+        }
+
+        .msg {
+            position: absolute;
+            margin-top: 5px;
+            font-size: 10px;
+            color: red;
+        }
+
+        .submit-button {
+            font-size: 16px;
+            height: 40px;
+            width: 100px;
+            background-color: #95a6c2;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            margin-top: 40px;
+        }
+
+        .forgot-link {
+            margin-top: 14px;
+            color: brown;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 14px;
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        .forgot-link:hover {
+            color: darkred;
+            text-decoration: underline;
+            cursor: pointer;
+        }
+
+        .signup-text {
+            margin-top: 10px;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 17px;
+            color: black;
+        }
+
+        .signup-link {
+            color: #60769A; 
+            text-decoration: none;
+            font-weight: bold;
+            margin-left: 5px;
+            transition: color 0.2s ease;
+        }
+
+        .signup-link:hover {
+            text-decoration: underline;
+            color: #7d8fae; 
+            cursor: pointer;
+        }
+        
+    </style>
+</head>
+<body>
+    <img src="sub.png" class="overlay-img">
+
+    <form method="post" action="Login_php.php" onsubmit="return check()" class="form-wrapper">
+        <div class="form-box">
+            <div class="form-content">
+                <label class="form-title"><b>LOGIN</b></label>
+
+                <div class="input-container">
+                    <input type="text" id="username" name="username" class="input-field" placeholder=" ">
+                    <label class="input-label">Username</label>
+                    <i><p id="msg" class="msg"></p></i>
+                </div>
+
+                <div class="input-container">
+                    <input type="password" id="pass" name="password" class="input-field" placeholder=" ">
+                    <label class="input-label">Password</label>
+                    <i><p id="msg1" class="msg"></p></i>
+                </div>
+
+                <input type="submit" id="button" name="submit" value="Submit" class="submit-button">
+                <a href="ForgotPass.html" class="forgot-link">Forgot password?</a>
+
+                <div class="signup-text">
+                    Create new account <a href="RegistrationPage.html" class="signup-link">Sign Up</a>
+                </div>
             </div>
-        </form>
-        <script>
-            document.getElementById("username").oninput = function() {
+        </div>
+    </form>
+
+    <script>
+        document.getElementById("username").oninput = function () {
             document.getElementById("msg").innerHTML = "";
-            };
+        };
 
-            document.getElementById("pass").oninput = function() {
+        document.getElementById("pass").oninput = function () {
             document.getElementById("msg1").innerHTML = "";
-            };
+        };
 
-            function check(){
-                let username = document.getElementById('username').value;
-                let msg = document.getElementById('msg');
+        function check() {
+            let username = document.getElementById('username').value;
+            let msg = document.getElementById('msg');
 
-                let password = document.getElementById('pass').value;
-                let msg1 = document.getElementById('msg1');
+            let password = document.getElementById('pass').value;
+            let msg1 = document.getElementById('msg1');
 
-                if(username==""){
-                    msg.innerHTML = "please type username first!";
-                    msg.style.color = 'red';
-                    
-                    return false;
-                }
-                
-
-                if(password==""){
-                    msg1.innerHTML = "please type password first!";
-                    msg1.style.color = 'red';
-                    return false;
-                }
-                
-                return true;
+            if (username === "") {
+                msg.innerHTML = "Please type username first!";
+                return false;
             }
-        </script>
-    </body>
+
+            if (password === "") {
+                msg1.innerHTML = "Please type password first!";
+                return false;
+            }
+
+            return true;
+        }
+    </script>
+</body>
 </html>

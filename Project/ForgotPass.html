@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Forgot Password</title>
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            width: 100vw;
+            padding: 0;
+            background-color: #D5D8AB;
+            background-image: url('auraback.jpg');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+
+        .overlay-img {
+            position: absolute;
+            margin-left: 800px;
+            width: 600px;
+            top: 120px;
+            left: 6px;
+            z-index: 1;
+        }
+
+        .form-wrapper {
+            height: 100vh;
+            width: 100vw;
+            padding: 0;
+            margin: 0;
+        }
+
+        .form-wrapper {
+            height: 100vh;
+            width: 100vw;
+            padding: 0;
+            margin: 0;
+        }
+
+        .form-box {
+            width: 1450px;
+            height: 700px;
+            background-color: rgba(97, 98, 94, 0.3);
+            position: absolute;
+            top: 50%;
+            left: 3%;
+            transform: translateY(-50%);
+            border-radius: 55px;
+        }
+
+        .form-content {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            justify-content: center;
+            height: 100%;
+            padding-left: 100px;
+        }
+
+        .form-msg {
+            font-size: 30px;
+            color: black;
+            margin-bottom: 20px;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        .input-field {
+            width: 400px;
+            height: 35px;
+            font-size: 16px;
+            border: none;
+            border-bottom: 2px solid #60769A;
+            background: transparent;
+            outline: none;
+            margin-bottom: 10px;
+        }
+
+        .msg {
+            color: red;
+            font-size: 12px;
+            margin-top: -5px;
+            margin-bottom: 15px;
+        }
+
+        .button-container {
+            display: flex;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .cancel-button,
+        .search-button {
+            font-size: 16px;
+            height: 40px;
+            width: 120px;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+        }
+
+        .cancel-button {
+            background-color: #686767;
+            color: white;
+        }
+
+        .search-button {
+            background-color: #5f86c5;
+            color: white;
+        }
+
+        .signin-link {
+            position: absolute;
+            top: 20px;
+            right: 60px;
+            color: #60769A;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 18px;
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        .signin-link:hover {
+            color: #7d8fae;
+            text-decoration: underline;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <form method="" action="" onsubmit="return check(event)" class="form-wrapper">
+        <div class="form-box">
+            <a href="UserAuth.html" class="signin-link">Sign In</a>
+            <div class="form-content">
+                <img src="forgotpass.png" class="overlay-img">
+
+                <label class="form-msg">Please enter your email address to search for your account.</label>
+
+                <input type="text" id="email" name="email" class="input-field" placeholder="Enter your email" required>
+                <p id="email-msg" class="msg"></p>
+
+                <div class="button-container">
+                    <button type="button" class="cancel-button" onclick="window.location.href='UserAuth.html'">Cancel</button>
+                    <button type="submit" class="search-button">Search</button>
+                </div>
+            </div>
+        </div>
+    </form>
+
+    <script>
+        document.getElementById("email").addEventListener("input", function () {
+        document.getElementById("email-msg").innerHTML = "";
+        });
+
+        function check() {
+            event.preventDefault(); 
+            let email = document.getElementById("email").value.trim();
+            let msg = document.getElementById("email-msg");
+            let valid = true;
+
+            msg.innerHTML = "";
+
+            if (email === "") {
+                msg.innerHTML = "Email cannot be empty.";
+                valid = false;
+            } else if (!email.includes("@") || !email.endsWith("example.com")) {
+                msg.innerHTML = "Please enter a valid email address.";
+                valid = false;
+            }
+
+            if (valid) {
+                
+                window.location.href = "SearchEmail.html"; 
+            }
+
+            return valid;
+        }
+    </script>
+</body>
+</html>
