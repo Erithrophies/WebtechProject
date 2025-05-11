@@ -1,0 +1,149 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  scroll-behavior: smooth;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  background-color: #222831;
+  padding: 1rem 2rem;
+  color: white;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 1rem;
+}
+
+.nav-links li a {
+  color: white;
+  text-decoration: none;
+}
+
+.cta {
+  background-color: #00ADB5;
+  padding: 0.4rem 1rem;
+  border-radius: 4px;
+}
+
+.hero {
+  background: #EEEEEE;
+  text-align: center;
+  padding: 4rem 2rem;
+}
+
+
+
+
+.cta-btn {
+    
+  background-color: #00ADB5;
+  color: white;
+  padding: 1rem 2rem;
+  border: none;
+  text-decoration: none;
+  border-radius: 5px;
+  display: inline-block;
+  margin-top: 1rem;
+}
+.cta-btn.secondary {
+  background-color: #666;
+  color: white;
+}
+
+
+section {
+  padding: 3rem 2rem;
+  max-width: 100%;
+  margin: auto;
+  
+}
+
+.testimonial {
+  background: #f0f0f0;
+  padding: 1rem;
+  margin: 1rem 0;
+  border-left: 4px solid #222831;
+}
+
+.signup-section {
+  background: #213448;
+  color: white;
+  text-align: center;
+  
+}
+
+footer {
+  background-color: #222;
+  color: #ccc;
+  text-align: center;
+  padding: 1rem;
+}
+
+.hero {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  height: 400px;
+  background-image: url('./home.JPG');
+  background-repeat: no-repeat;
+  background-position: center right; 
+  background-size: cover;
+  padding: 2rem 4rem;
+  color: white;
+  position: relative;
+}
+
+
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 1;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 600px;
+}
+
+.cta-btn {
+  display: inline-block;
+  margin-top: 1rem;
+  padding: 0.8rem 1.5rem;
+  background: #00ADB5;
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+}
+
+.cta-btn.secondary {
+  background: #555;
+  margin-left: 1rem;
+}
+
+
+.logo img {
+  height: 50px;         
+  width: auto;          
+  object-fit: contain;  
+}
+
+#about,
+#features {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    scroll-margin-top: 80px; 
+}
+
+
+
