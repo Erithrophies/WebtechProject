@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Org Chart</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <h1>Company Org Chart</h1>
+    <div class="controls">
+      <button id="zoom-in">Zoom In</button>
+      <button id="zoom-out">Zoom Out</button>
+      <button id="print">Print</button>
+    </div>
+  </header>
+
+  <main>
+ <div id="org-chart">
+  <ul>
+    <li>
+      <div class="employee" data-name="CEO" data-details="Chief Executive Officer">
+        <img src="/Project/Assets/1.jpg" alt="CEO">
+        <p>CEO</p>
+      </div>
+      <ul>
+        <li>
+          <div class="employee" data-name="CTO" data-details="Chief Technology Officer">
+            <img src="/Project/Assets/4.avif" alt="CTO">
+            <p>CTO</p>
+          </div>
+        </li>
+        <li>
+          <div class="employee" data-name="HR" data-details="Human Resources Manager">
+            <img src="/Project/Assets/3.jpg" alt="HR">
+            <p>HR</p>
+          </div>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div>
+
+
+  </main>
+
+  
+  <div id="profile-modal" class="modal">
+    <div class="modal-content">
+      <span id="modal-close" class="close">&times;</span>
+      <h2 id="modal-title">Employee Title</h2>
+      <p id="modal-details">Details go here...</p>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
