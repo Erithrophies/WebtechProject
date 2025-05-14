@@ -146,4 +146,96 @@ footer {
 }
 
 
+.about-section {
+  text-align: center;
+  background-color: #EEEEEE; 
+  padding: 60px 20px;
+}
+
+.about-section h2 {
+  font-size: 2rem;
+  margin-bottom: 40px;
+  color: #333;
+}
+
+.about-cards {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  gap: 40px;
+}
+
+.about-card {
+  max-width: 300px;
+  text-align: center;
+}
+
+.about-card img {
+  height: 80px;
+  margin-bottom: 20px;
+}
+
+.about-card h3 {
+  font-size: 1.25rem;
+  font-weight: bold;
+  color: #222;
+  margin-bottom: 10px;
+}
+
+.about-card p {
+  color: #444;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+.features-section {
+  background-color: #f8f5ec;
+  padding: 60px 20px;
+  text-align: center;
+}
+
+.features-section h2 {
+  font-size: 2rem;
+  margin-bottom: 40px;
+  color: #333;
+}
+
+.feature-cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  justify-content: center;
+}
+
+.feature-card {
+  background-color: #ffffff;
+  border-radius: 20px;
+  padding: 30px 20px;
+  width: 300px;
+  text-align: left;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  position: relative;
+  overflow: hidden;
+}
+
+.green-card {
+  background-color: #00ADB5; 
+  color: white;
+}
+
+.green-card h3,
+.green-card p {
+  color: white;
+}
+
+.feature-number {
+  background-color: #1a1a1a;
+  color: white;
+  display: inline-block;
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-weight: bold;
+  font-size: 1.1rem;
+  margin-bottom: 16px;
+}
 
