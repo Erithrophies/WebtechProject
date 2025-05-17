@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Document Storage</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      background-color: rgb(249, 249, 249);
+      color: #1c1f1c;
+    }
+
+    .container {
+      margin-left: 10px;
+      padding: 30px;
+    }
+
+    h1 {
+      color: #1c1f1c;
+      margin-bottom: 20px;
+    }
+
+    .upload-section,
+    .vault-section,
+    .signature-section,
+    .retention-section {
+      background-color: rgba(202, 206, 161, 0.432);
+      padding: 20px;
+      border-radius: 0px;
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: bold;
+    }
+
+    input[type="file"],
+    select {
+      width: 100%;
+      padding: 8px;
+      margin-bottom: 10px;
+    }
+
+    button {
+      padding: 10px 15px;
+      background-color: #85876a;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    ul li {
+      margin-bottom: 5px;
+      background: white;
+      padding: 8px;
+      border-radius: 5px;
+    }
+
+    .retention-policy {
+      background: white;
+      padding: 15px;
+      border-radius: 5px;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h3><i>Important Documents📁</i></h3>
+
+    
+    <div class="upload-section">
+      <h3>Upload Document</h3>
+      <label>Select Document:</label>
+      <input type="file" id="docInput">
+
+      <label>Set Permission:</label>
+      <select id="permissionSelect" style="height: 30px; width: 100px;  background-color: rgba(121, 223, 53, 0.151); color: rgb(24, 23, 23); background: transparent;">
+        <option value="manager">Manager</option>
+        <option value="all">All Employees</option>
+      </select>
+
+      <button onclick="uploadDoc()">Upload</button>
+    </div>
+
+    
+    <div class="vault-section">
+      <h3>Stored Documents</h3>
+      <ul id="vaultList">
+        
+      </ul>
+    </div>
+
+    
+    <div class="signature-section">
+      <h3>Collect Electronic Signature</h3>
+      <label><input type="checkbox" id="signatureCheck"> I acknowledge and sign this document.</label>
+    </div>
+
+    
+    <div class="retention-section">
+      <h3>Automated Retention Policy</h3>
+      <div class="retention-policy">
+        Documents will be retained for a maximum of 3 years unless flagged for extended access by HR. Expired documents are automatically flagged for deletion.
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function uploadDoc() {
+      var fileInput = document.getElementById('docInput');
+      var permission = document.getElementById('permissionSelect').value;
+      var vaultList = document.getElementById('vaultList');
+
+      if (fileInput.files.length === 0) {
+        alert("Please select a document to upload.");
+        return;
+      }
+
+      var fileName = fileInput.files[0].name;
+      var listItem = document.createElement('li');
+      listItem.textContent = fileName + " [Permission: " + permission + "] - v1.0";
+
+      vaultList.appendChild(listItem);
+
+      fileInput.value = "";
+    }
+  </script>
+
+</body>
+</html>

@@ -188,6 +188,10 @@
         };
 
         function check() {
+
+             let valid = true;
+            event.preventDefault(); 
+
             let username = document.getElementById('username').value;
             let msg = document.getElementById('msg');
 
@@ -196,15 +200,19 @@
 
             if (username === "") {
                 msg.innerHTML = "Please type username first!";
-                return false;
+                valid = false;
             }
 
             if (password === "") {
                 msg1.innerHTML = "Please type password first!";
-                return false;
+                valid = false;
+            }
+           if (valid) {
+                
+                window.location.href = "HR_Dasboard.php"; 
             }
 
-            return true;
+                return valid;
         }
     </script>
 </body>

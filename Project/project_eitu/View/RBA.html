@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Role-Based Access</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 30px;
+      background-color: black;
+      font-family: Arial, sans-serif;
+      color: white;
+    }
+
+    h1, h3 {
+      margin-left: 90px;
+      color: rgb(149, 183, 196);
+    }
+
+    table {
+      width: 90%;
+      margin: 20px auto;
+      border-collapse: collapse;
+      border: 0px;
+      border-radius: 0px;
+      background-color: rgba(12, 12, 12, 0.1);
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    th, td {
+      padding: 12px;
+      border: 0px solid #444;
+      text-align: center;
+      border-radius: 0px;
+    }
+
+    th {
+      background-color: rgba(15, 15, 15, 0.2);
+      color: rgba(161, 155, 155, 0.8);
+      font-weight: bolder;
+    }
+
+    td {
+      background-color: rgba(11, 11, 11, 0.765);
+      color: rgb(102, 99, 99);
+    }
+
+    tr:hover {
+      background-color: rgba(164, 160, 160, 0.2);
+    }
+
+    select, button {
+      padding: 6px 10px;
+      border: none;
+      border-radius: 5px;
+      background: transparent;
+      color: rgb(102, 99, 99);
+    }
+
+    button {
+      background-color: #8699da;
+      color: white;
+      cursor: pointer;
+    }
+
+    input[type="checkbox"] {
+      transform: scale(1.2);
+    }
+
+    .save-btn-container, .add-btn-container {
+      text-align: center;
+      margin-top: 30px;
+    }
+
+    .save-btn-container button, .add-btn-container button {
+      padding: 10px 20px;
+      font-size: 13px;
+    }
+
+    .add-btn-container button {
+      background-color: #b5d48e62;
+      color: white;
+      margin: 5px;
+      border-radius: 40px;
+      margin-left: 1000px;
+    }
+  </style>
+</head>
+<body>
+
+ 
+  <h3>Assign Roles</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>User ID</th>
+        <th>Name</th>
+        <th>Current Role</th>
+        <th>New Role</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>1</td>
+        <td>Alice</td>
+        <td id="role-1">Editor</td>
+        <td>
+          <select id="select-1" onchange="updateRole(1)">
+            <option>Admin</option>
+            <option selected>Editor</option>
+            <option>User</option>
+          </select>
+        </td>
+        <td><button onclick="confirmUpdate(1, 'Alice')">Update</button></td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td>Bob</td>
+        <td id="role-2">User</td>
+        <td>
+          <select id="select-2" onchange="updateRole(2)">
+            <option>Admin</option>
+            <option>Editor</option>
+            <option selected>User</option>
+          </select>
+        </td>
+        <td><button onclick="confirmUpdate(2, 'Bob')">Update</button></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="add-btn-container">
+    <button onclick="addRole()">Add New Role</button>
+  </div>
+
+  <h3>Permissions</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>Feature</th>
+        <th>Admin</th>
+        <th>Editor</th>
+        <th>User</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>View Employees</td>
+        <td><input type="checkbox" checked></td>
+        <td><input type="checkbox" checked></td>
+        <td><input type="checkbox" checked></td>
+      </tr>
+      <tr>
+        <td>Edit Salaries</td>
+        <td><input type="checkbox" checked></td>
+        <td><input type="checkbox" checked></td>
+        <td><input type="checkbox"></td>
+      </tr>
+      <tr>
+        <td>Manage Leave</td>
+        <td><input type="checkbox" checked></td>
+        <td><input type="checkbox" checked></td>
+        <td><input type="checkbox"></td>
+      </tr>
+      <tr>
+        <td>Assign Roles</td>
+        <td><input type="checkbox" checked></td>
+        <td><input type="checkbox"></td>
+        <td><input type="checkbox"></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="add-btn-container">
+    <button onclick="addPermission()">Add New Permission</button>
+  </div>
+
+  <div class="save-btn-container">
+    <button onclick="saveChanges()">Save</button>
+  </div>
+
+  <script>
+    function updateRole(userId) {
+      const newRole = document.getElementById("select-" + userId).value;
+      document.getElementById("role-" + userId).innerText = newRole;
+    }
+
+    function confirmUpdate(userId, name) {
+      const selectedRole = document.getElementById("select-" + userId).value;
+      alert(name + "'s role updated to " + selectedRole);
+    }
+
+    function saveChanges() {
+      alert("Changes saved successfully!");
+    }
+
+    function addRole() {
+      alert("");
+    }
+
+    function addPermission() {
+      alert("");
+    }
+  </script>
+</body>
+</html>

@@ -210,66 +210,29 @@
       display: flex;
       flex-wrap: wrap;
       gap: 40px;
-      margin-top: 40px;
     }
 
     canvas {
-      background:rgba(179, 170, 170, 0.18);
-      border-radius: 70px;
+      background: white;
+      border-radius: 10px;
     }
     form {
       all: unset;
       display: contents;
     }
-
-    table, th, td {
-      color: #333;
-    }
-
-    #searchBar {
-      width: 100%;
-      padding: 10px;
-      margin-bottom: 6px;
-      border-radius: 20px;
-      border: none;
-      font-size: 13px;
-      background-color: #ddd;
-    }
-
-    #tabs {
-      display: flex;
-      gap: 10px;
-      margin-bottom: 20px;
-    }
-
-    #tabs button {
-      padding: 10px 20px;
-      border-radius: 8px;
-      border: none;
-      background: #555;
-      color: white;
-      cursor: pointer;
-    }
-
-    #tabs button.active {
-      background: #333;
-    }
-
-    
   </style>
 </head>
 <body>
   <form>
-
     <div class="sidebar">
       <div class="top-section">
         <h2>Workos</h2>
         <ul>
           <h3>Menu</h3>
           <li><a href="HR_Dashboard.php">Dashboard</a></li>
-          <li><a href="HR_Employee.html">Employee</a></li>
-          <li><a href="HR_performance.html">Reviews</a></li>
-          <li><a href="HR_Document.html">Documents</a></li>
+          <li><a href="employee.html">Employee</a></li>
+          <li><a href="recruitment.html">Recruitment</a></li>
+          <li><a href="documents.html">Documents</a></li>
           <div class="department-header" onclick="toggleDepartments()">
             <h3>Department</h3>
             <button onclick="toggleDepartments()">+</button>
@@ -285,24 +248,20 @@
           <h3>Others</h3>
           <li><a href="settings.html">Settings</a></li>
           <li><a href="feedback.html">Feedbacks</a></li>
-          <li><a href="../Controller/logout.php">Logout</a></li>
+          <li><a href="logout.html">Logout</a></li>
         </ul>
       </div>
     </div>
 
     <div class="main">
-      
-
       <div class="topbar">
-        <input type="text" id="searchBar" placeholder="Search employee...">
         <div class="notification">🔔</div>
         <div class="profile-btn">
           <img src="profile.jpg" alt="Profile" />
         </div>
       </div>
-      
 
-      <h1 style="color: #1c1f1c;">Overview</h1>
+      <h1 style="color: #1c1f1c;">HR Dashboard</h1>
 
       <div class="dashboard-grid">
         <div class="card">👥 <span class="highlight">Total Employees:</span> 142</div>
@@ -315,66 +274,11 @@
         <div class="card">📚 <span class="highlight">Ongoing Trainings:</span> 9 Programs</div>
       </div>
 
-      
-<div style="display: flex; gap: 40px; align-items: flex-start;">
-
-  <!-- Pie Chart -->
-  <div class="chart-section" >
-    <canvas id="orgHealthChart" width="300" height="300"></canvas>
-  </div>
-
-  <!-- Employee Performance Table -->
-  <div style="flex: 1;">
-    <h2 style="color:#454d42;">Employee Performance</h2>
-    <table border="0" style="width: 100%; border-collapse: collapse; font-family: Arial, sans-serif; text-align:center" >
-      
-      <tbody style="font-weight: bold;">
-        <tr>
-          <td style="padding: 8px; border: 0px solid #ddd;">Top Performer</td>
-          <td style="padding: 8px; border: 0px solid #ddd;">Sarah Ahmed (95%)</td>
-        </tr>
-        <tr style="background-color: #f9f9f9;">
-          <td style="padding: 8px; border: 0px solid #ddd;">Avg Task Completion</td>
-          <td style="padding: 8px; border: 0px solid #ddd;">87%</td>
-        </tr>
-        <tr>
-          <td style="padding: 8px; border: 0px solid #ddd;">Attendance Rate</td>
-          <td style="padding: 8px; border: 0px solid #ddd;">96%</td>
-        </tr>
-        <tr style="background-color: #f9f9f9;">
-          <td style="padding: 8px; border: 0px solid #ddd;">Performance Index</td>
-          <td style="padding: 8px; border: px solid #ddd;">8.7 / 10</td>
-        </tr>
-      </tbody>
-    </table>
-  
-    <h3 style="color:#454d42; margin-top: 20px;">Top 3 Employee Scores</h3>
-    
-    <div style="margin-bottom: 15px;">
-      <div style="color:#333;">Sarah Ahmed</div>
-      <div style="background:#ddd; border-radius:10px; overflow:hidden;">
-        <div style="width:95%; background:#60a5fa; padding:5px 0; color:white; text-align:center;">95%</div>
+      <h2 style="color:#454d42;">Organizational Charts</h2>
+      <div class="chart-section">
+        <canvas id="orgHealthChart" width="300" height="300"></canvas>
       </div>
     </div>
-    <div style="margin-bottom: 15px;">
-      <div style="color:#333;">Mehedi Hasan</div>
-      <div style="background:#ddd; border-radius:10px; overflow:hidden;">
-        <div style="width:90%; background:#fcd34d; padding:5px 0; color:black; text-align:center;">90%</div>
-      </div>
-    </div>
-    <div style="margin-bottom: 15px;">
-      <div style="color:#333;">Fatima Noor</div>
-      <div style="background:#ddd; border-radius:10px; overflow:hidden;">
-        <div style="width:88%; background:#ef4444; padding:5px 0; color:white; text-align:center;">88%</div>
-      </div>
-    </div>
-  </div>
-
-</div>
-
-      
-
-    
   </form>
 
   <script>
