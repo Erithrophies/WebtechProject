@@ -21,6 +21,18 @@
       color: white;
     }
 
+    .container {
+      display: flex;
+      width: 100%;
+      min-height: 100vh;
+    }
+
+    .main {
+      flex: 1;
+      padding: 30px;
+      margin-left: 250px; 
+    }
+
     .department-header {
       display: flex;
       justify-content: space-between;
@@ -76,13 +88,6 @@
       object-fit: cover;
       border: 2px solid white;
     }
-
-    .main {
-      margin-left: 0;
-      padding: 30px;
-      flex-grow: 1;
-    }
-
 
     .card {
       background: rgba(177, 178, 167, 0.639);
@@ -178,10 +183,14 @@
       color: #454d42;
       margin-bottom: 20px;
     }
+    
   </style>
 </head>
 <body>
-  
+  <form>
+    <div class="container">
+      <?php include 'sidebar.html'; ?>
+      
       <div class="main">
         <div style="margin-bottom: 20px">
           <a href="#" class="action-btn edit-btn" style="font-size: 14px; padding: 10px 20px; text-decoration: none; display: inline-block;">
@@ -269,6 +278,7 @@
           }    
         }
       </script>
+      </form>
 </body>
 </html>
 

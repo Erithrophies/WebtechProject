@@ -13,8 +13,16 @@
     }
 
     .container {
-      margin-left: 10px;
+      display: flex;
+      width: 100%;
+      min-height: 100vh;
+    }
+
+    .main {
+      flex: 1;
       padding: 30px;
+      margin-left: 250px;
+      color: #1c1f1c; 
     }
 
     h1 {
@@ -30,12 +38,14 @@
       padding: 20px;
       border-radius: 0px;
       margin-bottom: 20px;
+      color: #1c1f1c;
     }
 
     label {
       display: block;
       margin-bottom: 8px;
       font-weight: bold;
+      color: #1c1f1c;
     }
 
     input[type="file"],
@@ -43,6 +53,7 @@
       width: 100%;
       padding: 8px;
       margin-bottom: 10px;
+      color: #1c1f1c;
     }
 
     button {
@@ -59,11 +70,11 @@
       padding: 0;
     }
 
-    ul li {
-      margin-bottom: 5px;
-      background: white;
-      padding: 8px;
-      border-radius: 5px;
+    
+
+    form {
+      all: unset;
+      display: contents;
     }
 
     .retention-policy {
@@ -75,8 +86,13 @@
   </style>
 </head>
 <body>
+  
+
 
   <div class="container">
+  <?php include 'sidebar.html'; ?>
+  <div class="main">
+
     <h3><i>Important Documents📁</i></h3>
 
     
@@ -116,6 +132,7 @@
       </div>
     </div>
   </div>
+  </div>
 
   <script>
     function uploadDoc() {
@@ -137,6 +154,6 @@
       fileInput.value = "";
     }
   </script>
-
+  
 </body>
 </html>

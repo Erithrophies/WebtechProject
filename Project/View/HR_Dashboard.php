@@ -261,34 +261,7 @@
 <body>
   <form>
 
-    <div class="sidebar">
-      <div class="top-section">
-        <h2>Workos</h2>
-        <ul>
-          <h3>Menu</h3>
-          <li><a href="HR_Dashboard.php">Dashboard</a></li>
-          <li><a href="HR_Employee.html">Employee</a></li>
-          <li><a href="HR_performance.html">Reviews</a></li>
-          <li><a href="HR_Document.html">Documents</a></li>
-          <div class="department-header" onclick="toggleDepartments()">
-            <h3>Department</h3>
-            <button onclick="toggleDepartments()">+</button>
-          </div>
-          <ul id="departmentList" class="department-list" style="display: block;">
-            <li><div class="circle art"></div><a href="art&design.html">Art & Design</a></li>
-            <li><div class="circle dev"></div><a href="development.html">Development</a></li>
-          </ul>
-        </ul>
-      </div>
-      <div class="bottom-section">
-        <ul>
-          <h3>Others</h3>
-          <li><a href="settings.html">Settings</a></li>
-          <li><a href="feedback.html">Feedbacks</a></li>
-          <li><a href="../Controller/logout.php">Logout</a></li>
-        </ul>
-      </div>
-    </div>
+    <?php include 'sidebar.html'; ?>
 
     <div class="main">
       
