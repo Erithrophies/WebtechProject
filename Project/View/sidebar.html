@@ -1,7 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
   <style>
     * { box-sizing: border-box; }
     html, body {
@@ -69,6 +65,11 @@
       justify-content: space-between;
       align-items: center;
       cursor: pointer;  
+      width: 100%;
+      margin: 20px 0 10px;
+      font-size: 16px;
+      border-bottom: 1px solid rgba(255,255,255,0.3);
+      padding-bottom: 5px;
     }
     .department-header button {
       background: none;
@@ -77,11 +78,18 @@
       font-size: 18px;
       cursor: pointer;
     }
+    .department-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      width: 100%;
+    }
     .department-list li {
       display: flex;
       align-items: center;
       gap: 10px;
       padding-left: 10px;
+      margin: 10px 0;
     }
     .circle {
       width: 10px;
@@ -93,45 +101,44 @@
     .bottom-section {
       margin-top: auto;
     }
-   
   </style>
-</head>
 
-<body>
-    <div class="sidebar">
-      <div class="top-section">
-        <h2>Workos</h2>
-        <ul>
-          <h3>Menu</h3>
-          <li><a href="HR_Dashboard.php">Dashboard</a></li>
-          <li><a href="HR_Employee.php">Employee</a></li>
-          <li><a href="HR_performance.php">Reviews</a></li>
-          <li><a href="HR_Document.php">Documents</a></li>
-          <div class="department-header" onclick="toggleDepartments()">
-            <h3>Department</h3>
-            <button onclick="toggleDepartments()">+</button>
-          </div>
-          <ul id="departmentList" class="department-list" style="display: block;">
-            <li><div class="circle art"></div><a href="art&design.html">Art & Design</a></li>
-            <li><div class="circle dev"></div><a href="development.html">Development</a></li>
-          </ul>
-        </ul>
+
+
+  <div class="sidebar">
+    <div class="top-section">
+      <h2>Workos</h2>
+      <ul>
+        <h3>Menu</h3>
+        <li><a href="HR_Dashboard.php">Dashboard</a></li>
+        <li><a href="HR_Employee.php">Employee</a></li>
+        <li><a href="HR_performance.php">Reviews</a></li>
+        <li><a href="HR_Document.php">Documents</a></li>
+      </ul>
+
+      <div class="department-header">
+        <span>Department</span>
+        <button onclick="toggleDepartments()">+</button>
       </div>
-      <div class="bottom-section">
-        <ul>
-          <h3>Others</h3>
-          <li><a href="settings.html">Settings</a></li>
-          <li><a href="feedback.html">Feedbacks</a></li>
-          <li><a href="../Controller/logout.php">Logout</a></li>
-        </ul>
-      </div>
+      <ul id="departmentList" class="department-list" style="display: block;">
+        <li><div class="circle art"></div><a href="art&design.html">Art & Design</a></li>
+        <li><div class="circle dev"></div><a href="development.html">Development</a></li>
+      </ul>
     </div>
 
-    <script>
-      function toggleDepartments() {
-        const departmentList = document.getElementById('departmentList');
-        departmentList.style.display = departmentList.style.display === 'block' ? 'none' : 'block';
-      }
-    </script>
+    <div class="bottom-section">
+      <ul>
+        <h3>Others</h3>
+        <li><a href="settings.html">Settings</a></li>
+        <li><a href="feedback.html">Feedbacks</a></li>
+        <li><a href="../Controller/logout.php">Logout</a></li>
+      </ul>
+    </div>
+  </div>
 
-</body>  
+  <script>
+    function toggleDepartments() {
+      const departmentList = document.getElementById('departmentList');
+      departmentList.style.display = departmentList.style.display === 'block' ? 'none' : 'block';
+    }
+  </script>

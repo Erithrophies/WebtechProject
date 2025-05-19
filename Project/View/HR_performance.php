@@ -4,21 +4,120 @@
   <meta charset="UTF-8" />
   <title>Performance</title>
   <style>
+    * { box-sizing: border-box; }
+
     body {
+      margin: 0;
+      padding: 0;
+      display: flex;
       font-family: Arial, sans-serif;
       background-color: rgb(249, 249, 249);
       color: #1c1f1c;
-      margin: 0;
+    }
+
+    .sidebar {
+      width: 250px;
+      background: #85876a;
+      padding: 30px 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      height: 100vh;
+      position: fixed;
+      color: white;
+    }
+
+    .sidebar .top-section {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .sidebar h2 {
+      margin-bottom: 30px;
+      font-size: 24px;
+      color: white;
+    }
+
+    .sidebar ul {
+      list-style: none;
       padding: 0;
+      width: 100%;
+    }
+
+    .sidebar ul h3 {
+      margin: 20px 0 10px;
+      font-size: 16px;
+      border-bottom: 1px solid rgba(255,255,255,0.3);
+      padding-bottom: 5px;
+      color: white;
+    }
+
+    .sidebar ul li a {
+      color: white;
+      text-decoration: none;
+      padding: 8px 0;
+      display: block;
+      border-radius: 5px;
+      transition: background 0.3s;
+    }
+
+    .sidebar ul li a:hover {
+      background-color: rgba(255, 255, 255, 0.2);
+    }
+
+    .department-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      width: 100%;
+      margin: 20px 0 10px;
+      font-size: 16px;
+      border-bottom: 1px solid rgba(255,255,255,0.3);
+      padding-bottom: 5px;
+    }
+
+    .department-header button {
+      background: none;
+      border: none;
+      color: white;
+      font-size: 18px;
+      cursor: pointer;
+    }
+
+    .department-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      width: 100%;
+    }
+
+    .department-list li {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding-left: 10px;
+      margin: 10px 0;
+    }
+
+    .circle {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+    }
+
+    .art { background-color: #f78fb3; }
+    .dev { background-color: #70a1ff; }
+
+    .bottom-section {
+      margin-top: auto;
     }
 
     .container {
-      margin-left: 10px;
+      margin-left: 250px;
       padding: 30px;
-    }
-
-    h1, h3 {
-      color: #1c1f1c;
+      width: calc(100% - 250px);
     }
 
     .tabs {
@@ -53,7 +152,6 @@
 
     .tab-content.active {
       display: block;
-    
     }
 
     input, textarea, select {
@@ -78,7 +176,7 @@
     }
 
     ul li {
-      background-color: white;
+      
       padding: 10px;
       margin-bottom: 5px;
       border-radius: 5px;
@@ -86,6 +184,37 @@
   </style>
 </head>
 <body>
+  <div class="sidebar">
+    <div class="top-section">
+      <h2>Workos</h2>
+      <ul>
+        <h3>Menu</h3>
+        <li><a href="HR_Dashboard.php">Dashboard</a></li>
+        <li><a href="HR_Employee.php">Employee</a></li>
+        <li><a href="HR_performance.php">Reviews</a></li>
+        <li><a href="HR_Document.php">Documents</a></li>
+      </ul>
+
+      <div class="department-header">
+        <span>Department</span>
+        <button onclick="toggleDepartments()">+</button>
+      </div>
+      <ul id="departmentList" class="department-list">
+        <li><div class="circle art"></div><a href="art&design.html">Art & Design</a></li>
+        <li><div class="circle dev"></div><a href="development.html">Development</a></li>
+      </ul>
+    </div>
+
+    <div class="bottom-section">
+      <ul>
+        <h3>Others</h3>
+        <li><a href="settings.html">Settings</a></li>
+        <li><a href="feedback.html">Feedbacks</a></li>
+        <li><a href="../Controller/logout.php">Logout</a></li>
+      </ul>
+    </div>
+  </div>
+
   <div class="container">
     <h1><i>Performance Management</i></h1>
     <div class="tabs">
@@ -97,7 +226,7 @@
     <div id="review" class="tab-content active">
       <h3>Schedule a Review</h3>
       <input type="text" id="reviewTitle" placeholder="Review Title">
-      <input type="date" id="reviewDate" >
+      <input type="date" id="reviewDate">
       <button class="submit-btn" onclick="addReview()">Schedule</button>
       <ul id="reviewList"></ul>
     </div>
@@ -168,13 +297,18 @@
       const status = document.getElementById('goalStatus').value;
       if (goal) {
         const item = document.createElement('li');
-        item.textContent = `🎯 ${goal} [${status}]`;
+        item.textContent = `🎯 ${goal} — ${status}`;
         document.getElementById('goalList').appendChild(item);
         document.getElementById('goalText').value = '';
         document.getElementById('goalStatus').value = 'Pending';
       } else {
-        alert("Enter a goal to track.");
+        alert("Please enter a goal.");
       }
+    }
+
+    function toggleDepartments() {
+      const list = document.getElementById("departmentList");
+      list.style.display = list.style.display === "none" ? "block" : "none";
     }
   </script>
 </body>

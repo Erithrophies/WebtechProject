@@ -192,8 +192,17 @@
       <?php include 'sidebar.html'; ?>
       
       <div class="main">
+        <div class="topbar">
+          <input
+            type="text"
+            id="searchInput"
+            placeholder="Search employees..."
+            style="padding: 8px 12px; font-size: 14px; border-radius: 6px; border: 1px solid #ccc; width: 250px; color: black;"
+          />
+        </div>
+
         <div style="margin-bottom: 20px">
-          <a href="#" class="action-btn edit-btn" style="font-size: 14px; padding: 10px 20px; text-decoration: none; display: inline-block;">
+          <a href="AddEmployee.html" class="action-btn edit-btn" style="font-size: 14px; padding: 10px 20px; text-decoration: none; display: inline-block;">
             + Add Employee
           </a>
         </div>
@@ -225,7 +234,8 @@
                   <td>Senior Developer</td>
                   <td><span class="status-badge status-active">Active</span></td>
                   <td>
-                    <button class="action-btn edit-btn">Edit</button>
+                    <a class="action-btn edit-btn" href="EditEmployee.html">Edit</a>
+
                     <button class="action-btn delete-btn">Delete</button>
                   </td>
                 </tr>
@@ -241,7 +251,8 @@
                   <td>UI Designer</td>
                   <td><span class="status-badge status-active">Active</span></td>
                   <td>
-                    <button class="action-btn edit-btn">Edit</button>
+                    <a class="action-btn edit-btn" href="EditEmployee.html">Edit</a>
+
                     <button class="action-btn delete-btn">Delete</button>
                   </td>
                 </tr>
@@ -257,7 +268,8 @@
                   <td>Project Manager</td>
                   <td><span class="status-badge status-leave">On Leave</span></td>
                   <td>
-                    <button class="action-btn edit-btn">Edit</button>
+                    <a class="action-btn edit-btn" href="EditEmployee.html">Edit</a>
+
                     <button class="action-btn delete-btn">Delete</button>
                   </td>
                 </tr>
@@ -277,6 +289,16 @@
             deptList.style.display = "none"; 
           }    
         }
+
+         document.getElementById("searchInput").addEventListener("keyup", function () {
+          const filter = this.value.toLowerCase();
+          const rows = document.querySelectorAll(".employee-table tbody tr");
+
+          rows.forEach(row => {
+            const text = row.innerText.toLowerCase();
+            row.style.display = text.includes(filter) ? "" : "none";
+          });
+        });
       </script>
       </form>
 </body>
