@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Timesheets - Employee Management System</title>
-  <link rel="stylesheet" href="/Project/Timesheet/style.css" />
+  <link rel="stylesheet" href="./style.css" />
 </head>
 <body>
 
@@ -16,11 +16,143 @@
   <section class="section">
     
     <div class="card-grid">
-      <div class="card">
+      <div class="card timesheet-card">
         <h3>🗓️ Weekly Timesheet</h3>
-      </div>
-      <div class="card">
-        <h3>✅ Approval Queue</h3>
+        <table class="timesheet-table">
+          <thead>
+            <tr>
+              <th>Day</th>
+              <th>Date</th>
+              <th>Clock In</th>
+              <th>Clock Out</th>
+              <th>Total Hours</th>
+              <th>Project/Task</th>
+              <th>Notes</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Monday</td>
+              <td><input type="date" /></td>
+              <td><input type="time" /></td>
+              <td><input type="time" /></td>
+              <td><input type="text" readonly /></td>
+              <td>
+                <select>
+                  <option value="">Select Project/Task</option>
+                  <option value="Minecraft">Minecraft</option>
+                  <option value="COD">COD</option>
+                  <option value="Bug Fix">Bug Fix Task</option>
+                  <option value="Concept Art">Concept Art Task</option>
+                </select>
+              </td>
+              <td><input type="text" placeholder="Notes" /></td>
+            </tr>
+            <tr>
+              <td>Tuesday</td>
+              <td><input type="date" /></td>
+              <td><input type="time" /></td>
+              <td><input type="time" /></td>
+              <td><input type="text" readonly /></td>
+              <td>
+                <select>
+                  <option value="">Select Project/Task</option>
+                  <option value="Minecraft">Minecraft</option>
+                  <option value="COD">COD</option>
+                  <option value="Bug Fix">Bug Fix Task</option>
+                  <option value="Concept Art">Concept Art Task</option>
+                </select>
+              </td>
+              <td><input type="text" placeholder="Notes" /></td>
+            </tr>
+            <tr>
+              <td>Wednesday</td>
+              <td><input type="date" /></td>
+              <td><input type="time" /></td>
+              <td><input type="time" /></td>
+              <td><input type="text" readonly /></td>
+              <td>
+                <select>
+                  <option value="">Select Project/Task</option>
+                  <option value="Minecraft">Minecraft</option>
+                  <option value="COD">COD</option>
+                  <option value="Bug Fix">Bug Fix Task</option>
+                  <option value="Concept Art">Concept Art Task</option>
+                </select>
+              </td>
+              <td><input type="text" placeholder="Notes" /></td>
+            </tr>
+            <tr>
+              <td>Thursday</td>
+              <td><input type="date" /></td>
+              <td><input type="time" /></td>
+              <td><input type="time" /></td>
+              <td><input type="text" readonly /></td>
+              <td>
+                <select>
+                  <option value="">Select Project/Task</option>
+                  <option value="Minecraft">Minecraft</option>
+                  <option value="COD">COD</option>
+                  <option value="Bug Fix">Bug Fix Task</option>
+                  <option value="Concept Art">Concept Art Task</option>
+                </select>
+              </td>
+              <td><input type="text" placeholder="Notes" /></td>
+            </tr>
+            <tr>
+              <td>Friday</td>
+              <td><input type="date" /></td>
+              <td><input type="time" /></td>
+              <td><input type="time" /></td>
+              <td><input type="text" readonly /></td>
+              <td>
+                <select>
+                  <option value="">Select Project/Task</option>
+                  <option value="Minecraft">Minecraft</option>
+                  <option value="COD">COD</option>
+                  <option value="Bug Fix">Bug Fix Task</option>
+                  <option value="Concept Art">Concept Art Task</option>
+                </select>
+              </td>
+              <td><input type="text" placeholder="Notes" /></td>
+            </tr>
+            <tr>
+              <td>Saturday</td>
+              <td><input type="date" /></td>
+              <td><input type="time" /></td>
+              <td><input type="time" /></td>
+              <td><input type="text" readonly /></td>
+              <td>
+                <select>
+                  <option value="">Select Project/Task</option>
+                  <option value="Minecraft">Minecraft</option>
+                  <option value="COD">COD</option>
+                  <option value="Bug Fix">Bug Fix Task</option>
+                  <option value="Concept Art">Concept Art Task</option>
+                </select>
+              </td>
+              <td><input type="text" placeholder="Notes" /></td>
+            </tr>
+            <tr>
+              <td>Sunday</td>
+              <td><input type="date" /></td>
+              <td><input type="time" /></td>
+              <td><input type="time" /></td>
+              <td><input type="text" readonly /></td>
+              <td>
+                <select>
+                  <option value="">Select Project/Task</option>
+                  <option value="Minecraft">Minecraft</option>
+                  <option value="COD">COD</option>
+                  <option value="Bug Fix">Bug Fix Task</option>
+                  <option value="Concept Art">Concept Art Task</option>
+                </select>
+              </td>
+              <td><input type="text" placeholder="Notes" /></td>
+            </tr>
+          </tbody>
+        </table>
+        <button class="submit-timesheet">Submit Timesheet</button>
       </div>
     </div>
   </section>
@@ -28,21 +160,53 @@
   <section class="section">
     <div class="card-grid">
       <div class="card">
-        <h3>📍 Clock In/Out with GPS</h3>
-        <p>Employees can punch in/out using geolocation verification to ensure accuracy and compliance.</p>
-      </div>
-      <div class="card">
-        <h3>🛠️ Project/Task Allocation</h3>
-        <p>Track time spent on specific projects or tasks for better project management and reporting.</p>
-      </div>
-      <div class="card">
-        <h3>⏰ Overtime Threshold Alerts</h3>
-        <p>Get real-time alerts when logged hours approach or exceed preset overtime limits.</p>
+        <h3>✅ Approval Queue</h3>
+        <table class="approval-table">
+          <thead>
+            <tr>
+              <th>Employee</th>
+              <th>Week</th>
+              <th>Status</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Abdullah Al Noman</td>
+              <td>2025-05-12 to 2025-05-18</td>
+              <td>Pending</td>
+              <td>
+                <button class="approve-btn">Approve</button>
+                <button class="reject-btn">Reject</button>
+              </td>
+            </tr>
+            <tr>
+              <td>Tahsin Siam</td>
+              <td>2025-05-12 to 2025-05-18</td>
+              <td>Pending</td>
+              <td>
+                <button class="approve-btn">Approve</button>
+                <button class="reject-btn">Reject</button>
+              </td>
+            </tr>
+            <tr>
+              <td>Maliha Imam</td>
+              <td>2025-05-12 to 2025-05-18</td>
+              <td>Pending</td>
+              <td>
+                <button class="approve-btn">Approve</button>
+                <button class="reject-btn">Reject</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
   </section>
 
+
+
  
-  <script src="/Project/Timesheet/script.js"></script>
+  <script src="./script.js"></script>
 </body>
 </html>
