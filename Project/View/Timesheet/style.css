@@ -1,15 +1,16 @@
 body {
   font-family: Arial, sans-serif;
   margin: 0;
-  background-color: #fdfdfd;
-  color: #333;
+  background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('/Project/View/Assets/home.JPG') no-repeat center center fixed;
+  background-size: cover;
+  color: #fff;
 }
 
 .header {
   padding: 60px 20px;
   text-align: center;
-  background-color: #00ADB5;
-  color: white;
+  background-image: url('/Project/View/Assets/home.JPG');
+  color: rgb(31, 31, 31);
 }
 
 .header h1 {
@@ -43,20 +44,91 @@ body {
   border-radius: 12px;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
   padding: 20px;
+  color: #333;
+}
+
+.card.timesheet-card {
+  max-width: 100%;
+  width: 100%;
+  min-width: 0;
+}
+
+.timesheet-table {
+  width: 100%;
+  table-layout: auto;
+  font-size: 1rem;
+}
+
+.timesheet-table .overtime-alert {
+  background-color: #ffeaea;
+  color: #c00;
+  font-weight: bold;
+}
+
+.timesheet-table .overtime-notes {
+  background-color: #ffeaea;
+  color: #c00;
+  font-weight: bold;
+}
+
+@media (max-width: 700px) {
+  .timesheet-table th, .timesheet-table td {
+    font-size: 0.9rem;
+    padding: 4px;
+  }
 }
 
 .card h3 {
   margin-top: 0;
   font-size: 1.4rem;
+  color: #333;
 }
 
 .card p {
   margin: 10px 0 0;
+  color: #333;
 }
 
 footer {
   text-align: center;
   padding: 20px;
   font-size: 0.9rem;
-  color: #777;
+  color: #333;
+}
+
+.approval-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 16px;
+}
+.approval-table th, .approval-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: center;
+}
+.approval-table th {
+  background: #f5f5f5;
+}
+.approve-btn {
+  background: #4caf50;
+  color: #fff;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-right: 4px;
+}
+.reject-btn {
+  background: #f44336;
+  color: #fff;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.approve-btn:hover {
+  background: #388e3c;
+}
+.reject-btn:hover {
+  background: #c62828;
 }
