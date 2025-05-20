@@ -1,33 +1,24 @@
 <?php
     session_start();
-    
-
     if (isset($_COOKIE['status'])){
       //$role = $_COOKIE['emp'];
-      if (isset($_COOKIE['emp'])){
-       
-        header('Location: Employee_dashboard.php');}
-       if (isset($_COOKIE['mng'])){
-       
-        header('Location: manager_dashboard.php');}  
       if (isset($_COOKIE['hr'])){
+        header('Location: HR_dashboard.php');}
+        if (isset($_COOKIE['mng'])){
+        header('Location: manager_dashboard.php');}
+       if (isset($_COOKIE['emp'])){
        
-       // header('Location: HR_dashboard.php');
+        //header('Location: Employee_dashboard.php');
        
-    
 ?>
-
-
-
-
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>HR Dashboard</title>
+  <title>Employee Dashboard</title>
   <style>
-    * { box-sizing: border-box; }
+     * { box-sizing: border-box; }
     html, body {
       height: 100%;
       margin: 0;
@@ -280,141 +271,104 @@
 <body>
   <form>
 
-    <?php include 'sidebar.html'; ?>
+    <?php include 'Emp_sidebar.html'; // Employee version of sidebar ?>
 
     <div class="main">
       
-
       <div class="topbar">
-        <input type="text" id="searchBar" placeholder="Search employee...">
+        <input type="text" id="searchBar" placeholder="Search teammates...">
         <div class="notification">🔔</div>
         <div class="profile-btn">
           <img src="profile.jpg" alt="Profile" />
         </div>
       </div>
       
-
       <h1 style="color: #1c1f1c;">Overview</h1>
 
       <div class="dashboard-grid">
-        <div class="card">👥 <span class="highlight">Total Employees:</span> 142</div>
-        <div class="card">📅 <span class="highlight">On Leave Today:</span> 8</div>
-        <div class="card">🏢 <span class="highlight">Departments:</span> 5 Active</div>
-        <div class="card">📝 <span class="highlight">Pending Reviews:</span> 12</div>
-        <div class="card">🎉 <span class="highlight">New Joiners This Month:</span> 6</div>
-        <div class="card">⚠️ <span class="highlight">Documents Expiring Soon:</span> 4</div>
-        <div class="card">📊 <span class="highlight">Attrition Rate:</span> 3.2%</div>
-        <div class="card">📚 <span class="highlight">Ongoing Trainings:</span> 9 Programs</div>
+        <div class="card">👥 <span class="highlight">Team Members:</span> 25</div>
+        <div class="card">📅 <span class="highlight">Tasks Due Today:</span> 3</div>
+        <div class="card">🏢 <span class="highlight">Your Teams:</span> 2</div>
+        <div class="card">📝 <span class="highlight">Pending Approvals:</span> 1</div>
+        <div class="card">🎉 <span class="highlight">New Messages:</span> 5</div>
+        <div class="card">⚠️ <span class="highlight">Upcoming Trainings:</span> 2</div>
+        <div class="card">📊 <span class="highlight">Your Performance:</span> 88%</div>
+        <div class="card">📚 <span class="highlight">Completed Projects:</span> 4</div>
       </div>
 
-      
-<div style="display: flex; gap: 40px; align-items: flex-start;">
+      <div style="display: flex; gap: 40px; align-items: flex-start;">
 
-  <!-- Pie Chart -->
-  <div class="chart-section" >
-    <canvas id="orgHealthChart" width="300" height="300"></canvas>
-  </div>
+        <!-- Pie Chart -->
+       
 
-  <!-- Employee Performance Table -->
-  <div style="flex: 1;">
-    <h2 style="color:#454d42;">Employee Performance</h2>
-    <table border="0" style="width: 100%; border-collapse: collapse; font-family: Arial, sans-serif; text-align:center" >
-      
-      <tbody style="font-weight: bold;">
-        <tr>
-          <td style="padding: 8px; border: 0px solid #ddd;">Top Performer</td>
-          <td style="padding: 8px; border: 0px solid #ddd;">Sarah Ahmed (95%)</td>
-        </tr>
-        <tr style="background-color: #f9f9f9;">
-          <td style="padding: 8px; border: 0px solid #ddd;">Avg Task Completion</td>
-          <td style="padding: 8px; border: 0px solid #ddd;">87%</td>
-        </tr>
-        <tr>
-          <td style="padding: 8px; border: 0px solid #ddd;">Attendance Rate</td>
-          <td style="padding: 8px; border: 0px solid #ddd;">96%</td>
-        </tr>
-        <tr style="background-color: #f9f9f9;">
-          <td style="padding: 8px; border: 0px solid #ddd;">Performance Index</td>
-          <td style="padding: 8px; border: px solid #ddd;">8.7 / 10</td>
-        </tr>
-      </tbody>
-    </table>
-  
-    <h3 style="color:#454d42; margin-top: 20px;">Top 3 Employee Scores</h3>
-    
-    <div style="margin-bottom: 15px;">
-      <div style="color:#333;">Sarah Ahmed</div>
-      <div style="background:#ddd; border-radius:10px; overflow:hidden;">
-        <div style="width:95%; background:#60a5fa; padding:5px 0; color:white; text-align:center;">95%</div>
+        <!-- Personal Performance Table -->
+        <div style="flex: 1;">
+          <h2 style="color:#454d42;">Your Performance Summary</h2>
+          <table border="0" style="width: 100%; border-collapse: collapse; font-family: Arial, sans-serif; text-align:center" >
+            <tbody style="font-weight: bold;">
+              <tr>
+                <td style="padding: 8px; border: 0px solid #ddd;">Tasks Completed</td>
+                <td style="padding: 8px; border: 0px solid #ddd;">45</td>
+              </tr>
+              <tr style="background-color: #f9f9f9;">
+                <td style="padding: 8px; border: 0px solid #ddd;">Attendance Rate</td>
+                <td style="padding: 8px; border: 0px solid #ddd;">96%</td>
+              </tr>
+              <tr>
+                <td style="padding: 8px; border: 0px solid #ddd;">Projects Involved</td>
+                <td style="padding: 8px; border: 0px solid #ddd;">3</td>
+              </tr>
+              <tr style="background-color: #f9f9f9;">
+                <td style="padding: 8px; border: 0px solid #ddd;">Performance Score</td>
+                <td style="padding: 8px; border: 0px solid #ddd;">8.8 / 10</td>
+              </tr>
+            </tbody>
+          </table>
+        
+          <h3 style="color:#454d42; margin-top: 20px;">Recent Task Completion Rates</h3>
+          
+          <div style="margin-bottom: 15px;">
+            <div style="color:#333;">Project Alpha</div>
+            <div style="background:#ddd; border-radius:10px; overflow:hidden;">
+              <div style="width:90%; background:#60a5fa; padding:5px 0; color:white; text-align:center;">90%</div>
+            </div>
+          </div>
+          <div style="margin-bottom: 15px;">
+            <div style="color:#333;">Project Beta</div>
+            <div style="background:#ddd; border-radius:10px; overflow:hidden;">
+              <div style="width:85%; background:#fcd34d; padding:5px 0; color:black; text-align:center;">85%</div>
+            </div>
+          </div>
+          <div style="margin-bottom: 15px;">
+            <div style="color:#333;">Project Gamma</div>
+            <div style="background:#ddd; border-radius:10px; overflow:hidden;">
+              <div style="width:78%; background:#ef4444; padding:5px 0; color:white; text-align:center;">78%</div>
+            </div>
+          </div>
+        </div>
+
       </div>
+
     </div>
-    <div style="margin-bottom: 15px;">
-      <div style="color:#333;">Mehedi Hasan</div>
-      <div style="background:#ddd; border-radius:10px; overflow:hidden;">
-        <div style="width:90%; background:#fcd34d; padding:5px 0; color:black; text-align:center;">90%</div>
-      </div>
-    </div>
-    <div style="margin-bottom: 15px;">
-      <div style="color:#333;">Fatima Noor</div>
-      <div style="background:#ddd; border-radius:10px; overflow:hidden;">
-        <div style="width:88%; background:#ef4444; padding:5px 0; color:white; text-align:center;">88%</div>
-      </div>
-    </div>
-  </div>
 
-</div>
-
-      
-
-    
   </form>
 
   <script>
-    window.onload = function () {
-      const ctx = document.getElementById("orgHealthChart").getContext("2d");
+    
 
-      const data = [60, 25, 15];
-      const colors = ["#60a5fa", "#fcd34d", "#ef4444"];
-      const total = data.reduce((a, b) => a + b, 0);
-
-      let startAngle = 0;
-      for (let i = 0; i < data.length; i++) {
-        const sliceAngle = (data[i] / total) * 2 * Math.PI;
-        ctx.beginPath();
-        ctx.moveTo(150, 150);
-        ctx.arc(150, 150, 100, startAngle, startAngle + sliceAngle);
-        ctx.closePath();
-        ctx.fillStyle = colors[i];
-        ctx.fill();
-        startAngle += sliceAngle;
-      }
-
-      ctx.fillStyle = "#333";
-      ctx.font = "16px Arial";
-      ctx.fillText("Org Health", 100, 280);
-    };
-
-    function toggleDepartments() {
-      const deptList = document.getElementById("departmentList");
-      if (deptList.style.display === "none") {
-        deptList.style.display = "block";
-      } else {
-        deptList.style.display = "none"; 
-      }
-    }
-
+     
   
-  </script> 
+  </script>
 </body>
 </html>
 
 
-
 <?php
-      }
-  }else{
+     
+  }
+    }else{
         header('location: UserAuth.html');
     }
+  
 
 ?>
-

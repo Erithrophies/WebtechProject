@@ -165,7 +165,7 @@
         <p class="signin-msg">Already have an account?</p>
         <button class="signin-button">Sign In</button>
 
-        <form method="" action="" onsubmit="return validateForm()" class="form-wrapper">
+        <form method="post" action="../Controller/RegCheck.php" onsubmit="return validateForm()" class="form-wrapper">
             <div class="form-box">
                 <div class="form-content">
                     <label class="form-title"><b>Sign Up</b></label>
@@ -228,7 +228,7 @@
         <script>
             function validateForm() {
                 let valid = true;
-                event.preventDefault(); 
+                //event.preventDefault(); 
     
                 let username = document.getElementById("username").value.trim();
                 let email = document.getElementById("email").value.trim();
@@ -376,14 +376,12 @@
                     msg.innerHTML = "Passwords do not match";
                     valid = false;
                 }
-                 if (valid) {
-                
-                window.location.href = "UserAuth.html"; 
-            }
 
-         
-    
-                return valid;
+                
+                if (valid) {
+                    window.location.href = "../Controller/RegCheck.php";
+                }
+                return valid; 
             }
 
             document.getElementById("username").addEventListener("input", function() {
@@ -421,7 +419,7 @@
             });
 
             document.querySelector(".signin-button").addEventListener("click", function() {
-                window.location.href = "userauth.html";
+                window.location.href = "../View/UserAuth.html";
             });
 
             

@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -23,7 +24,7 @@
 </head>
 <body>
   <!-- Sidebar Include -->
-  <?php include 'sidebar.html'; ?>
+  <?php include 'Emp_sidebar.html'; ?>
 
   <div class="main-content">
     <h2>Apply for Leave</h2>
@@ -67,3 +68,4 @@
   </script>
 </body>
 </html>
+
