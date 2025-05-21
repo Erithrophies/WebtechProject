@@ -1,51 +1,94 @@
 body {
-    font-family: Arial, sans-serif;
-    background: #f4f4f4;
-    padding: 30px;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: linear-gradient(rgba(44,62,80,0.85),rgba(44,62,80,0.85)), url('../Assets/home.JPG') center center/cover no-repeat;
+    padding: 0;
+    margin: 0;
+    min-height: 100vh;
   }
   
   .container {
     max-width: 500px;
-    margin: auto;
-    background: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px #ccc;
+    margin: 48px auto;
+    background: rgba(255,255,255,0.97);
+    padding: 32px 28px;
+    border-radius: 16px;
+    box-shadow: 0 8px 32px rgba(44,62,80,0.13);
+  }
+  
+  h1, h2 {
+    text-align: center;
+    color: #222831;
+    margin-bottom: 18px;
   }
   
   input, textarea {
     width: 100%;
-    margin-top: 10px;
-    padding: 10px;
-    font-size: 16px;
+    margin-top: 14px;
+    padding: 12px;
+    font-size: 1.08em;
+    border-radius: 7px;
+    border: 1.5px solid #A0C878;
+    background: rgba(255,255,255,0.85);
     box-sizing: border-box;
+    margin-bottom: 10px;
+    transition: border 0.2s;
+    color: #222831;
+  }
+  
+  input:focus, textarea:focus {
+    border: 2px solid #A0C878;
+    outline: none;
+    background: #f4f8f4;
   }
   
   button {
-    margin-top: 15px;
-    padding: 10px 20px;
-    background: #007bff;
+    margin-top: 18px;
+    padding: 12px 28px;
+    background: #A0C878;
     border: none;
-    color: white;
-    font-size: 16px;
-    border-radius: 4px;
+    color: #fff;
+    font-size: 1.08em;
+    border-radius: 7px;
     cursor: pointer;
+    font-weight: bold;
+    box-shadow: 0 2px 8px rgba(160,200,120,0.10);
+    transition: background 0.2s, transform 0.2s;
+  }
+  
+  button:hover {
+    background: #7ea85a;
+    transform: translateY(-2px) scale(1.04);
   }
   
   .captcha-container {
     display: flex;
     align-items: center;
-    gap: 10px;
-    margin-top: 15px;
+    gap: 12px;
+    margin-top: 18px;
   }
   
   #confirmation-message {
     display: none;
     background: #dff0d8;
-    padding: 15px;
-    margin-top: 20px;
+    padding: 18px;
+    margin-top: 24px;
     text-align: center;
     color: #3c763d;
-    border-radius: 5px;
+    border-radius: 7px;
+    font-size: 1.1em;
+    font-weight: bold;
+    box-shadow: 0 2px 8px rgba(160,200,120,0.08);
   }
   
+  @media (max-width: 600px) {
+    .container {
+        padding: 12px 4vw;
+    }
+    input, textarea {
+        font-size: 1em;
+    }
+    button {
+        width: 100%;
+        padding: 12px 0;
+    }
+}

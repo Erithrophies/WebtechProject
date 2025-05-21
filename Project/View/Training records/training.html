@@ -24,21 +24,22 @@
         <p>Browse and register for available training courses.</p>
         <ul id="courseList">
           <li>
-            C++ <button onclick="registerCourse('C++')">Register</button>
+            C++ <button class="register-btn" data-course="C++">Register</button>
           </li>
           <li>
-            Python <button onclick="registerCourse('Python')">Register</button>
+            Python <button class="register-btn" data-course="Python">Register</button>
           </li>
           <li>
-            Java <button onclick="registerCourse('Java')">Register</button>
+            Java <button class="register-btn" data-course="Java">Register</button>
           </li>
           <li>
-            Blender <button onclick="registerCourse('Blender')">Register</button>
+            Blender <button class="register-btn" data-course="Blender">Register</button>
           </li>
           <li>
-            Unreal Engine <button onclick="registerCourse('Unreal Engine')">Register</button>
+            Unreal Engine <button class="register-btn" data-course="Unreal Engine">Register</button>
           </li>
         </ul>
+        <div id="registerMessage" style="color:#ff4d4d;margin-top:10px;"></div>
       </div>
       
 
@@ -46,17 +47,19 @@
       <h2>Transcripts</h2>
       <p>View your completed courses and scores.</p>
       <ul id="completedCourses"></ul>
+      <div id="noCoursesMsg" style="color:#ff4d4d;"></div>
     </div>
 
     <div id="certifications" class="screen-content hidden">
       <h2>Certification Tracker</h2>
       <p>Monitor your active and expired certifications.</p>
       <button id="alertBtn">Check Expiry Alert</button>
-      <button onclick="generateGapReport()">Generate Skills Gap Report</button>
+      <button id="gapReportBtn">Generate Skills Gap Report</button>
+      <p id="expiryAlert" style="color:#ff4d4d;"></p>
       <p id="gapReport"></p>
     </div>
   </div>
 
-  <script src="script.js"></script>
+  <script src="../Training records/script.js"></script>
 </body>
 </html>
