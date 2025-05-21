@@ -1,3 +1,30 @@
+<?php
+    session_start();
+    if (isset($_COOKIE['status'])){
+      //$role = $_COOKIE['emp'];
+      if (isset($_COOKIE['hr'])){
+        header('Location: HR_dashboard.php');}
+        if (isset($_COOKIE['mng'])){
+        header('Location: manager_dashboard.php');}
+        if (isset($_COOKIE['hr_d'])){
+        header('Location: HR_document.php');}
+        if (isset($_COOKIE['hr_emp'])){
+        header('Location: HR_Employee.php');}
+        if (isset($_COOKIE['hr_leave'])){
+        header('Location: HR_leave.php');}
+        if (isset($_COOKIE['hr_perfomance'])){
+        header('Location: HR_perfomance.php');}
+        if (isset($_COOKIE['mng_leave'])){
+        header('Location: Leave_manager.php');}
+        if (isset($_COOKIE['mng_doc'])){
+        header('Location: mng_document');}
+        if (isset($_COOKIE['mng_emp'])){
+        header('Location: mng_employee.php');}
+       if (isset($_COOKIE['emp'])){
+       
+        //header('Location: Employee_dashboard.php');
+       
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -73,7 +100,7 @@
     <div class="vault-section">
       <h3>Available Documents</h3>
       <ul id="vaultList">
-        <!-- No documents yet -->
+        
       </ul>
     </div>
 
@@ -101,3 +128,13 @@
 
 </body>
 </html>
+
+<?php
+     
+  }
+    }else{
+        header('location: UserAuth.html');
+    }
+  
+
+?>

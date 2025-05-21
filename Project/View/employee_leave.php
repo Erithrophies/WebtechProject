@@ -1,4 +1,30 @@
-
+<?php
+    session_start();
+    if (isset($_COOKIE['status'])){
+      //$role = $_COOKIE['emp'];
+      if (isset($_COOKIE['hr'])){
+        header('Location: HR_dashboard.php');}
+        if (isset($_COOKIE['mng'])){
+        header('Location: manager_dashboard.php');}
+        if (isset($_COOKIE['hr_d'])){
+        header('Location: HR_document.php');}
+        if (isset($_COOKIE['hr_emp'])){
+        header('Location: HR_Employee.php');}
+        if (isset($_COOKIE['hr_leave'])){
+        header('Location: HR_leave.php');}
+        if (isset($_COOKIE['hr_perfomance'])){
+        header('Location: HR_perfomance.php');}
+        if (isset($_COOKIE['mng_leave'])){
+        header('Location: Leave_manager.php');}
+        if (isset($_COOKIE['mng_doc'])){
+        header('Location: mng_document');}
+        if (isset($_COOKIE['mng_emp'])){
+        header('Location: mng_employee.php');}
+       if (isset($_COOKIE['emp'])){
+       
+        //header('Location: Employee_dashboard.php');
+       
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -23,27 +49,27 @@
   </style>
 </head>
 <body>
-  <!-- Sidebar Include -->
+  
   <?php include 'Emp_sidebar.html'; ?>
 
   <div class="main-content">
     <h2>Apply for Leave</h2>
     <form onsubmit="return validateEmployeeForm()">
       <label for="fromDate">From Date:</label>
-      <input type="date" id="fromDate" name="fromDate">
+      <input type="date" id="fromDate" name="fromDate" style="width: 300px;">
 
-      <label for="toDate">To Date:</label>
-      <input type="date" id="toDate" name="toDate">
+      <label for="toDate" style="margin-top: 20px;">To Date:</label>
+      <input type="date" id="toDate" name="toDate"  style="width: 300px;">
 
-      <label for="leaveType">Leave Type:</label>
-      <select id="leaveType" name="leaveType">
+      <label for="leaveType" style="margin-top: 20px;">Leave Type:</label>
+      <select id="leaveType" name="leaveType"  style="width: 300px;">
         <option value="">--Select--</option>
         <option value="Casual">Casual</option>
         <option value="Sick">Sick</option>
         <option value="Earned">Earned</option>
       </select>
 
-      <button type="submit">Submit</button>
+      <button type="submit" style="margin-top: 20px; height: 25px; background-color:#85876a; color:black">Submit</button>
     </form>
   </div>
 
@@ -68,4 +94,12 @@
   </script>
 </body>
 </html>
+<?php
+     
+  }
+    }else{
+        header('location: UserAuth.html');
+    }
+  
 
+?>

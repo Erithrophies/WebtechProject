@@ -1,3 +1,30 @@
+     <?php
+    session_start();
+    if (isset($_COOKIE['status'])){
+      //$role = $_COOKIE['emp'];
+      if (isset($_COOKIE['emp'])){
+        header('Location: Employee_dashboard.php');}
+        if (isset($_COOKIE['mng'])){
+        header('Location: manager_dashboard.php');}
+        if (isset($_COOKIE['emp_doc'])){
+        header('Location: emp_document.php');}
+        if (isset($_COOKIE['emp_emp'])){
+        header('Location: Emp_employee.php');}
+        if (isset($_COOKIE['emp_leave'])){
+        header('Location: employee_leave.php');}
+        // if (isset($_COOKIE['hr_perfomance'])){
+        // header('Location: HR_perfomance.php');}
+        if (isset($_COOKIE['mng_leave'])){
+        header('Location: Leave_manager.php');}
+        if (isset($_COOKIE['mng_doc'])){
+        header('Location: mng_document');}
+        if (isset($_COOKIE['mng_emp'])){
+        header('Location: mng_employee.php');}
+       if (isset($_COOKIE['hr'])){
+       
+        //header('Location: Employee_dashboard.php');
+       
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -104,11 +131,11 @@
   </div>
 </div>
 
-<!-- Main Content -->
+
 <div class="content">
   <h1>HR Leave Management</h1>
 
-  <!-- Leave Calendar placeholder -->
+  
   <div class="section">
     <h2>Leave Calendar</h2>
     <p>(Calendar UI goes here — For demo, static example below)</p>
@@ -123,7 +150,7 @@
     </table>
   </div>
 
-  <!-- Leave Balance Tracker -->
+  
   <div class="section">
     <h2>Leave Balance Tracker</h2>
     <table>
@@ -137,7 +164,7 @@
     </table>
   </div>
 
-  <!-- Approval Status (filter/search with validation) -->
+  
   <div class="section">
     <h2>Leave Approval Status</h2>
     <form id="searchForm" onsubmit="return validateSearch()">
@@ -178,12 +205,19 @@ function validateSearch() {
     return false;
   }
 
-  // For demo: display a simple message
+ 
   var result = document.getElementById('searchResult');
   result.innerHTML = 'Search executed for "' + input + '". (No real search functionality here)';
-  return false; // prevent actual submission for demo
+  return false; 
 }
 </script>
 
 </body>
 </html>
+<?php
+      }
+  }else{
+        header('location: UserAuth.html');
+    }
+
+?>
