@@ -73,4 +73,3 @@ document.addEventListener("DOMContentLoaded", () => {
       updatePasswordForm.reset();
     });
   });
-  

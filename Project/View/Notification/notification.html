@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Notification Center</title>
+    <link rel="stylesheet" href="notification.css">
+    <script src="notification.js" defer></script>
+</head>
+<body>
+    <div class="background-overlay"></div>
+    
+    <header>
+        <div class="header-content">
+            <span class="bell-icon" id="bellIcon">
+                <img src="../Assets/bell.png" alt="Notifications" />
+                <span class="unread-count" id="unreadCount">2</span>
+            </span>
+            <h1>Notification Center</h1>
+            <a href="settings.html" class="settings-link-btn">Settings</a>
+            <button class="settings-link-btn" onclick="window.history.back()">Go Back</button>
+        </div>
+    </header>
+    <main>
+        <div id="notificationList" class="notification-list">
+            
+            <div class="notification unread">
+                <p><strong>System:</strong> Your password was changed successfully.</p>
+                <span class="timestamp">2 min ago</span>
+            </div>
+            <div class="notification unread">
+                <p><strong>HR:</strong> New policy update available.</p>
+                <span class="timestamp">10 min ago</span>
+            </div>
+            <div class="notification">
+                <p><strong>Manager:</strong> Your leave request was approved.</p>
+                <span class="timestamp">1 day ago</span>
+            </div>
+        </div>
+    </main>
+</body>
+</html>

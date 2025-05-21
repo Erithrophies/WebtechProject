@@ -1,0 +1,112 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: #f4f4f9;
+}
+
+.header-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #A0C878;
+    color: #fff;
+    padding: 1rem;
+    gap: 16px;
+    position: relative;
+}
+
+.bell-icon {
+    position: relative;
+    cursor: pointer;
+    margin-right: 16px;
+}
+
+.bell-icon img {
+    width:62px;
+    height: 62px;
+}
+
+.unread-count {
+    position: absolute;
+    top: -6px;
+    right: -6px;
+    background: #ff0000;
+    color: #fff;
+    border-radius: 50%;
+    padding: 2px 7px;
+    font-size: 0.9rem;
+    font-weight: bold;
+}
+
+.settings-link {
+    margin-left: auto;
+    color: #fff;
+    text-decoration: underline;
+}
+
+.settings-link-btn {
+    background-color: #fff;
+    color: #A0C878;
+    border: none;
+    padding: 0.5rem 1.5rem;
+    border-radius: 24px;
+    font-size: 1.1rem;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+    font-weight: bold;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.10);
+    display: inline-block;
+    margin-left: 16px;
+    letter-spacing: 1px;
+}
+
+.settings-link-btn:hover {
+    background-color: #A0C878;
+    color: #fff;
+    box-shadow: 0 4px 16px rgba(160,200,120,0.25);
+}
+
+.notification-list {
+    max-width: 600px;
+    margin: 2rem auto;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    padding: 1rem;
+}
+
+.notification {
+    padding: 1rem;
+    border-bottom: 1px solid #eee;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.notification.unread {
+    background: #e6f7ff;
+    font-weight: bold;
+}
+
+.notification:last-child {
+    border-bottom: none;
+}
+
+.timestamp {
+    font-size: 0.85rem;
+    color: #888;
+}
+
+.background-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: -1;
+    background:
+        linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)),
+        url('../Assets/home.JPG') center center / cover no-repeat;
+}

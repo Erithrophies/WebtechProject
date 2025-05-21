@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
-    // Handle acknowledge buttons
+    
     const acknowledgeButtons = document.querySelectorAll(".acknowledge-btn");
     acknowledgeButtons.forEach((button) => {
         button.addEventListener("click", () => {
@@ -9,11 +9,11 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
-    // Post form elements
+   
     const postUpdateForm = document.getElementById("post-update-form");
     const postsContainer = document.getElementById("posts");
 
-    // Handle form submission
+    
     postUpdateForm.addEventListener("submit", (event) => {
         event.preventDefault();
 
@@ -39,11 +39,11 @@ document.addEventListener("DOMContentLoaded", () => {
         addPostInteractions(post);
     });
 
-    // Initialize interaction for existing posts
+   
     const existingPosts = document.querySelectorAll(".post");
     existingPosts.forEach((post) => addPostInteractions(post));
 
-    // Function to handle like and comment buttons
+   
     function addPostInteractions(post) {
         const likeButton = post.querySelector(".like-btn");
         const commentButton = post.querySelector(".comment-btn");

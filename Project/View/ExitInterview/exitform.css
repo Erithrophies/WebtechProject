@@ -1,0 +1,65 @@
+body {
+    font-family: Arial, sans-serif;
+    background: #f4f4f9;
+    margin: 0;
+    padding: 0;
+    color: #fff;
+}
+main {
+    max-width: 600px;
+    margin: 2rem auto;
+    background: rgba(34, 40, 49, 0.85); /* #222831 with opacity for overlay effect */
+    border-radius: 12px;
+    border: 1px solid #222222;
+    box-shadow: 0 6px 32px rgba(0,0,0,0.12);
+    padding: 2.5rem 2rem;
+    backdrop-filter: blur(6px);
+    color: #fff;
+}
+h1, h2 {
+    color: #A0C878;
+}
+form section {
+    margin-bottom: 2rem;
+}
+label {
+    display: block;
+    margin-bottom: 1rem;
+    color: #fff;
+}
+textarea, select, input[type="text"] {
+    width: 100%;
+    padding: 0.5rem;
+    margin-top: 0.25rem;
+    border-radius: 4px;
+    border: 1px solid #eeeeee;
+    box-sizing: border-box;
+    color: #fff;
+    background: rgba(34,40,49,0.7);
+}
+button[type="submit"] {
+    background: #A0C878;
+    color: #fff;
+    border: none;
+    padding: 0.75rem 2rem;
+    border-radius: 4px;
+    font-size: 1rem;
+    cursor: pointer;
+    font-weight: bold;
+    letter-spacing: 1px;
+    box-shadow: 0 2px 8px rgba(58,142,166,0.10);
+}
+button[type="submit"]:hover {
+    background: #7ea85a;
+}
+.background-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: -1;
+    background:
+        linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)),
+        url('../Assets/home.JPG') center center / cover no-repeat;
+}
