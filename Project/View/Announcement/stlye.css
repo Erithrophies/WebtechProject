@@ -7,7 +7,7 @@ body {
 }
 
 header {
-    background-color: #A0C878;
+    background-color: #222831;
     color: #fff;
     padding: 1rem;
     text-align: center;
@@ -25,12 +25,13 @@ footer {
 
 
 main {
-    padding: 2rem;
-    max-width: 800px;
-    margin: 0 auto;
-    background: #fff;
-    border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    background: rgba(255, 255, 255, 0.2); 
+    border-radius: 16px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.15);
+    padding: 32px;
+    margin: 32px auto;
+    max-width: 900px;
+    backdrop-filter: blur(4px);
 }
 
 
@@ -38,16 +39,20 @@ main {
     margin-bottom: 2rem;
 }
 
+#priority-alerts h2 {
+    color: #fff;
+}
+
 #priority-alerts .alert {
-    background-color: #ffcccc;
-    border: 1px solid #ff0000;
+    background-color: #ccd8c0;
+    border: 1px solid #72a045;
     padding: 1rem;
     border-radius: 4px;
     margin-bottom: 1rem;
 }
 
 #priority-alerts .alert button {
-    background-color: #ff0000;
+    background-color: #A0C878;
     color: #fff;
     border: none;
     padding: 0.5rem 1rem;
@@ -56,12 +61,16 @@ main {
 }
 
 #priority-alerts .alert button:hover {
-    background-color: #cc0000;
+    background-color: #A0C878;
 }
 
 
 #news-feed {
     margin-bottom: 2rem;
+}
+
+#news-feed h2 {
+    color: #fff;
 }
 
 #post-form {
@@ -134,4 +143,30 @@ main {
     padding: 0.5rem;
     background-color: #f1f1f1;
     border-radius: 4px;
+}
+
+.background-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: -1;
+    background: 
+        linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)),
+        url('../Assets/home.JPG') center center / cover no-repeat;
+}
+
+.header-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+}
+
+.company-logo {
+    height: 100px;
+    width: 300px;
+    object-fit: contain;
+    margin-right: 200px;
 }
