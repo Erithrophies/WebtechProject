@@ -1,3 +1,30 @@
+<?php
+    session_start();
+    if (isset($_COOKIE['status'])){
+      //$role = $_COOKIE['emp'];
+      if (isset($_COOKIE['hr'])){
+        header('Location: HR_dashboard.php');}
+        if (isset($_COOKIE['emp'])){
+        header('Location: Employee_dashboard.php');}
+        if (isset($_COOKIE['hr_d'])){
+        header('Location: HR_document.php');}
+        if (isset($_COOKIE['hr_emp'])){
+        header('Location: HR_Employee.php');}
+        if (isset($_COOKIE['hr_leave'])){
+        header('Location: HR_leave.php');}
+        if (isset($_COOKIE['emp_doc'])){
+        header('Location: emp_document.php');}
+        if (isset($_COOKIE['emp_emp'])){
+        header('Location: Emp_employee.php');}
+        if (isset($_COOKIE['emp_leave'])){
+        header('Location: employee_leave.php');}
+        if (isset($_COOKIE['hr_perfomance'])){
+        header('Location: HR_perfomance.php');}
+       if (isset($_COOKIE['mng'])){
+       
+        //header('Location: Employee_dashboard.php');
+       
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -284,5 +311,10 @@
 </body>
 </html>
 
-
+<?php
+      }  
+  }else{
+        header('location: UserAuth.html');
+    }
+?>
 

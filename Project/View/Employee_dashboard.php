@@ -6,6 +6,20 @@
         header('Location: HR_dashboard.php');}
         if (isset($_COOKIE['mng'])){
         header('Location: manager_dashboard.php');}
+        if (isset($_COOKIE['hr_d'])){
+        header('Location: HR_document.php');}
+        if (isset($_COOKIE['hr_emp'])){
+        header('Location: HR_Employee.php');}
+        if (isset($_COOKIE['hr_leave'])){
+        header('Location: HR_leave.php');}
+        if (isset($_COOKIE['hr_perfomance'])){
+        header('Location: HR_perfomance.php');}
+        if (isset($_COOKIE['mng_leave'])){
+        header('Location: Leave_manager.php');}
+        if (isset($_COOKIE['mng_doc'])){
+        header('Location: mng_document');}
+        if (isset($_COOKIE['mng_emp'])){
+        header('Location: mng_employee.php');}
        if (isset($_COOKIE['emp'])){
        
         //header('Location: Employee_dashboard.php');
@@ -223,17 +237,17 @@
       margin-top: 40px;
     }
 
-    canvas {
-      background:rgba(179, 170, 170, 0.18);
-      border-radius: 70px;
-    }
+    
     form {
       all: unset;
       display: contents;
     }
 
     table, th, td {
-      color: #333;
+      color:rgb(102, 143, 199);
+      font-size: 13px;
+      
+      
     }
 
     #searchBar {
@@ -243,27 +257,10 @@
       border-radius: 20px;
       border: none;
       font-size: 13px;
-      background-color: #ddd;
+      background-color:#ddd;
     }
 
-    #tabs {
-      display: flex;
-      gap: 10px;
-      margin-bottom: 20px;
-    }
-
-    #tabs button {
-      padding: 10px 20px;
-      border-radius: 8px;
-      border: none;
-      background: #555;
-      color: white;
-      cursor: pointer;
-    }
-
-    #tabs button.active {
-      background: #333;
-    }
+  
 
     
   </style>
@@ -271,7 +268,7 @@
 <body>
   <form>
 
-    <?php include 'Emp_sidebar.html'; // Employee version of sidebar ?>
+    <?php include 'Emp_sidebar.html';  ?>
 
     <div class="main">
       
@@ -296,14 +293,12 @@
         <div class="card">📚 <span class="highlight">Completed Projects:</span> 4</div>
       </div>
 
-      <div style="display: flex; gap: 40px; align-items: flex-start;">
-
-        <!-- Pie Chart -->
-       
+      <div style="margin-right: 90px;">
 
         <!-- Personal Performance Table -->
-        <div style="flex: 1;">
-          <h2 style="color:#454d42;">Your Performance Summary</h2>
+        <div style="align-items: center;">
+          <h2 style="color:#454d42; margin-left:540px"><i>Your Performance Summary</i></h2>
+          <hr>
           <table border="0" style="width: 100%; border-collapse: collapse; font-family: Arial, sans-serif; text-align:center" >
             <tbody style="font-weight: bold;">
               <tr>
@@ -320,31 +315,32 @@
               </tr>
               <tr style="background-color: #f9f9f9;">
                 <td style="padding: 8px; border: 0px solid #ddd;">Performance Score</td>
-                <td style="padding: 8px; border: 0px solid #ddd;">8.8 / 10</td>
+                <td style="padding: 8px; border: 0px solid #ddd; ">8.8 / 10</td>
               </tr>
             </tbody>
-          </table>
+          </table><hr><br><br>
         
-          <h3 style="color:#454d42; margin-top: 20px;">Recent Task Completion Rates</h3>
+          <h3 style="color:#454d42; margin-left:560px; margin-top:10px; font-size:18px"><i>Recent Task Completion Rates</i></h3>
           
-          <div style="margin-bottom: 15px;">
+          
+          <div style="margin-bottom: 5px;">
             <div style="color:#333;">Project Alpha</div>
-            <div style="background:#ddd; border-radius:10px; overflow:hidden;">
-              <div style="width:90%; background:#60a5fa; padding:5px 0; color:white; text-align:center;">90%</div>
+            <div style="background:#ddd; border-radius:15px; overflow:hidden; margin-top:10px">
+              <div style="width:90%; background:darkslategray; padding:5px 0; color:white; text-align:center;">90%</div>
             </div>
           </div>
           <div style="margin-bottom: 15px;">
-            <div style="color:#333;">Project Beta</div>
-            <div style="background:#ddd; border-radius:10px; overflow:hidden;">
+            <div style="color:#333; margin-top:10px">Project Beta</div>
+            <div style="background:#ddd; border-radius:10px; overflow:hidden; margin-top:10px">
               <div style="width:85%; background:#fcd34d; padding:5px 0; color:black; text-align:center;">85%</div>
             </div>
           </div>
           <div style="margin-bottom: 15px;">
-            <div style="color:#333;">Project Gamma</div>
-            <div style="background:#ddd; border-radius:10px; overflow:hidden;">
+            <div style="color:#333; margin-top:10px">Project Gamma</div>
+            <div style="background:#ddd; border-radius:10px; overflow:hidden; margin-top:10px">
               <div style="width:78%; background:#ef4444; padding:5px 0; color:white; text-align:center;">78%</div>
             </div>
-          </div>
+          </div><br>  
         </div>
 
       </div>
@@ -354,9 +350,6 @@
   </form>
 
   <script>
-    
-
-     
   
   </script>
 </body>

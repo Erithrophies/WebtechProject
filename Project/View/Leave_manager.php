@@ -1,3 +1,30 @@
+<?php
+    session_start();
+    if (isset($_COOKIE['status'])){
+      //$role = $_COOKIE['emp'];
+      if (isset($_COOKIE['hr'])){
+        header('Location: HR_dashboard.php');}
+        if (isset($_COOKIE['emp'])){
+        header('Location: Employee_dashboard.php');}
+        if (isset($_COOKIE['hr_d'])){
+        header('Location: HR_document.php');}
+        if (isset($_COOKIE['hr_emp'])){
+        header('Location: HR_Employee.php');}
+        if (isset($_COOKIE['hr_leave'])){
+        header('Location: HR_leave.php');}
+        if (isset($_COOKIE['emp_doc'])){
+        header('Location: emp_document.php');}
+        if (isset($_COOKIE['emp_emp'])){
+        header('Location: Emp_employee.php');}
+        if (isset($_COOKIE['emp_leave'])){
+        header('Location: employee_leave.php');}
+        if (isset($_COOKIE['hr_perfomance'])){
+        header('Location: HR_perfomance.php');}
+       if (isset($_COOKIE['mng'])){
+       
+        //header('Location: Employee_dashboard.php');
+       
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,36 +32,18 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Manager Leave Page</title>
 <style>
-  /* Sidebar styles: same as above */
+  
   * { box-sizing: border-box; }
-  html, body { height: 100%; margin: 0; padding: 0; font-family: Arial, sans-serif; background: rgb(249, 249, 249); color: white; }
+  html, body { height: 100%;
+     margin: 0;
+      padding: 0;
+       font-family: Arial, sans-serif;
+        background: rgb(249, 249, 249);
+         color: white; }
   body { display: flex; min-height: 100vh; }
-  .sidebar {
-    width: 250px; background: #85876a; padding: 30px 20px; display: flex; flex-direction: column; justify-content: space-between;
-    position: fixed; height: 100vh;
-  }
-  .sidebar .top-section { display: flex; flex-direction: column; align-items: center; }
-  .sidebar h2 { margin-bottom: 30px; font-size: 24px; }
-  .sidebar ul { list-style: none; padding: 0; width: 100%; }
-  .sidebar ul h3 { margin: 20px 0 10px; font-size: 16px; border-bottom: 1px solid rgba(255,255,255,0.3); padding-bottom: 5px; }
-  .sidebar ul li { margin: 10px 0; }
-  .sidebar ul li a { color: white; text-decoration: none; padding: 8px 0; display: block; border-radius: 5px; transition: background 0.3s; }
-  .sidebar ul li a:hover { background-color: rgba(255, 255, 255, 0.2); }
-  .department-header {
-    display: flex; justify-content: space-between; align-items: center; cursor: pointer; width: 100%; margin: 20px 0 10px;
-    font-size: 16px; border-bottom: 1px solid rgba(255,255,255,0.3); padding-bottom: 5px;
-  }
-  .department-header button {
-    background: none; border: none; color: white; font-size: 18px; cursor: pointer;
-  }
-  .department-list { list-style: none; padding: 0; margin: 0; width: 100%; }
-  .department-list li { display: flex; align-items: center; gap: 10px; padding-left: 10px; margin: 10px 0; }
-  .circle { width: 10px; height: 10px; border-radius: 50%; }
-  .art { background-color: #f78fb3; }
-  .dev { background-color: #70a1ff; }
-  .bottom-section { margin-top: auto; }
 
-  /* Page content styles */
+ 
+  
   .content {
     margin-left: 270px;
     padding: 20px;
@@ -75,39 +84,9 @@
 </head>
 <body>
 
-<!-- Sidebar -->
-<div class="sidebar">
-  <div class="top-section">
-    <h2>Workos</h2>
-    <ul>
-      <h3>Menu</h3>
-      <li><a href="HR_Dashboard.php">Dashboard</a></li>
-      <li><a href="HR_Employee.php">Employee</a></li>
-      <li><a href="HR_performance.php">Reviews</a></li>
-      <li><a href="HR_Document.php">Documents</a></li>
-    </ul>
 
-    <div class="department-header">
-      <span>Department</span>
-      <button onclick="toggleDepartments()">+</button>
-    </div>
-    <ul id="departmentList" class="department-list" style="display: block;">
-      <li><div class="circle art"></div><a href="art&design.html">Art & Design</a></li>
-      <li><div class="circle dev"></div><a href="development.html">Development</a></li>
-    </ul>
-  </div>
+<?php include 'mng_sidebar.html'; ?>
 
-  <div class="bottom-section">
-    <ul>
-      <h3>Others</h3>
-      <li><a href="settings.html">Settings</a></li>
-      <li><a href="feedback.html">Feedbacks</a></li>
-      <li><a href="../Controller/logout.php">Logout</a></li>
-    </ul>
-  </div>
-</div>
-
-<!-- Main Content -->
 <div class="content">
   <h1>Manager Leave Approval</h1>
 
@@ -153,7 +132,7 @@
 </div>
 
 <script>
-  // Toggle department list visibility
+ 
   function toggleDepartments() {
     var deptList = document.getElementById('departmentList');
     if (deptList.style.display === 'block') {
@@ -163,7 +142,7 @@
     }
   }
 
-  // Approve Leave with basic validation
+  
   function approveLeave(row) {
     var commentBox = document.getElementById('comment' + row);
     var errorBox = document.getElementById('error' + row);
@@ -179,7 +158,7 @@
     }
   }
 
-  // Reject Leave with basic validation
+ 
   function rejectLeave(row) {
     var commentBox = document.getElementById('comment' + row);
     var errorBox = document.getElementById('error' + row);
@@ -197,3 +176,12 @@
 </script>
 </body>
 </html>
+<?php
+     
+  }
+    }else{
+        header('location: UserAuth.html');
+    }
+  
+
+?>

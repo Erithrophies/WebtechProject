@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <title>Department Structure</title>
 <style>
-  /* --- Sidebar styles (copied from your sidebar.html) --- */
+  
   * { box-sizing: border-box; }
   html, body {
     height: 100%;
@@ -19,7 +19,7 @@
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
-    color: #1c1f1c; /* changed to dark for readability */
+    color: #1c1f1c;
   }
 
   .sidebar {
@@ -109,9 +109,9 @@
     margin-top: auto;
   }
 
-  /* --- Page content styles --- */
+  
   .content {
-    margin-left: 270px; /* space for sidebar */
+    margin-left: 270px; 
     padding: 30px;
     flex: 1;
     color: #1c1f1c;
@@ -152,13 +152,13 @@
     background-color: #70a1ff;
   }
   .department.hr {
-    background-color: #85876a; /* same as sidebar bg */
+    background-color: #85876a; 
   }
 </style>
 </head>
 <body>
 
-<!-- Sidebar copied from your sidebar.html -->
+
 <div class="sidebar">
   <div class="top-section">
     <h2>Workos</h2>
@@ -190,7 +190,6 @@
   </div>
 </div>
 
-<!-- Page main content -->
 <div class="content">
   <h1>Department Structure</h1>
   <p>Description: Organizational hierarchy</p>
@@ -227,7 +226,7 @@
     var data = event.dataTransfer.getData("text");
     var draggedElement = document.getElementById(data);
 
-    // Drop only if dropping on drop zone or department container, not on department itself
+    
     if(event.target.classList.contains('drop-zone')){
       event.target.appendChild(draggedElement);
     } else if(event.target.classList.contains('department')){

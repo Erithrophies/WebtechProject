@@ -1,3 +1,30 @@
+<?php
+    session_start();
+    if (isset($_COOKIE['status'])){
+      //$role = $_COOKIE['emp'];
+      if (isset($_COOKIE['hr'])){
+        header('Location: HR_dashboard.php');}
+        if (isset($_COOKIE['mng'])){
+        header('Location: manager_dashboard.php');}
+        if (isset($_COOKIE['hr_d'])){
+        header('Location: HR_document.php');}
+        if (isset($_COOKIE['hr_emp'])){
+        header('Location: HR_Employee.php');}
+        if (isset($_COOKIE['hr_leave'])){
+        header('Location: HR_leave.php');}
+        if (isset($_COOKIE['hr_perfomance'])){
+        header('Location: HR_perfomance.php');}
+        if (isset($_COOKIE['mng_leave'])){
+        header('Location: Leave_manager.php');}
+        if (isset($_COOKIE['mng_doc'])){
+        header('Location: mng_document');}
+        if (isset($_COOKIE['mng_emp'])){
+        header('Location: mng_employee.php');}
+       if (isset($_COOKIE['emp'])){
+       
+        //header('Location: Employee_dashboard.php');
+       
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -33,64 +60,8 @@
       margin-left: 250px; 
     }
 
-    .department-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    .department-header button {
-      background: none;
-      border: none;
-      color: white;
-      font-size: 18px;
-      cursor: pointer;
-    }
-    .department-list li {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      padding-left: 10px;
-    }
-    .circle {
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-    }
-    .art { background-color: #f78fb3; }
-    .dev { background-color: #70a1ff; }
-    .bottom-section {
-      margin-top: auto;
-    }
-
-    .topbar {
-      display: flex;
-      justify-content: flex-end;
-      align-items: center;
-      margin-bottom: 30px;
-      gap: 20px;
-    }
-    .topbar .notification {
-      font-size: 20px;
-      cursor: pointer;
-      background-color: rgba(255, 255, 255, 0.1);
-      padding: 10px;
-      border-radius: 50%;
-      transition: background 0.3s;
-    }
-    .topbar .notification:hover {
-      background-color: rgba(255, 255, 255, 0.2);
-    }
-    .topbar .profile-btn img {
-      width: 35px;
-      height: 35px;
-      border-radius: 50%;
-      cursor: pointer;
-      object-fit: cover;
-      border: 2px solid white;
-    }
-
     .card {
-      background: rgba(177, 178, 167, 0.639);
+      background: rgb(255, 255, 255);
       margin-bottom: 60px;
       padding: 20px;
       border-radius: 10px;
@@ -98,47 +69,22 @@
       color: #454d42c1;
     }
 
-    .dashboard-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 20px;
-    }
-
-    .highlight {
-      font-weight: bold;
-      color: #2749bc;
-    }
-
-    .chart-section {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 40px;
-    }
-
-    canvas {
-      background: white;
-      border-radius: 10px;
-    }
     form {
       all: unset;
       display: contents;
     }
 
-    .table-container {
-      overflow-x: auto;
-    }
-
     .employee-table {
       width: 100%;
       border-collapse: collapse;
-      background: white;
+      background: #ccc;
       border-radius: 8px;
     }
 
     .employee-table th {
       padding: 15px;
       text-align: left;
-      background: #85876a;
+      background:rgb(133, 135, 106);
       color: white;
     }
 
@@ -161,24 +107,7 @@
     .status-leave {
       background: #000000;
     }
-
-    .action-btn {
-      border: none;
-      padding: 5px 10px;
-      border-radius: 4px;
-      cursor: pointer;
-      color: white;
-    }
-
-    .edit-btn {
-      background: #85876a;
-      margin-right: 5px;
-    }
-
-    .delete-btn {
-      background: #e03f3f;
-    }
-
+    
     .card h2 {
       color: #454d42;
       margin-bottom: 20px;
@@ -196,15 +125,15 @@
           <input
             type="text"
             id="searchInput"
-            placeholder="Search employees..."
-            style="padding: 8px 12px; font-size: 14px; border-radius: 6px; border: 1px solid #ccc; width: 250px; color: black;"
+            placeholder=" Search employees..."
+            style="padding: 8px 12px; font-size: 14px; border-radius: 610px; border: 1px solid #ccc; width: 250px; color: black;"
           />
         </div>
 
         
 
         <div class="card">
-          <h2>Employee List</h2>
+          <h1>Employee List</h1>
           <div class="table-container">
             <table class="employee-table">
               <thead>
@@ -219,7 +148,7 @@
               <tbody>
                 <tr>
                   <td>EMP001</td>
-                  <td>John Doe</td>
+                  <td>Jeba Sahjida</td>
                   <td>
                     <div style="display: flex; align-items: center; gap: 10px;">
                       <div class="circle dev"></div>Development
@@ -231,7 +160,7 @@
                 </tr>
                 <tr>
                   <td>EMP002</td>
-                  <td>Jane Smith</td>
+                  <td>Ashraful Moon</td>
                   <td>
                     <div style="display: flex; align-items: center; gap: 10px;">
                       <div class="circle art"></div>Art & Design
@@ -243,7 +172,7 @@
                 </tr>
                 <tr>
                   <td>EMP003</td>
-                  <td>Mike Johnson</td>
+                  <td>Owsi shafi</td>
                   <td>
                     <div style="display: flex; align-items: center; gap: 10px;">
                       <div class="circle dev"></div>Development
@@ -284,5 +213,13 @@
 </body>
 </html>
 
+<?php
+     
+  }
+    }else{
+        header('location: UserAuth.html');
+    }
+  
 
+?>
 

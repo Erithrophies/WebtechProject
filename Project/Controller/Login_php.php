@@ -18,11 +18,45 @@
                     header('location: ../view/Employee_dashboard.php');
                 }
                 else if(isset($_COOKIE['mng'])){
-                    header('location: ../view/mng_dashboard.php');
-                }else
-                {
+                    header('location: ../view/manager_dashboard.php');
+                }
+                // else if(isset($_COOKIE['emp_doc'])){
+                //     header('location: ../view/emp_document.php');
+                // }
+                // else if(isset($_COOKIE['emp_emp'])){
+                //     header('location: ../view/Emp_employee.php');
+                // }
+                // else if(isset($_COOKIE['emp_leave'])){
+                //     header('location: ../view/employee_leave.php');
+                // }
+                // else if(isset($_COOKIE['hr_d'])){
+                //     header('location: ../view/HR_Document.php');
+                // }
+                // else if(isset($_COOKIE['hr_emp'])){
+                //     header('location: ../view/HR_Employee.php');
+                // }
+                // else if(isset($_COOKIE['hr_leave'])){
+                //     header('location: ../view/HR_leave.php');
+                // }
+                // else if(isset($_COOKIE['hr_perfomance'])){
+                //     header('location: ../view/HR_perfomance.php');
+                // }
+                // else if(isset($_COOKIE['mng_leave'])){
+                //     header('location: ../view/Leave_manager.php');
+                // }
+                // else if(isset($_COOKIE['mng_doc'])){
+                //     header('location: ../view/mng_document.php');
+                // }
+                // else if(isset($_COOKIE['mng_emp'])){
+                //     header('location: ../view/mng_employee.php');
+                // }
+                else if(isset($_COOKIE['hr'])){
                     header('location: ../view/HR_Dashboard.php');
                 }
+                // else
+                // {
+                //     header('location: ../view/HR_Dashboard.php');
+                // }
                 
 
             }else{
