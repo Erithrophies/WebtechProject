@@ -2,14 +2,14 @@
 require_once('../../Model/db.php');
 $con = getConnection();
 
-// Example: Get employee_id from session (update as needed)
+
 session_start();
-$employee_id = isset($_SESSION['employee_id']) ? $_SESSION['employee_id'] : 1; // Replace 1 with actual logic
+$employee_id = isset($_SESSION['employee_id']) ? $_SESSION['employee_id'] : 1; 
 
 $days = ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'];
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Loop through each day
+    
     for ($i = 0; $i < 7; $i++) {
         $date = isset($_POST['date'][$i]) ? $_POST['date'][$i] : null;
         $clock_in = isset($_POST['clock_in'][$i]) ? $_POST['clock_in'][$i] : null;
@@ -17,7 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $project = isset($_POST['project'][$i]) ? $_POST['project'][$i] : null;
         $notes = isset($_POST['notes'][$i]) ? $_POST['notes'][$i] : null;
 
-        // Calculate total hours
+       
         $total_hours = null;
         if ($clock_in && $clock_out) {
             $in = strtotime($clock_in);
@@ -27,7 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
         }
 
-        // Only insert if date and times are provided
+        
         if ($date && $clock_in && $clock_out) {
             $sql = "INSERT INTO timesheet (employee_id, day, date, clock_in, clock_out, total_hours, project, notes) 
                     VALUES (?, ?, ?, ?, ?, ?, ?, ?)";

@@ -16,8 +16,8 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  // Overtime threshold alert logic
-  const OVERTIME_THRESHOLD = 8; // hours per day
+
+  const OVERTIME_THRESHOLD = 8; 
   const table = document.querySelector('.timesheet-table');
   if (table) {
     table.addEventListener('input', (e) => {
@@ -31,7 +31,7 @@ document.addEventListener("DOMContentLoaded", () => {
           const [inH, inM] = clockIn.split(':').map(Number);
           const [outH, outM] = clockOut.split(':').map(Number);
           let total = (outH + outM/60) - (inH + inM/60);
-          if (total < 0) total += 24; // handle overnight
+          if (total < 0) total += 24; 
           totalCell.value = total.toFixed(2);
           if (total > OVERTIME_THRESHOLD) {
             notesCell.value = 'Overtime';
@@ -49,5 +49,5 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // document.getElementById("clockInBtn").addEventListener("click", clockInWithGPS);
+ 
 });
