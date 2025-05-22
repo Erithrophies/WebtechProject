@@ -335,11 +335,11 @@
     
    
     .error-message {
-      color: red;
-      font-size: 12px;
-      display: block;
-      margin-top: 5px;
-    }
+  color: red;
+  font-size: 0.9em;
+  margin-left: 10px;
+}
+
   </style>
 </head>
 <body>
@@ -366,14 +366,16 @@
     <section id="training-program" style="margin-top:30px;">
       <h1><i>Training Program Assignment</i></h1>
       <form id="trainingForm">
-        <label for="empNameTrain" style="font-size:15px">Employee:</label>
-        <input type="text" id="empNameTrain" placeholder=" Enter employee name" style="margin-left:30px; height:25px;"><br><br>
+        <label for="empNameTrain" style="font-size:15px; margin-left:5px">Employee:</label>
+        <input type="text" id="empNameTrain" placeholder=" Enter employee name" style="margin-left:30px; height:25px;">
+         <span id="msg-train-name" class="error-message" ></span><br><br> 
         
         <label for="trainingTitle" style="font-size:15px">Training Title:</label>
-        <input type="text" id="trainingTitle" placeholder="Enter training program" style="margin-left:10px; height:25px;"><br><br>
-        
+        <input type="text" id="trainingTitle" placeholder="Enter training program" style="margin-left:10px; height:25px;">
+         <span id="msg-train-title" class="error-message"></span> <br><br>
+
         <label for="trainingStatus" style="font-size:15px">Status:</label>
-        <select id="trainingStatus" style="margin-left:50px; height:25px;">
+        <select id="trainingStatus" style="margin-left:52px; height:25px;">
           <option>Not started</option>
           <option>In progress</option>
           <option>Completed</option>
@@ -395,13 +397,15 @@
         <option value="Jane Smith">Jane Smith</option>
         <option value="Mike Johnson">Mike Johnson</option>
       </select>
+        <span id="msg-employee" class="error-message"></span>
 
       <select id="teamSelect" aria-label="Select team">
         <option value="" disabled selected>Select Team</option>
-        <option value="Art & Design">Sales</option>
-        <option value="UI">Marketing</option>
+        <option value="Art & Design">Art & Design</option>
+        <option value="UI">UI</option>
         <option value="Development">Development</option>
       </select>
+       <span id="msg-team" class="error-message"></span> 
 
       <button type="submit">Assign</button>
     </form>
@@ -454,10 +458,160 @@
     </div>
   </div> 
   
-  <script>
-   
+ <script>
+  const employees = ["Alice Johnson", "Bob Smith", "Charlie Davis"];
+  const assignments = [];
+  const assignedTrainings = [];
+
+ 
+  document.getElementById("assignTeamForm").addEventListener("submit", function (e) {
+    e.preventDefault();
+    let isValid = true;
+
     
-  </script>
+    document.getElementById("msg-employee").innerHTML = "";
+    document.getElementById("msg-team").innerHTML = "";
+
+    let employee = document.getElementById("employeeSelect").value;
+    let team = document.getElementById("teamSelect").value;
+
+   
+    let msg = document.getElementById("msg-employee");
+    if ( document.getElementById("employeeSelect").selectedIndex === 0) {
+      msg.innerHTML = "Please select an employee";
+      document.getElementById("employeeSelect").style.border = "1px solid red";
+      isValid = false;
+    } else {
+      document.getElementById("employeeSelect").style.border = "1px solid #ccc";
+    }
+
+   
+    msg = document.getElementById("msg-team");
+    if (team === "" || document.getElementById("teamSelect").selectedIndex === 0) {
+      msg.innerHTML = "Please select a team";
+      document.getElementById("teamSelect").style.border = "1px solid red";
+      isValid = false;
+    } else {
+      document.getElementById("teamSelect").style.border = "1px solid #ccc";
+    }
+
+   
+    if (isValid) {
+      const exists = assignments.find(a => a.employee === employee && a.team === team);
+      if (exists) {
+        alert(employee + " is already assigned to " + team + " team.");
+        return;
+      }
+
+      assignments.push({ employee, team });
+      updateAssignmentsList();
+      document.getElementById("employeeSelect").value = "";
+      document.getElementById("teamSelect").value = "";
+    }
+  });
+
+  function updateAssignmentsList() {
+    const ul = document.getElementById("teamAssignments");
+    ul.innerHTML = "";
+    assignments.forEach(a => {
+      const li = document.createElement("li");
+      li.textContent = a.employee + " → " + a.team;
+      ul.appendChild(li);
+    });
+  }
+
+  
+  document.getElementById("trainingForm").addEventListener("submit", function (e) {
+    e.preventDefault();
+    let isValid = true;
+
+    
+    document.getElementById("msg-train-name").innerHTML = "";
+    document.getElementById("msg-train-title").innerHTML = "";
+
+    let empName = document.getElementById("empNameTrain").value.trim();
+    let trainingTitle = document.getElementById("trainingTitle").value.trim();
+    let trainingStatus = document.getElementById("trainingStatus").value;
+
+    
+    let msg = document.getElementById("msg-train-name");
+    if (empName === "") {
+      msg.innerHTML = "Please enter employee name";
+      document.getElementById("empNameTrain").style.border = "1px solid red";
+      isValid = false;
+    } else {
+      document.getElementById("empNameTrain").style.border = "1px solid #ccc";
+    }
+
+   
+    msg = document.getElementById("msg-train-title");
+    if (trainingTitle === "") {
+      msg.innerHTML = "Please enter training title";
+      document.getElementById("trainingTitle").style.border = "1px solid red";
+      isValid = false;
+    } else {
+      document.getElementById("trainingTitle").style.border = "1px solid #ccc";
+    }
+
+    
+    if (isValid) {
+      assignedTrainings.push({
+        employee: empName,
+        title: trainingTitle,
+        status: trainingStatus
+      });
+      renderTrainings();
+      document.getElementById("trainingForm").reset();
+    }
+  });
+
+  function renderTrainings() {
+    const list = document.getElementById("trainingList");
+    list.innerHTML = "";
+
+    if (assignedTrainings.length === 0) {
+      list.innerHTML = '<p style="color:blue">No trainings assigned yet.</p>';
+      return;
+    }
+
+    assignedTrainings.forEach(training => {
+      const div = document.createElement("div");
+      div.style.border = "1px solid #ccc";
+      div.style.padding = "8px";
+      div.style.marginBottom = "5px";
+      div.style.borderRadius = "4px";
+      div.innerHTML = `
+        <strong>Employee:</strong> ${training.employee} <br>
+        <strong>Training:</strong> ${training.title} <br>
+        <strong>Status:</strong> ${training.status}
+      `;
+      list.appendChild(div);
+    });
+  }
+
+  
+  const employeeList = document.getElementById("employeeList");
+  const employeeSearch = document.getElementById("employeeSearch");
+
+  function updateEmployeeList(filter = "") {
+    employeeList.innerHTML = "";
+    employees
+      .filter(emp => emp.toLowerCase().includes(filter.toLowerCase()))
+      .forEach(emp => {
+        const li = document.createElement("li");
+        li.textContent = emp;
+        employeeList.appendChild(li);
+      });
+  }
+
+  employeeSearch.addEventListener("input", function () {
+    updateEmployeeList(employeeSearch.value);
+  });
+
+  //updateEmployeeList();
+  renderTrainings();
+</script>
+
 </body> 
 </html>
 <?php
