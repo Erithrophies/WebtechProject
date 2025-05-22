@@ -37,6 +37,20 @@ textarea, select, input[type="text"] {
     color: #fff;
     background: rgba(34,40,49,0.7);
 }
+.submit-btn, button[type="submit"] {
+    background: #A0C878;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    padding: 12px 24px;
+    margin: 8px 4px 0 0;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+.submit-btn:hover, button[type="submit"]:hover {
+    background: #A0C878;
+}
 button[type="submit"] {
     background: #A0C878;
     color: #fff;
