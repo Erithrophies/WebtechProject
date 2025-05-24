@@ -1,7 +1,7 @@
 body {
   font-family: Arial, sans-serif;
   margin: 0;
-  background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('/Project/View/Assets/home.JPG') no-repeat center center fixed;
+  background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('../View/home.JPG') no-repeat center center fixed;
   background-size: cover;
   color: #fff;
 }
@@ -9,7 +9,7 @@ body {
 .header {
   padding: 60px 20px;
   text-align: center;
-  background-image: url('/Project/View/Assets/home.JPG');
+  background-image: url('../View/home.JPG');
   color: rgb(31, 31, 31);
 }
 
