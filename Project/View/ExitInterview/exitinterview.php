@@ -1,37 +1,45 @@
 <?php
-error_reporting(E_ALL);
-session_start();
+// Initialize variables
+$errors = [];
+$success = false;
 
-if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    
-    $reason = trim($_POST['reason'] ?? '');
-    $like_most = trim($_POST['like_most'] ?? '');
-    $improve = trim($_POST['improve'] ?? '');
+// Check if form was submitted
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    // Get form data
+    $reason = $_POST['reason'] ?? '';
+    $like_most = $_POST['like_most'] ?? '';
+    $improve = $_POST['improve'] ?? '';
     $recommend = $_POST['recommend'] ?? '';
     $assets = $_POST['assets'] ?? [];
-    $assets_other = trim($_POST['assets_other'] ?? '');
-    $alumni = isset($_POST['alumni_opt_in']) ? 'Yes' : 'No';
+    $assets_other = $_POST['assets_other'] ?? '';
+    $alumni_opt_in = isset($_POST['alumni_opt_in']) ? 'yes' : 'no';
 
-    if (empty($reason) || empty($like_most) || empty($improve) || empty($recommend)) {
-        echo "<script>alert('Please fill in all required fields.'); window.location.href='../ExitInterview/exitInterview.html';</script>";
+    // Validate required fields
+    if (empty($reason)) $errors[] = "Please provide a reason for leaving";
+    if (empty($like_most)) $errors[] = "Please tell us what you liked most";
+    if (empty($improve)) $errors[] = "Please provide suggestions for improvement";
+    if (empty($recommend)) $errors[] = "Please select if you would recommend us";
+    
+    // Validate assets if "Other" is checked
+    if (in_array('other', $assets) && empty($assets_other)) {
+        $errors[] = "Please specify the other asset";
+    }
+
+    // If no errors, process the form
+    if (empty($errors)) {
+        $success = true;
+        
+        // Here you would normally:
+        // 1. Save to database
+        // 2. Send email notifications
+        // 3. Redirect to thank you page
+        
+        // For now, just show success message
+        include 'exitform.html';
         exit;
     }
-
-    
-    echo "<h2>Exit Interview Submitted Successfully</h2>";
-    echo "<p><strong>Reason for leaving:</strong> " . htmlspecialchars($reason) . "</p>";
-    echo "<p><strong>What you liked most:</strong> " . htmlspecialchars($like_most) . "</p>";
-    echo "<p><strong>Suggestions for improvement:</strong> " . htmlspecialchars($improve) . "</p>";
-    echo "<p><strong>Recommendation:</strong> " . htmlspecialchars($recommend) . "</p>";
-    echo "<p><strong>Assets Returned:</strong> " . implode(", ", array_map('htmlspecialchars', $assets)) . "</p>";
-    if (!empty($assets_other)) {
-        echo "<p><strong>Other asset:</strong> " . htmlspecialchars($assets_other) . "</p>";
-    }
-    echo "<p><strong>Alumni Network:</strong> $alumni</p>";
-
-} else {
-    
-    header('Location: exitInterviewForm.html');
-    exit;
 }
+
+// If there are errors or form wasn't submitted, show the form
+include 'exitform.html';
 ?>
