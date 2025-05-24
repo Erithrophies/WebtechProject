@@ -91,7 +91,7 @@ footer {
   align-items: center;
   justify-content: flex-start;
   height: 400px;
-  background-image: url('./home.JPG');
+  background-image: url('../View/home.JPG');
   background-repeat: no-repeat;
   background-position: center right; 
   background-size: cover;

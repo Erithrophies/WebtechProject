@@ -5,14 +5,14 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Profile Management</title>
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="../Asset/profileedit.css" />
 </head>
 <body>
   <div class="container">
     
     <div id="view-profile" class="profile-section">
       <h2>View Profile</h2>
-      <img id="profile-image-view" src="../Assets/3.jpg" alt="Profile Image" />
+      <img id="profile-image-view" src="../View/Assets/3.jpg" alt="Profile Image" />
       <div id="profile-details">
         <p class="name-display"><strong>Name:</strong> Md. Abdullah Al Noman</p>
         <p class="email-display"><strong>Email:</strong> abdullahjoy3000@gmail.com</p>
@@ -24,7 +24,7 @@
       <h2>Edit Profile</h2>
       <form id="edit-profile-form" enctype="multipart/form-data">
         <label for="profile-image-input">
-          <img id="profile-image-preview" src="./Assets/account.png" alt="Profile Change" style="cursor: pointer;" />
+          <img id="profile-image-preview" src="../View/account.png" alt="Profile Change" style="cursor: pointer;" />
         </label>
         <input type="file" id="profile-image-input" name="profile_image" accept="image/*" style="display: none;" />
 
@@ -47,6 +47,6 @@
     </div>
   </div>
 
-  <script src="script.js"></script>
+  <script src="../Asset/profileedit.js"></script>
 </body>
 </html>
