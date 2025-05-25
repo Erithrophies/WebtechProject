@@ -154,7 +154,7 @@ main {
     z-index: -1;
     background: 
         linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)),
-        url('../Assets/home.JPG') center center / cover no-repeat;
+        url('../View/home.JPG') center center / cover no-repeat;
 }
 
 .header-content {

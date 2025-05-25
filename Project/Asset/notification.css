@@ -1,0 +1,124 @@
+
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f9f9fb;
+    margin: 0;
+    padding: 0;
+}
+
+.background-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.03);
+    z-index: -1;
+}
+
+.notification-container {
+    width: 420px;
+    margin: 50px auto;
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+header {
+    border-bottom: 1px solid #e0e0e0;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header-content {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    width: 100%;
+    justify-content: space-between;
+}
+
+h1 {
+    font-size: 18px;
+    margin: 0;
+    flex-grow: 1;
+    text-align: center;
+    font-weight: 600;
+}
+
+.bell-icon {
+    position: relative;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+}
+
+.bell-icon img {
+    width: 100%;
+    height: auto;
+}
+
+.unread-count {
+    position: absolute;
+    top: -6px;
+    right: -6px;
+    background-color: #A0C878;
+    color: white;
+    border-radius: 50%;
+    font-size: 12px;
+    padding: 3px 6px;
+    font-weight: bold;
+}
+
+.settings-link-btn {
+    background: none;
+    border: none;
+    color: #5a5a89;
+    font-size: 14px;
+    cursor: pointer;
+    padding: 5px 10px;
+    transition: color 0.3s;
+    text-decoration: underline;
+}
+
+.settings-link-btn:hover {
+    color: #A0C878;
+}
+
+.notification-list {
+    padding: 10px 20px;
+    max-height: 350px;
+    overflow-y: auto;
+}
+
+.notification {
+    background-color: #ffffff;
+    border-left: 4px solid transparent;
+    padding: 10px 12px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    transition: background 0.3s ease;
+}
+
+.notification.unread {
+    background-color: #f3f1ff;
+    border-left-color: #A0C878;
+}
+
+.notification p {
+    margin: 0;
+    font-size: 14px;
+    color: #333;
+}
+
+.notification .timestamp {
+    font-size: 12px;
+    color: #888;
+    margin-top: 4px;
+    display: block;
+}

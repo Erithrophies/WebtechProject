@@ -8,7 +8,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const emailInput = document.getElementById("email");
     const nameDisplay = document.getElementsByClassName("name-display")[0];
     const emailDisplay = document.getElementsByClassName("email-display")[0];
-
   
     const profileImageInput = document.getElementById("profile-image-input");
     const profileImagePreview = document.getElementById("profile-image-preview");
@@ -31,7 +30,20 @@ document.addEventListener("DOMContentLoaded", () => {
     
     const editProfileForm = document.getElementById("edit-profile-form");
     editProfileForm.addEventListener("submit", (e) => {
-      e.preventDefault();
+     
+      if (nameInput.value.trim() === "") {
+        alert("Name is required.");
+        nameInput.focus();
+        e.preventDefault();
+        return;
+      }
+      if (emailInput.value.trim() === "") {
+        alert("Email is required.");
+        emailInput.focus();
+        e.preventDefault();
+        return;
+      }
+  
       nameDisplay.innerHTML = "<strong>Name:</strong> " + nameInput.value;
       emailDisplay.innerHTML = "<strong>Email:</strong> " + emailInput.value;
       
@@ -41,6 +53,7 @@ document.addEventListener("DOMContentLoaded", () => {
       alert("Profile updated successfully!");
       editProfileSection.style.display = "none";
       viewProfileSection.style.display = "block";
+      
     });
   
     

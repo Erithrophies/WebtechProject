@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Notification Settings</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background: #f5f6fa;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .settings-box {
+            background: white;
+            padding: 40px 32px;
+            border-radius: 16px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+            width: 100%;
+            max-width: 400px;
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        h1 {
+            color: #2e2e48;
+            font-size: 22px;
+            font-weight: 600;
+            margin: 0;
+            text-align: center;
+        }
+
+        .settings-form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .settings-form label {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 15px;
+            font-weight: 500;
+            color: #333;
+            background: #f8f8fc;
+            padding: 14px 16px;
+            border-radius: 12px;
+            transition: background 0.3s;
+            cursor: pointer;
+        }
+
+        .settings-form input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            accent-color: #A0C878;
+            cursor: pointer;
+        }
+
+        .settings-form label:hover {
+            background: #f0efff;
+        }
+
+        @media (max-width: 600px) {
+            .settings-box {
+                padding: 24px 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="settings-box">
+        <h1>Notification Settings</h1>
+        <form class="settings-form">
+            <label>
+                Email Notifications
+                <input type="checkbox" checked>
+            </label>
+            <label>
+                Push Notifications
+                <input type="checkbox" checked>
+            </label>
+        </form>
+    </div>
+</body>
+</html>

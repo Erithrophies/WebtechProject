@@ -1,6 +1,6 @@
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('../Assets/home.JPG') center center/cover no-repeat;
+    background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('../View/home.JPG') center center/cover no-repeat;
     color: #333;
     margin: 0;
     padding: 0;
@@ -41,7 +41,7 @@ body {
   
   .screen-card {
     flex: 1 1 220px;
-    background: #3498db;
+    background: #A0C878;
     color: white;
     padding: 24px 0;
     text-align: center;
@@ -54,7 +54,7 @@ body {
     min-width: 180px;
   }
   .screen-card:hover {
-    background: #2980b9;
+    background: #A0C878;
     transform: translateY(-4px) scale(1.03);
   }
   
@@ -71,36 +71,63 @@ body {
     display: none;
   }
   
-  ul#courseList, ul#completedCourses {
-    padding-left: 20px;
+  #courseList {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 28px;
+    justify-content: center;
+    padding-left: 0;
     margin: 18px 0;
+    list-style: none;
   }
   
-  ul#courseList li, ul#completedCourses li {
-    margin-bottom: 12px;
-    font-size: 1.05em;
+  #courseList li {
+    background: #fff;
+    border-radius: 14px;
+    box-shadow: 0 4px 16px rgba(44,62,80,0.10);
+    padding: 22px 18px 18px 18px;
+    margin-bottom: 0;
+    font-size: 1.08em;
     color: #2c3e50;
-    background: rgba(255,255,255,0.7);
-    border-radius: 6px;
-    padding: 8px 12px;
-    box-shadow: 0 1px 4px rgba(44,62,80,0.04);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 180px;
+    max-width: 220px;
+    transition: box-shadow 0.2s, transform 0.2s;
+    position: relative;
   }
   
-  button {
+  #courseList li:hover {
+    box-shadow: 0 8px 32px rgba(44,62,80,0.18);
+    transform: translateY(-4px) scale(1.03);
+  }
+  
+  .course-img {
+    width: 64px;
+    height: 64px;
+    object-fit: contain;
+    margin-bottom: 12px;
+    border-radius: 10px;
+    background: #f4f6fa;
+    box-shadow: 0 2px 8px rgba(44,62,80,0.06);
+  }
+  
+  #courseList li button {
+    margin-top: 14px;
+    width: 100%;
     background: #27ae60;
-    color: white;
-    padding: 10px 22px;
+    color: #fff;
+    padding: 10px 0;
     border: none;
     border-radius: 8px;
-    cursor: pointer;
     font-weight: bold;
-    margin-top: 10px;
     font-size: 1em;
     box-shadow: 0 2px 8px rgba(39,174,96,0.08);
     transition: background 0.2s, transform 0.2s;
   }
   
-  button:hover {
+  #courseList li button:hover {
     background: #1e8449;
     transform: translateY(-2px) scale(1.04);
   }
@@ -121,6 +148,14 @@ body {
     margin-top: 18px;
   }
   
+  .course-desc {
+    font-size: 0.98em;
+    color: #555;
+    margin: 8px 0 0 0;
+    text-align: center;
+    min-height: 38px;
+  }
+  
   @media (max-width: 700px) {
     .container {
         padding: 10px 2vw;
@@ -135,5 +170,20 @@ body {
     }
     .screen-content {
         padding: 18px 6px;
+    }
+  }
+  
+  @media (max-width: 900px) {
+    ul#courseList {
+        gap: 14px;
+    }
+    ul#courseList li {
+        min-width: 130px;
+        max-width: 180px;
+        padding: 14px 6px 12px 6px;
+    }
+    .course-img {
+        width: 44px;
+        height: 44px;
     }
   }
