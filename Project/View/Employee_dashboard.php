@@ -1,30 +1,15 @@
 <?php
-    session_start();
-    if (isset($_COOKIE['status'])){
-      //$role = $_COOKIE['emp'];
-      if (isset($_COOKIE['hr'])){
-        header('Location: HR_dashboard.php');}
-        if (isset($_COOKIE['mng'])){
-        header('Location: manager_dashboard.php');}
-        if (isset($_COOKIE['hr_d'])){
-        header('Location: HR_document.php');}
-        if (isset($_COOKIE['hr_emp'])){
-        header('Location: HR_Employee.php');}
-        if (isset($_COOKIE['hr_leave'])){
-        header('Location: HR_leave.php');}
-        if (isset($_COOKIE['hr_perfomance'])){
-        header('Location: HR_perfomance.php');}
-        if (isset($_COOKIE['mng_leave'])){
-        header('Location: Leave_manager.php');}
-        if (isset($_COOKIE['mng_doc'])){
-        header('Location: mng_document');}
-        if (isset($_COOKIE['mng_emp'])){
-        header('Location: mng_employee.php');}
-       if (isset($_COOKIE['emp'])){
-       
-        //header('Location: Employee_dashboard.php');
-       
-?>
+session_start();
+$upcomingTrainingsCount = 0;
+if (isset($_SESSION['id']) && $_SESSION['type'] === 'employee') {
+    require_once('../Model/userModel.php');
+    $upcomingTrainingsCount = getEmployeeUpcomingTrainingsCount($_SESSION['id']);
+}
+
+
+if (isset($_SESSION['type']) && $_SESSION['type'] === 'employee') {
+  // Manager is allowed to view this page
+  ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -49,79 +34,7 @@
       color: white;
     }
 
-    .sidebar {
-      width: 250px;
-      background: #85876a;
-      padding: 30px 20px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      position: fixed;
-      height: 100vh;
-    }
-    .sidebar .top-section {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-    .sidebar h2 {
-      margin-bottom: 30px;
-      font-size: 24px;
-    }
-    .sidebar ul {
-      list-style: none;
-      padding: 0;
-      width: 100%;
-    }
-    .sidebar ul h3 {
-      margin: 20px 0 10px;
-      font-size: 16px;
-      border-bottom: 1px solid rgba(255,255,255,0.3);
-      padding-bottom: 5px;
-    }
-    .sidebar ul li {
-      margin: 10px 0;
-    }
-    .sidebar ul li a {
-      color: white;
-      text-decoration: none;
-      padding: 8px 0;
-      display: block;
-      border-radius: 5px;
-      transition: background 0.3s;
-    }
-    .sidebar ul li a:hover {
-      background-color: rgba(255, 255, 255, 0.2);
-    }
-    .department-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      cursor: pointer;  
-    }
-    .department-header button {
-      background: none;
-      border: none;
-      color: white;
-      font-size: 18px;
-      cursor: pointer;
-    }
-    .department-list li {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      padding-left: 10px;
-    }
-    .circle {
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-    }
-    .art { background-color: #f78fb3; }
-    .dev { background-color: #70a1ff; }
-    .bottom-section {
-      margin-top: auto;
-    }
+ 
 
     .topbar {
       display: flex;
@@ -139,22 +52,23 @@
       transition: background 0.3s;
     }
     .topbar .notification:hover {
-      background-color: rgba(255, 255, 255, 0.2);
+      background-color: rgba(177, 178, 167, 0.639);
     }
-    .topbar .profile-btn img {
-      width: 35px;
-      height: 35px;
-      border-radius: 50%;
-      cursor: pointer;
-      object-fit: cover;
-      border: 2px solid white;
+    .topbar .profile-btn {
+      font-size: 16px;
+      padding: 10px;
+      border-radius: 10px;
+      
     }
 
-    .main {
-      margin-left: 250px;
-      padding: 30px;
-      flex-grow: 1;
-    }
+   .main {
+    position: absolute;
+    left: 300px;
+    width: 1200px;
+    display: block;
+   padding: 30px;
+   flex: 1;
+}
 
     .dashboard-grid {
       display: grid;
@@ -266,17 +180,16 @@
   </style>
 </head>
 <body>
-  <form>
 
-    <?php include 'Emp_sidebar.html';  ?>
+    <?php include 'Emp_sidebar.php';  ?>
 
     <div class="main">
       
       <div class="topbar">
         <input type="text" id="searchBar" placeholder="Search teammates...">
         <div class="notification">🔔</div>
-        <div class="profile-btn">
-          <img src="profile.jpg" alt="Profile" />
+        <div class="profile-btn" style="color:#85876a; font-weight: bold; margin-right:20px">
+          <?php echo $_SESSION['username']; ?>
         </div>
       </div>
       
@@ -288,7 +201,10 @@
         <div class="card">🏢 <span class="highlight">Your Teams:</span> 2</div>
         <div class="card">📝 <span class="highlight">Pending Approvals:</span> 1</div>
         <div class="card">🎉 <span class="highlight">New Messages:</span> 5</div>
-        <div class="card">⚠️ <span class="highlight">Upcoming Trainings:</span> 2</div>
+        <div class="card" id="upcomingTrainingCard" style="cursor:pointer;">
+          ⚠️ <span class="highlight">Upcoming Trainings:</span> <?php echo $upcomingTrainingsCount; ?>
+        </div>
+
         <div class="card">📊 <span class="highlight">Your Performance:</span> 88%</div>
         <div class="card">📚 <span class="highlight">Completed Projects:</span> 4</div>
       </div>
@@ -347,9 +263,15 @@
 
     </div>
 
-  </form>
 
   <script>
+
+    document.getElementById('upcomingTrainingCard').addEventListener('click', function() {
+    // Option 1: redirect to a page showing details
+    window.location.href = 'employee_upcoming_training.php';
+
+    // Option 2: or load with AJAX and show a popup/modal (more complex)
+});
   
   </script>
 </body>
@@ -357,11 +279,9 @@
 
 
 <?php
-     
-  }
-    }else{
-        header('location: UserAuth.html');
-    }
-  
-
+} else {
+  // Redirect non-manager users
+  header("Location: UserAuth.html");
+  exit();
+}
 ?>

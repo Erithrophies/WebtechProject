@@ -3,7 +3,7 @@
     $host = "127.0.0.1";
     $dbuser = "root";
     $dbpass = "";
-    $dbname = "ems";
+    $dbname = "EMS1";
 
     function getConnection(){
         global $dbname;
@@ -13,5 +13,6 @@
         $con = mysqli_connect($GLOBALS['host'], $dbuser, $dbpass, $dbname);
         return $con;
     }
+    $con = getConnection();
 
 ?>

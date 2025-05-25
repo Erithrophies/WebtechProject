@@ -1,30 +1,11 @@
 <?php
-    session_start();
-    if (isset($_COOKIE['status'])){
-      //$role = $_COOKIE['emp'];
-      if (isset($_COOKIE['hr'])){
-        header('Location: HR_dashboard.php');}
-        if (isset($_COOKIE['emp'])){
-        header('Location: Employee_dashboard.php');}
-        if (isset($_COOKIE['hr_d'])){
-        header('Location: HR_document.php');}
-        if (isset($_COOKIE['hr_emp'])){
-        header('Location: HR_Employee.php');}
-        if (isset($_COOKIE['hr_leave'])){
-        header('Location: HR_leave.php');}
-        if (isset($_COOKIE['emp_doc'])){
-        header('Location: emp_document.php');}
-        if (isset($_COOKIE['emp_emp'])){
-        header('Location: Emp_employee.php');}
-        if (isset($_COOKIE['emp_leave'])){
-        header('Location: employee_leave.php');}
-        if (isset($_COOKIE['hr_perfomance'])){
-        header('Location: HR_perfomance.php');}
-       if (isset($_COOKIE['mng'])){
-       
-        //header('Location: Employee_dashboard.php');
-       
-?>
+session_start();
+include '../Model/db.php'; 
+include '../Controller/assign_training.php';
+
+if (isset($_SESSION['type']) && $_SESSION['type'] === 'manager') {
+  
+  ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -79,21 +60,13 @@
       background-color: rgba(0, 0, 0, 0.18);
       box-shadow: 0 4px 12px rgba(133, 135, 106, 0.13);
     }
-    .topbar .profile-btn img {
-      width: 38px;
-      height: 38px;
-      border-radius: 50%;
-      cursor: pointer;
-      object-fit: cover;
-      border: 2px solid #1c1f1c;
-      box-shadow: 0 2px 6px rgba(133, 135, 106, 0.10);
-      transition: border 0.2s;
+    .topbar .profile-btn {
+      font-size: 16px;
+      padding: 10px;
+      border-radius: 10px;
+      
     }
-    .topbar .profile-btn img:hover {
-      border: 2px solid #85876a;
-    }
-
-    
+   
 
     .card {
       background: rgba(177, 178, 167, 0.72);
@@ -343,16 +316,16 @@
   </style>
 </head>
 <body>
-  <?php include 'mng_sidebar.html'; ?>
+  <?php include 'mng_sidebar.php'; ?>
 
   <div class="main">
     
     <div class="topbar">
       <input type="text" id="searchBar" placeholder="Search employees...">
       <div class="notification" title="Notifications">🔔</div>
-      <div class="profile-btn" title="Profile">
-        <img src="manager-profile.jpg" alt="Profile" />
-      </div>
+      <div class="profile-btn" style="color:#85876a; font-weight: bold; margin-right:20px">
+          <?php echo $_SESSION['username']; ?>
+        </div>
     </div>
     
     <h1>Overview</h1>
@@ -365,17 +338,17 @@
     
     <section id="training-program" style="margin-top:30px;">
       <h1><i>Training Program Assignment</i></h1>
-      <form id="trainingForm">
+       <form id="trainingForm"method="POST" onsubmit="return validateTrainingForm();">
         <label for="empNameTrain" style="font-size:15px; margin-left:5px">Employee:</label>
-        <input type="text" id="empNameTrain" placeholder=" Enter employee name" style="margin-left:30px; height:25px;">
+        <input type="text" id="empNameTrain" name = "username" placeholder=" Enter employee name" style="margin-left:30px; height:25px;">
          <span id="msg-train-name" class="error-message" ></span><br><br> 
         
         <label for="trainingTitle" style="font-size:15px">Training Title:</label>
-        <input type="text" id="trainingTitle" placeholder="Enter training program" style="margin-left:10px; height:25px;">
+        <input type="text" id="trainingTitle" name = "training_name" placeholder="Enter training program" style="margin-left:10px; height:25px;">
          <span id="msg-train-title" class="error-message"></span> <br><br>
 
         <label for="trainingStatus" style="font-size:15px">Status:</label>
-        <select id="trainingStatus" style="margin-left:52px; height:25px;">
+        <select id="trainingStatus"  name="training_status" style="margin-left:52px; height:25px;">
           <option>Not started</option>
           <option>In progress</option>
           <option>Completed</option>
@@ -383,10 +356,12 @@
         
         <button type="submit" style=" height:20px; width:250px">Assign Training</button>
       </form>
-      
-      <div id="trainingList" style="margin-top:10px;">
-       
+      <div id="trainingOutput" style="margin-top: 20px;">
+         <?php echo $output; ?>
       </div>
+
+      
+
     </section>
     
     <h2>Assign Teams</h2>
@@ -520,74 +495,35 @@
     });
   }
 
+ function validateTrainingForm() {
+    let name = document.getElementById("empNameTrain").value.trim();
+    let title = document.getElementById("trainingTitle").value.trim();
+
+    let nameMsg = document.getElementById("msg-train-name");
+    let titleMsg = document.getElementById("msg-train-title");
+
+    nameMsg.textContent = "";
+    titleMsg.textContent = "";
+
+    let valid = true;
+
+    if (name === "") {
+        nameMsg.textContent = "Employee name is required.";
+        valid = false;
+    }
+
+    if (title === "") {
+        titleMsg.textContent = "Training title is required.";
+        valid = false;
+    }
+
+    return valid; 
+}
+
+
   
-  document.getElementById("trainingForm").addEventListener("submit", function (e) {
-    e.preventDefault();
-    let isValid = true;
+ 
 
-    
-    document.getElementById("msg-train-name").innerHTML = "";
-    document.getElementById("msg-train-title").innerHTML = "";
-
-    let empName = document.getElementById("empNameTrain").value.trim();
-    let trainingTitle = document.getElementById("trainingTitle").value.trim();
-    let trainingStatus = document.getElementById("trainingStatus").value;
-
-    
-    let msg = document.getElementById("msg-train-name");
-    if (empName === "") {
-      msg.innerHTML = "Please enter employee name";
-      document.getElementById("empNameTrain").style.border = "1px solid red";
-      isValid = false;
-    } else {
-      document.getElementById("empNameTrain").style.border = "1px solid #ccc";
-    }
-
-   
-    msg = document.getElementById("msg-train-title");
-    if (trainingTitle === "") {
-      msg.innerHTML = "Please enter training title";
-      document.getElementById("trainingTitle").style.border = "1px solid red";
-      isValid = false;
-    } else {
-      document.getElementById("trainingTitle").style.border = "1px solid #ccc";
-    }
-
-    
-    if (isValid) {
-      assignedTrainings.push({
-        employee: empName,
-        title: trainingTitle,
-        status: trainingStatus
-      });
-      renderTrainings();
-      document.getElementById("trainingForm").reset();
-    }
-  });
-
-  function renderTrainings() {
-    const list = document.getElementById("trainingList");
-    list.innerHTML = "";
-
-    if (assignedTrainings.length === 0) {
-      list.innerHTML = '<p style="color:blue">No trainings assigned yet.</p>';
-      return;
-    }
-
-    assignedTrainings.forEach(training => {
-      const div = document.createElement("div");
-      div.style.border = "1px solid #ccc";
-      div.style.padding = "8px";
-      div.style.marginBottom = "5px";
-      div.style.borderRadius = "4px";
-      div.innerHTML = `
-        <strong>Employee:</strong> ${training.employee} <br>
-        <strong>Training:</strong> ${training.title} <br>
-        <strong>Status:</strong> ${training.status}
-      `;
-      list.appendChild(div);
-    });
-  }
 
   
   const employeeList = document.getElementById("employeeList");
@@ -615,8 +551,9 @@
 </body> 
 </html>
 <?php
-      }  
-  }else{
-        header('location: UserAuth.html');
-    }
-    ?>
+} else {
+  
+  header("Location: UserAuth.html");
+  exit();
+}
+?>

@@ -1,38 +1,10 @@
 
-      <?php
-    session_start();
-    if (isset($_COOKIE['status'])){
-      //$role = $_COOKIE['emp'];
-      if (isset($_COOKIE['emp'])){
-        header('Location: Employee_dashboard.php');}
-        if (isset($_COOKIE['mng'])){ 
-        header('Location: manager_dashboard.php');}
-        if (isset($_COOKIE['emp_doc'])){
-        header('Location: emp_document.php');}
-        if (isset($_COOKIE['emp_emp'])){
-        header('Location: Emp_employee.php');}
-        if (isset($_COOKIE['emp_leave'])){
-        header('Location: employee_leave.php');}
-        // if (isset($_COOKIE['hr_perfomance'])){
-        // header('Location: HR_perfomance.php');}
-        if (isset($_COOKIE['mng_leave'])){
-        header('Location: Leave_manager.php');}
-        if (isset($_COOKIE['mng_doc'])){
-        header('Location: mng_document');}
-        if (isset($_COOKIE['mng_emp'])){
-        header('Location: mng_employee.php');}
-       if (isset($_COOKIE['hr'])){
-       
-        //header('Location: Employee_dashboard.php');
-       
-?>
-       
-    
-?>
+    <?php
+session_start();
 
-
-
-
+if (isset($_SESSION['type']) && $_SESSION['type'] === 'hr') {
+  // HR is allowed to view this page
+  ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -149,15 +121,12 @@
     .topbar .notification:hover {
       background-color: rgba(255, 255, 255, 0.2);
     }
-    .topbar .profile-btn img {
-      width: 35px;
-      height: 35px;
-      border-radius: 50%;
-      cursor: pointer;
-      object-fit: cover;
-      border: 2px solid white;
+    .topbar .profile-btn {
+      font-size: 16px;
+      padding: 10px;
+      border-radius: 10px;
+      
     }
-
     .main {
       margin-left: 250px;
       padding: 30px;
@@ -301,9 +270,10 @@
       <div class="topbar">
         <input type="text" id="searchBar" placeholder="Search employee...">
         <div class="notification">🔔</div>
-        <div class="profile-btn">
-          <img src="profile.jpg" alt="Profile" />
+          <div class="profile-btn" style="color:#85876a; font-weight: bold; margin-right:20px">
+          <?php echo $_SESSION['username']; ?>
         </div>
+
       </div>
       
 
@@ -424,10 +394,9 @@
 
 
 <?php
-      }
-  }else{
-        header('location: UserAuth.html');
-    }
-
+} else {
+  // Redirect non-HR users
+  header("Location: UserAuth.html");
+  exit();
+}
 ?>
-
