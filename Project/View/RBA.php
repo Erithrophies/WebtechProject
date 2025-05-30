@@ -1,22 +1,4 @@
-<?php
-include("../Model/db.php"); 
-
-$deptResult = mysqli_query($con, "SELECT dept_id, dept_name FROM departments");
-$departments = [];
-while ($row = mysqli_fetch_assoc($deptResult)) {
-    $departments[] = $row;
-}
-
-
-$sql = "
-  SELECT e.id, e.username, e.type, d.dept_id, d.dept_name
-  FROM employee e
-  LEFT JOIN employee_department ed ON e.id = ed.employee_id
-  LEFT JOIN departments d ON ed.dept_id = d.dept_id
-";
-$result = mysqli_query($con, $sql);
-
-?>
+<<?php include("../Controller/rbaController.php"); ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -168,46 +150,46 @@ button, select, input {
 
     </tr>
   </thead>
-  <tbody>
-    <?php while ($row = mysqli_fetch_assoc($result)) { ?>
+ <tbody>
+    <?php foreach ($employees as $row): ?>
     <tr>
-  <td><?= $row['id'] ?></td>
-  <td><?= $row['username'] ?></td>
-  <td id="role-<?= $row['id'] ?>"><?= $row['type'] ?></td>
-  <td>
-    <form action="../Controller/updateRoleDept.php" method="POST">
-      <input type="hidden" name="id" value="<?= $row['id'] ?>">
-      <select name="role" id="select-<?= $row['id'] ?>" onchange="updateRole(<?= $row['id'] ?>)">
-        <option value="admin" <?= $row['type'] == 'admin' ? 'selected' : '' ?>>Admin</option>
-        <option value="manager" <?= $row['type'] == 'manager' ? 'selected' : '' ?>>Manager</option>
-        <option value="hr" <?= $row['type'] == 'hr' ? 'selected' : '' ?>>HR</option>
-        <option value="employee" <?= $row['type'] == 'employee' ? 'selected' : '' ?>>Employee</option>
-      </select>
-  </td>
-  <td>
-    <select name="department">
-      <?php foreach ($departments as $dept): ?>
-        <option value="<?= $dept['dept_id'] ?>" <?= $dept['dept_id'] == $row['dept_id'] ? 'selected' : '' ?>>
-          <?= $dept['dept_name'] ?>
-        </option>
-      <?php endforeach; ?>
-    </select>
-  </td>
-  <td>
-      <button type="submit" onclick="return confirmUpdate(<?= $row['id'] ?>, '<?= $row['username'] ?>')">Update</button>
-    </form>
-  </td>
-  <td>
-    <form class="delete-form" action="../Controller/deleteUser.php" method="POST" onsubmit="return confirm('Are you sure you want to delete this user?');">
-      <input type="hidden" name="id" value="<?= $row['id'] ?>">
-      <button type="submit">Delete</button>
-    </form>
-  </td>
-</tr>
-
-    <?php } ?>
+      <td><?= $row['id'] ?></td>
+      <td><?= $row['username'] ?></td>
+      <td id="role-<?= $row['id'] ?>"><?= $row['type'] ?></td>
+      <td>
+        <form action="../Controller/updateRoleDept.php" method="POST">
+          <input type="hidden" name="id" value="<?= $row['id'] ?>">
+          <select name="role" id="select-<?= $row['id'] ?>" onchange="updateRole(<?= $row['id'] ?>)">
+            <option value="admin" <?= $row['type'] === 'admin' ? 'selected' : '' ?>>Admin</option>
+            <option value="manager" <?= $row['type'] === 'manager' ? 'selected' : '' ?>>Manager</option>
+            <option value="hr" <?= $row ['type'] === 'hr' ? 'selected' : '' ?>>HR</option>
+            <option value="employee" <?= $row['type'] === 'employee' ? 'selected' : '' ?>>Employee</option>
+          </select>
+      </td>
+      <td>
+          <select name="department">
+            <?php foreach ($departments as $dept): ?>
+              <option value="<?= $dept['dept_id'] ?>" <?= $dept['dept_id'] == $row['dept_id'] ? 'selected' : '' ?>>
+                <?= $dept['dept_name'] ?>
+              </option>
+            <?php endforeach; ?>
+          </select>
+      </td>
+      <td>
+          <button type="submit" onclick="return confirmUpdate(<?= $row['id'] ?>, '<?= $row['username'] ?>')">Update</button>
+        </form>
+      </td>
+      <td>
+        <form class="delete-form" action="../Controller/deleteUser.php" method="POST" onsubmit="return confirm('Are you sure you want to delete this user?');">
+          <input type="hidden" name="id" value="<?= $row['id'] ?>">
+          <button type="submit">Delete</button>
+        </form>
+      </td>
+    </tr>
+    <?php endforeach; ?>
   </tbody>
 </table>
+
 
 <div class="add-btn-container">
   <form id="addUserForm" action="../Controller/addUser.php" method="POST">
@@ -234,9 +216,6 @@ button, select, input {
 </div>
 
 
-
-
-
 <script>
 function updateRole(userId) {
   const newRole = document.getElementById("select-" + userId).value;
@@ -248,10 +227,6 @@ function confirmUpdate(userId, name) {
   return confirm(name + "'s role will be updated to " + role + ". Proceed?");
 }
 
-
-
-
-
 document.getElementById("addUserForm").addEventListener("submit", function (e) {
   const username = document.getElementById("username").value.trim();
   const password = document.getElementById("password").value.trim();
@@ -261,8 +236,7 @@ document.getElementById("addUserForm").addEventListener("submit", function (e) {
   if (!username || !password || !role || !department) {
     alert("Please fill out all fields before submitting.");
     e.preventDefault(); 
-  }
-  else{
+  } else {
     alert("User added successfully");
   }
 });

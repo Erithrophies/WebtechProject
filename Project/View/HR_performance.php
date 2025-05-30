@@ -1,28 +1,10 @@
     <?php
     session_start();
-    if (isset($_COOKIE['status'])){
-      //$role = $_COOKIE['emp'];
-      if (isset($_COOKIE['emp'])){
-        header('Location: Employee_dashboard.php');}
-        if (isset($_COOKIE['mng'])){
-        header('Location: manager_dashboard.php');}
-        if (isset($_COOKIE['emp_doc'])){
-        header('Location: emp_document.php');}
-        if (isset($_COOKIE['emp_emp'])){
-        header('Location: Emp_employee.php');}
-        if (isset($_COOKIE['emp_leave'])){
-        header('Location: employee_leave.php');}
-        // if (isset($_COOKIE['hr_perfomance'])){
-        // header('Location: HR_perfomance.php');}
-        if (isset($_COOKIE['mng_leave'])){
-        header('Location: Leave_manager.php');}
-        if (isset($_COOKIE['mng_doc'])){
-        header('Location: mng_document');}
-        if (isset($_COOKIE['mng_emp'])){
-        header('Location: mng_employee.php');}
-       if (isset($_COOKIE['hr'])){
-       
-        //header('Location: Employee_dashboard.php');
+     include_once("../Controller/departmentAccess.php");
+     include_once("../Controller/Hr_perfomanceC.php");
+     include_once("../Controller/Hr_goal.php");
+
+    if (isset($_SESSION['type']) && $_SESSION['type'] === 'hr'){
        
 ?>
 <!DOCTYPE html>
@@ -224,12 +206,20 @@
 
       <div class="department-header">
         <span>Department</span>
-        <button onclick="toggleDepartments()">+</button>
+        <button>+</button>
       </div>
-      <ul id="departmentList" class="department-list">
-        <li><div class="circle art"></div><a href="art&design.html">Art & Design</a></li>
-        <li><div class="circle dev"></div><a href="development.html">Development</a></li>
-      </ul>
+      <ul id="departmentList" class="department-list" style="display: block;">
+        <?php if ($departmentName == "art & design"): ?>
+          <li>
+            <div class="circle art"></div><a href="art&design.html">art & design</a>
+          </li>
+        <?php elseif ($departmentName == "development"): ?>
+          <li>
+            <div class="circle dev"></div><a href="development.html">development</a>
+          </li>
+        <?php else: ?>
+          <li><em>No department assigned</em></li>
+        <?php endif; ?>
     </div>
 
     <div class="bottom-section">
@@ -243,6 +233,7 @@
   </div>
 
   <div class="container">
+
     <h1><i>Performance Management</i></h1>
     <div class="tabs">
       <button class="active" id="btn-review" onclick="showTab('review')">Review Templates</button>
@@ -250,13 +241,38 @@
       <button id="btn-goals" onclick="showTab('goals')">Goal Tracking</button>
     </div>
 
-    <div id="review" class="tab-content active">
-      <h3>Schedule a Review</h3>
-      <input type="text" id="reviewTitle" placeholder="Review Title">
-      <input type="date" id="reviewDate">
-      <button class="submit-btn" onclick="addReview()">Schedule</button>
-      <ul id="reviewList"></ul>
-    </div>
+    <<div id="review" class="tab-content active">
+  <h3>Schedule a Review</h3>
+  <form method="post" action="../Controller/Hr_perfomanceC.php" onsubmit="return addReview()">
+    <input type="text" name="review_title" id="review_title"  placeholder="Review Title">
+    <input type="date" name="review_date" id="review_date">
+    <button type="submit" class="submit-btn">Schedule</button>
+  </form>
+
+  <table style="width: 100%; border-collapse: collapse; margin-top: 20px;">
+    <thead>
+      <tr style="background-color: #cacea1;">
+        <th style="padding: 10px; border: 1px solid #ccc;">Review Title</th>
+        <th style="padding: 10px; border: 1px solid #ccc;">Review Date</th>
+      </tr>
+    </thead>
+    <tbody>
+      <?php if (!empty($reviews)): ?>
+        <?php foreach ($reviews as $review): ?>
+          <tr>
+            <td style="padding: 10px; border: 1px solid #ccc;"><?php echo $review['review_title']; ?></td>
+            <td style="padding: 10px; border: 1px solid #ccc;"><?php echo $review['review_date']; ?></td>
+          </tr>
+        <?php endforeach; ?>
+      <?php else: ?>
+        <tr>
+          <td colspan="3" style="padding: 10px; text-align: center;">No scheduled reviews yet.</td>
+        </tr>
+      <?php endif; ?>
+    </tbody>
+  </table>
+</div>
+
 
     <div id="feedback" class="tab-content">
       <h3>Self Assessment</h3>
@@ -271,13 +287,44 @@
 
     <div id="goals" class="tab-content">
       <h3>Track Goals</h3>
-      <input type="text" id="goalText" placeholder="Enter goal...">
-      <select id="goalStatus" style="width: 150px;">
-        <option value="Pending">Pending</option>
-        <option value="Completed">Completed</option>
-      </select><br/>
-      <button class="submit-btn" onclick="addGoal()">Add Goal</button>
-      <ul id="goalList"></ul>
+       <form method="post" action="../Controller/HR_goal.php" onsubmit="return addGoal()">
+    <input type="text" name="goal_title" id = "goal_title" placeholder="Enter new goal">
+    <button type="submit">Add Goal</button>
+  </form>
+
+  <table style="width: 100%; border-collapse: collapse; margin-top: 20px;">
+    <thead>
+      <tr style="background-color: #cacea1;">
+        <th style="padding: 10px; border: 1px solid #ccc;">Goal</th>
+        <th style="padding: 10px; border: 1px solid #ccc;">Status</th>
+        <th style="padding: 10px; border: 1px solid #ccc;">Change Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <?php if (!empty($goals)): ?>
+        <?php foreach ($goals as $goal): ?>
+          <tr>
+            <td style="padding: 10px; border: 1px solid #ccc;"><?php echo $goal['goal_title']; ?></td>
+            <td style="padding: 10px; border: 1px solid #ccc;"><?php echo $goal['status']; ?></td>
+            <td style="padding: 10px; border: 1px solid #ccc;">
+              <form method="post" action="../Controller/HR_goal .php" style="margin:0;">
+                <input type="hidden" name="goal_id" value="<?php echo $goal['goal_id']; ?>">
+                <?php if ($goal['status'] === 'Pending'): ?>
+                  <button type="submit" name="status" value="Completed">Mark Completed</button>
+                <?php else: ?>
+                  <button type="submit" name="status" value="Pending">Mark Pending</button>
+                <?php endif; ?>
+              </form>
+            </td>
+          </tr>
+        <?php endforeach; ?>
+      <?php else: ?>
+        <tr>
+          <td colspan="3" style="padding: 10px; text-align: center;">No goals added yet.</td>
+        </tr>
+      <?php endif; ?>
+    </tbody>
+  </table>
     </div>
   </div>
 
@@ -294,15 +341,9 @@
     }
 
     function addReview() {
-      const title = document.getElementById('reviewTitle').value.trim();
-      const date = document.getElementById('reviewDate').value;
-      if (title && date) {
-        const item = document.createElement('li');
-        item.textContent = `📅 ${title} — Due by ${date}`;
-        document.getElementById('reviewList').appendChild(item);
-        document.getElementById('reviewTitle').value = '';
-        document.getElementById('reviewDate').value = '';
-      } else {
+      const title = document.getElementById('review_title').value.trim();
+      const date = document.getElementById('review_date').value;
+      if (title == "" || date == "") {
         alert("Please fill out both title and date.");
       }
     }
@@ -320,28 +361,17 @@
     }
 
     function addGoal() {
-      const goal = document.getElementById('goalText').value.trim();
-      const status = document.getElementById('goalStatus').value;
-      if (goal) {
-        const item = document.createElement('li');
-        item.textContent = `🎯 ${goal} — ${status}`;
-        document.getElementById('goalList').appendChild(item);
-        document.getElementById('goalText').value = '';
-        document.getElementById('goalStatus').value = 'Pending';
-      } else {
+      const goal = document.getElementById('goal_title').value.trim();
+      if (goal == "") {
         alert("Please enter a goal.");
       }
     }
 
-    function toggleDepartments() {
-      const list = document.getElementById("departmentList");
-      list.style.display = list.style.display === "none" ? "block" : "none";
-    }
   </script>
 </body>
 </html>
 <?php
-      }
+      
   }else{
         header('location: UserAuth.html');
     }

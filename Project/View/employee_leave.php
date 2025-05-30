@@ -1,10 +1,8 @@
 <?php
 session_start();
 
-
-
 if (isset($_SESSION['type']) && $_SESSION['type'] === 'employee') {
-  // Manager is allowed to view this page
+  
   ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -16,7 +14,7 @@ if (isset($_SESSION['type']) && $_SESSION['type'] === 'employee') {
   <style>
      * { box-sizing: border-box; }
     html, body {
-      height: 100%;
+      height: 100%; 
       margin: 0;
       padding: 0;
     }
@@ -40,7 +38,7 @@ if (isset($_SESSION['type']) && $_SESSION['type'] === 'employee') {
 .main-content {
   flex: 1;
   padding: 30px;
-  margin-left: 250px; /* Match your sidebar width */
+  margin-left: 250px; 
   color: #1c1f1c;
 }
 
@@ -63,7 +61,7 @@ if (isset($_SESSION['type']) && $_SESSION['type'] === 'employee') {
 
   <div class="main-content">
     <h2>Apply for Leave</h2>
-    <form onsubmit="return validateEmployeeForm()">
+    <form action="../Controller/leaveEmp.php" method="POST" onsubmit="return validateEmployeeForm()">
       <label for="fromDate">From Date:</label>
       <input type="date" id="fromDate" name="fromDate" style="width: 300px;">
 
@@ -78,7 +76,7 @@ if (isset($_SESSION['type']) && $_SESSION['type'] === 'employee') {
         <option value="Earned">Earned</option>
       </select>
 
-      <button type="submit" style="margin-top: 20px; height: 30px;width:90px; background-color:#85876a; color:white; border:0px; font-size:13px">Submit</button>
+      <button type="submit" name = "submit" style="margin-top: 20px; height: 30px;width:90px; background-color:#85876a; color:white; border:0px; font-size:13px">Submit</button>
     </form>
   </div>
   </div>
@@ -106,7 +104,7 @@ if (isset($_SESSION['type']) && $_SESSION['type'] === 'employee') {
 </html>
 <?php
 } else {
-  // Redirect non-manager users
+  
   header("Location: UserAuth.html");
   exit();
 }

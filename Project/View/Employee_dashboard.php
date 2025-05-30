@@ -1,14 +1,13 @@
 <?php
 session_start();
-$upcomingTrainingsCount = 0;
-if (isset($_SESSION['id']) && $_SESSION['type'] === 'employee') {
-    require_once('../Model/userModel.php');
-    $upcomingTrainingsCount = getEmployeeUpcomingTrainingsCount($_SESSION['id']);
-}
+
+include_once("../Controller/pendingApprovalEmp.php");
+include_once("../Controller/employee_upcoming_training.php");
+include_once("../Controller/empCard.php");
 
 
 if (isset($_SESSION['type']) && $_SESSION['type'] === 'employee') {
-  // Manager is allowed to view this page
+  
   ?>
 
 <!DOCTYPE html>
@@ -196,14 +195,24 @@ if (isset($_SESSION['type']) && $_SESSION['type'] === 'employee') {
       <h1 style="color: #1c1f1c;">Overview</h1>
 
       <div class="dashboard-grid">
-        <div class="card">👥 <span class="highlight">Team Members:</span> 25</div>
+        <a href="Emp_employee.php" style="text-decoration: none; color: inherit;">
+        <div class="card" id="Totalemployee" style="cursor:pointer;">
+          ⚠️ <span class="highlight">Total Employees:</span> <?php echo $emps; ?>
+        </div>
+        </a>
         <div class="card">📅 <span class="highlight">Tasks Due Today:</span> 3</div>
         <div class="card">🏢 <span class="highlight">Your Teams:</span> 2</div>
-        <div class="card">📝 <span class="highlight">Pending Approvals:</span> 1</div>
+       <div class="card" id="pendingApprovalsCard" style="cursor:pointer;">
+    🕓 <span class="highlight">Pending Approvals:</span> <?php echo $pendingApprovals; ?>
+        </div>
+      
+
         <div class="card">🎉 <span class="highlight">New Messages:</span> 5</div>
+        <a href="trainingEmployee.php" style="text-decoration: none; color: inherit;">
         <div class="card" id="upcomingTrainingCard" style="cursor:pointer;">
           ⚠️ <span class="highlight">Upcoming Trainings:</span> <?php echo $upcomingTrainingsCount; ?>
         </div>
+  </a>
 
         <div class="card">📊 <span class="highlight">Your Performance:</span> 88%</div>
         <div class="card">📚 <span class="highlight">Completed Projects:</span> 4</div>
@@ -211,7 +220,7 @@ if (isset($_SESSION['type']) && $_SESSION['type'] === 'employee') {
 
       <div style="margin-right: 90px;">
 
-        <!-- Personal Performance Table -->
+       
         <div style="align-items: center;">
           <h2 style="color:#454d42; margin-left:540px"><i>Your Performance Summary</i></h2>
           <hr>
@@ -267,10 +276,10 @@ if (isset($_SESSION['type']) && $_SESSION['type'] === 'employee') {
   <script>
 
     document.getElementById('upcomingTrainingCard').addEventListener('click', function() {
-    // Option 1: redirect to a page showing details
+    
     window.location.href = 'employee_upcoming_training.php';
 
-    // Option 2: or load with AJAX and show a popup/modal (more complex)
+    
 });
   
   </script>
@@ -280,7 +289,7 @@ if (isset($_SESSION['type']) && $_SESSION['type'] === 'employee') {
 
 <?php
 } else {
-  // Redirect non-manager users
+  
   header("Location: UserAuth.html");
   exit();
 }

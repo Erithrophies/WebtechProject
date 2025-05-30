@@ -4,7 +4,7 @@ session_start();
 
 
 if (isset($_SESSION['type']) && $_SESSION['type'] === 'employee') {
-  // Manager is allowed to view this page
+  
   ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -122,7 +122,7 @@ if (isset($_SESSION['type']) && $_SESSION['type'] === 'employee') {
 
 <?php
 } else {
-  // Redirect non-manager users
+ 
   header("Location: UserAuth.html");
   exit();
 }

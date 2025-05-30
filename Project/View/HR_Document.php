@@ -1,29 +1,9 @@
 
-      <?php
+<?php
     session_start();
-    if (isset($_COOKIE['status'])){
-      //$role = $_COOKIE['emp'];
-      if (isset($_COOKIE['emp'])){
-        header('Location: Employee_dashboard.php');}
-        if (isset($_COOKIE['mng'])){
-        header('Location: manager_dashboard.php');}
-        if (isset($_COOKIE['emp_doc'])){
-        header('Location: emp_document.php');}
-        if (isset($_COOKIE['emp_emp'])){
-        header('Location: Emp_employee.php');}
-        if (isset($_COOKIE['emp_leave'])){
-        header('Location: employee_leave.php');}
-        // if (isset($_COOKIE['hr_perfomance'])){
-        // header('Location: HR_perfomance.php');}
-        if (isset($_COOKIE['mng_leave'])){
-        header('Location: Leave_manager.php');}
-        if (isset($_COOKIE['mng_doc'])){
-        header('Location: mng_document');}
-        if (isset($_COOKIE['mng_emp'])){
-        header('Location: mng_employee.php');}
-       if (isset($_COOKIE['hr'])){
-       
-        //header('Location: Employee_dashboard.php');
+    
+
+if (isset($_SESSION['type']) && $_SESSION['type'] === 'hr') {
        
 ?>
 <!DOCTYPE html>
@@ -118,7 +98,7 @@
 
 
   <div class="container">
-  <?php include 'sidebar.html'; ?>
+  <?php include 'sidebar.php'; ?>
   <div class="main">
 
     <h3><i>Important Documents📁</i></h3>
@@ -185,9 +165,9 @@
   
 </body>
 </html>
-<?php
+<<?php
       }
-  }else{
+  else{
         header('location: UserAuth.html');
     }
 

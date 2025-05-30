@@ -1,10 +1,10 @@
 <?php
 session_start();
 
-
+include('../Controller/empDir_emp.php');
 
 if (isset($_SESSION['type']) && $_SESSION['type'] === 'employee') {
-  // Manager is allowed to view this page
+  
   ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -93,6 +93,12 @@ if (isset($_SESSION['type']) && $_SESSION['type'] === 'employee') {
       color: #454d42;
       margin-bottom: 20px;
     }
+
+    .circle {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+    }
     
   </style>
 </head>
@@ -115,57 +121,35 @@ if (isset($_SESSION['type']) && $_SESSION['type'] === 'employee') {
 
         <div class="card">
           <h1>Employee List</h1>
-          <div class="table-container">
-            <table class="employee-table">
-              <thead>
-                <tr>
-                  <th>Employee ID</th>
-                  <th>Name</th>
-                  <th>Department</th>
-                  <th>Position</th>
-                  <th>Status</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>EMP001</td>
-                  <td>Jeba Sahjida</td>
-                  <td>
-                    <div style="display: flex; align-items: center; gap: 10px;">
-                      <div class="circle dev"></div>Development
-                    </div>
-                  </td>
-
-                  <td>Senior Developer</td>
-                  <td><span class="status-badge status-active">Active</span></td>
-                </tr>
-                <tr>
-                  <td>EMP002</td>
-                  <td>Ashraful Moon</td>
-                  <td>
-                    <div style="display: flex; align-items: center; gap: 10px;">
-                      <div class="circle art"></div>Art & Design
-                    </div>
-                  </td>
-
-                  <td>UI Designer</td>
-                  <td><span class="status-badge status-active">Active</span></td>
-                </tr>
-                <tr>
-                  <td>EMP003</td>
-                  <td>Owsi shafi</td>
-                  <td>
-                    <div style="display: flex; align-items: center; gap: 10px;">
-                      <div class="circle dev"></div>Development
-                    </div>
-                  </td>
-
-                  <td>Project Manager</td>
-                  <td><span class="status-badge status-leave">On Leave</span></td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
+          <?php if (!empty($employees)): ?>
+  <div class="table-container">
+    <table class="employee-table">
+      <thead>
+        <tr>
+          <th>Employee ID</th>
+          <th>Name</th>
+          <th>Department</th>
+        </tr>
+      </thead>
+      <tbody>
+        <?php foreach ($employees as $emp): ?>
+          <tr>
+            <td><?= $emp['id'] ?></td>
+            <td><?= $emp['username'] ?></td>
+            <td>
+              <div style="display: flex; align-items: center; gap: 10px;">
+                <div class="circle" style="background-color: <?= $emp['color_code'] ?>;"></div>
+          <?= $emp['department'] ?>
+              </div>
+            </td>
+          </tr>
+        <?php endforeach; ?>
+      </tbody>
+    </table>
+  </div>
+<?php else: ?>
+  <p>No employee records found.</p>
+<?php endif; ?>
         </div>
       </div>
     </div>
@@ -196,7 +180,7 @@ if (isset($_SESSION['type']) && $_SESSION['type'] === 'employee') {
 
 <?php
 } else {
-  // Redirect non-manager users
+  
   header("Location: UserAuth.html");
   exit();
 }

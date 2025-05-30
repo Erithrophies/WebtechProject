@@ -1,7 +1,12 @@
 <?php
 session_start();
-include '../Model/db.php'; 
-include '../Controller/assign_training.php';
+//include '../Model/db.php'; 
+//include '../Controller/assign_training.php';
+
+include_once("../Controller/empCard.php");
+include_once('../Controller/mngDir_mng.php');
+
+
 
 if (isset($_SESSION['type']) && $_SESSION['type'] === 'manager') {
   
@@ -331,14 +336,18 @@ if (isset($_SESSION['type']) && $_SESSION['type'] === 'manager') {
     <h1>Overview</h1>
 
     <div class="dashboard-grid">
-      <div class="card">👥 <span class="highlight">Total Employees:</span> 120</div>
+      <<a href="mng_employee.php" style="text-decoration: none; color: inherit;">
+        <div class="card" id="Totalemployee" style="cursor:pointer;">
+          ⚠️ <span class="highlight">Total Employees:</span> <?php echo $emps; ?>
+        </div>
+        </a>
       <div class="card">🌿 <span class="highlight">Active Leaves:</span> 8</div>
       <div class="card">📝 <span class="highlight">Documents Expiring Soon:</span> 3</div>
     </div>
     
     <section id="training-program" style="margin-top:30px;">
       <h1><i>Training Program Assignment</i></h1>
-       <form id="trainingForm"method="POST" onsubmit="return validateTrainingForm();">
+       <form id="trainingForm" method="POST" action="../Controller/assign_Training.php" onsubmit="return validateTrainingForm()">
         <label for="empNameTrain" style="font-size:15px; margin-left:5px">Employee:</label>
         <input type="text" id="empNameTrain" name = "username" placeholder=" Enter employee name" style="margin-left:30px; height:25px;">
          <span id="msg-train-name" class="error-message" ></span><br><br> 
@@ -354,10 +363,11 @@ if (isset($_SESSION['type']) && $_SESSION['type'] === 'manager') {
           <option>Completed</option>
         </select><br><br><br>
         
-        <button type="submit" style=" height:20px; width:250px">Assign Training</button>
+        <button type="submit" name = "submit" style=" height:20px; width:250px">Assign Training</button>
+        <a href="trainingManager.php">See the training datas</a>
       </form>
       <div id="trainingOutput" style="margin-top: 20px;">
-         <?php echo $output; ?>
+        
       </div>
 
       
@@ -392,10 +402,11 @@ if (isset($_SESSION['type']) && $_SESSION['type'] === 'manager') {
       <div class="employee-directory-col">
         <input type="text" id="employeeSearch" placeholder="Search employees by name..." aria-label="Search employee directory">
         <ul id="employeeList" aria-label="Employee list">
-          <li>John Doe</li>
-          <li>Jane Smith</li>
-          <li>Mike Johnson</li>
+            <?php foreach ($employees as $employee) { ?>
+             <li><?= $employee['username'] ?></li>
+              <?php } ?>
         </ul>
+
       </div>
       <div class="summary-table-col">
         <h2>Summary Table</h2>
@@ -404,96 +415,29 @@ if (isset($_SESSION['type']) && $_SESSION['type'] === 'manager') {
             <tr>
               <th>Name</th>
               <th>Team</th>
-              <th>Role</th>
-              <th>Status</th>
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>John Doe</td>
-              <td>Art & Design</td>
-              <td>Art & Design</td>
-              <td>Active</td>
-            </tr>
-            <tr>
-              <td>Jane Smith</td>
-              <td>Designer</td>
-              <td>UI & Ux</td>
-              <td>On Leave</td>
-            </tr>
-            <tr>
-              <td>Mike Johnson</td>
-              <td>Development</td>
-              <td>Software Engineer</td>
-              <td>Active</td>
-            </tr>
-          </tbody>
+        <?php foreach ($employees as $emp): ?>
+          <tr>
+            <td><?= $emp['username'] ?></td>
+            <td>
+              <div style="display: flex; align-items: center; gap: 10px;">
+                <div class="circle" style="background-color: <?= $emp['color_code'] ?>;"></div>
+          <?= $emp['department'] ?>
+              </div>
+            </td>
+          </tr>
+        <?php endforeach; ?>
+      </tbody>
         </table>
       </div>
     </div>
   </div> 
   
  <script>
-  const employees = ["Alice Johnson", "Bob Smith", "Charlie Davis"];
-  const assignments = [];
-  const assignedTrainings = [];
 
  
-  document.getElementById("assignTeamForm").addEventListener("submit", function (e) {
-    e.preventDefault();
-    let isValid = true;
-
-    
-    document.getElementById("msg-employee").innerHTML = "";
-    document.getElementById("msg-team").innerHTML = "";
-
-    let employee = document.getElementById("employeeSelect").value;
-    let team = document.getElementById("teamSelect").value;
-
-   
-    let msg = document.getElementById("msg-employee");
-    if ( document.getElementById("employeeSelect").selectedIndex === 0) {
-      msg.innerHTML = "Please select an employee";
-      document.getElementById("employeeSelect").style.border = "1px solid red";
-      isValid = false;
-    } else {
-      document.getElementById("employeeSelect").style.border = "1px solid #ccc";
-    }
-
-   
-    msg = document.getElementById("msg-team");
-    if (team === "" || document.getElementById("teamSelect").selectedIndex === 0) {
-      msg.innerHTML = "Please select a team";
-      document.getElementById("teamSelect").style.border = "1px solid red";
-      isValid = false;
-    } else {
-      document.getElementById("teamSelect").style.border = "1px solid #ccc";
-    }
-
-   
-    if (isValid) {
-      const exists = assignments.find(a => a.employee === employee && a.team === team);
-      if (exists) {
-        alert(employee + " is already assigned to " + team + " team.");
-        return;
-      }
-
-      assignments.push({ employee, team });
-      updateAssignmentsList();
-      document.getElementById("employeeSelect").value = "";
-      document.getElementById("teamSelect").value = "";
-    }
-  });
-
-  function updateAssignmentsList() {
-    const ul = document.getElementById("teamAssignments");
-    ul.innerHTML = "";
-    assignments.forEach(a => {
-      const li = document.createElement("li");
-      li.textContent = a.employee + " → " + a.team;
-      ul.appendChild(li);
-    });
-  }
 
  function validateTrainingForm() {
     let name = document.getElementById("empNameTrain").value.trim();
@@ -517,35 +461,13 @@ if (isset($_SESSION['type']) && $_SESSION['type'] === 'manager') {
         valid = false;
     }
 
+
+    // if (valid) {
+    //                 window.location.href = "../Controller/assign_Training.php";
+    //             }
     return valid; 
 }
 
-
-  
- 
-
-
-  
-  const employeeList = document.getElementById("employeeList");
-  const employeeSearch = document.getElementById("employeeSearch");
-
-  function updateEmployeeList(filter = "") {
-    employeeList.innerHTML = "";
-    employees
-      .filter(emp => emp.toLowerCase().includes(filter.toLowerCase()))
-      .forEach(emp => {
-        const li = document.createElement("li");
-        li.textContent = emp;
-        employeeList.appendChild(li);
-      });
-  }
-
-  employeeSearch.addEventListener("input", function () {
-    updateEmployeeList(employeeSearch.value);
-  });
-
-  //updateEmployeeList();
-  renderTrainings();
 </script>
 
 </body> 
@@ -554,6 +476,6 @@ if (isset($_SESSION['type']) && $_SESSION['type'] === 'manager') {
 } else {
   
   header("Location: UserAuth.html");
-  exit();
+  //exit();
 }
 ?>

@@ -2,7 +2,7 @@
 session_start();
 
 if (isset($_SESSION['type']) && $_SESSION['type'] === 'manager') {
-  // Manager is allowed to view this page
+  
   ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -96,13 +96,7 @@ if (isset($_SESSION['type']) && $_SESSION['type'] === 'manager') {
     var emptyMessage = document.createElement("li");
     emptyMessage.textContent = "No documents available at the moment.";
     vaultList.appendChild(emptyMessage);
-  } else {
-    for (var i = 0; i < docs.length; i++) {
-      var listItem = document.createElement("li");
-      listItem.innerHTML = docs[i].name + " <a href='" + docs[i].path + "' class='download-btn' download>Download</a>";
-      vaultList.appendChild(listItem);
-    }
-  }
+  } 
 </script>
 
 </body>
@@ -110,7 +104,7 @@ if (isset($_SESSION['type']) && $_SESSION['type'] === 'manager') {
 
 <?php
 } else {
-  // Redirect non-manager users
+  
   header("Location: UserAuth.html");
   exit();
 }

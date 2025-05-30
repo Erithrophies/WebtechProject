@@ -1,9 +1,11 @@
 
-    <?php
+<?php
 session_start();
 
+include("../Controller/HRempCard.php");
+
 if (isset($_SESSION['type']) && $_SESSION['type'] === 'hr') {
-  // HR is allowed to view this page
+  
   ?>
 
 <!DOCTYPE html>
@@ -29,79 +31,6 @@ if (isset($_SESSION['type']) && $_SESSION['type'] === 'hr') {
       color: white;
     }
 
-    .sidebar {
-      width: 250px;
-      background: #85876a;
-      padding: 30px 20px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      position: fixed;
-      height: 100vh;
-    }
-    .sidebar .top-section {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-    .sidebar h2 {
-      margin-bottom: 30px;
-      font-size: 24px;
-    }
-    .sidebar ul {
-      list-style: none;
-      padding: 0;
-      width: 100%;
-    }
-    .sidebar ul h3 {
-      margin: 20px 0 10px;
-      font-size: 16px;
-      border-bottom: 1px solid rgba(255,255,255,0.3);
-      padding-bottom: 5px;
-    }
-    .sidebar ul li {
-      margin: 10px 0;
-    }
-    .sidebar ul li a {
-      color: white;
-      text-decoration: none;
-      padding: 8px 0;
-      display: block;
-      border-radius: 5px;
-      transition: background 0.3s;
-    }
-    .sidebar ul li a:hover {
-      background-color: rgba(255, 255, 255, 0.2);
-    }
-    .department-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      cursor: pointer;  
-    }
-    .department-header button {
-      background: none;
-      border: none;
-      color: white;
-      font-size: 18px;
-      cursor: pointer;
-    }
-    .department-list li {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      padding-left: 10px;
-    }
-    .circle {
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-    }
-    .art { background-color: #f78fb3; }
-    .dev { background-color: #70a1ff; }
-    .bottom-section {
-      margin-top: auto;
-    }
 
     .topbar {
       display: flex;
@@ -256,34 +185,50 @@ if (isset($_SESSION['type']) && $_SESSION['type'] === 'hr') {
       background: #333;
     }
 
+    #employeeResults {
+  margin-top: 10px;
+  padding: 10px;
+  background: #f1f1f1;
+  color: #333;
+  border-radius: 10px;
+}
+
+
     
   </style>
 </head>
 <body>
   <form>
 
-    <?php include 'sidebar.html'; ?>
+    <?php include 'sidebar.php'; ?>
 
     <div class="main">
-      
-
       <div class="topbar">
-        <input type="text" id="searchBar" placeholder="Search employee...">
+        <input type="text" id="searchBar" placeholder="Search employees..." oninput="searchEmployee()" />
+<div id="employeeResults"></div>
+
         <div class="notification">🔔</div>
           <div class="profile-btn" style="color:#85876a; font-weight: bold; margin-right:20px">
           <?php echo $_SESSION['username']; ?>
         </div>
-
       </div>
       
 
       <h1 style="color: #1c1f1c;">Overview</h1>
 
       <div class="dashboard-grid">
-        <div class="card">👥 <span class="highlight">Total Employees:</span> 142</div>
+        <a href="HR_employee.php" style="text-decoration: none; color: inherit;">
+        <div class="card" id="Totalemployees" style="cursor:pointer;">
+          ⚠️ <span class="highlight">Total Employees:</span> <?php echo $emps; ?>
+        </div>
+        </a>
         <div class="card">📅 <span class="highlight">On Leave Today:</span> 8</div>
         <div class="card">🏢 <span class="highlight">Departments:</span> 5 Active</div>
-        <div class="card">📝 <span class="highlight">Pending Reviews:</span> 12</div>
+        <a href="HR_performance.php" style="text-decoration: none; color: inherit;">
+        <div class="card" id="" style="cursor:pointer; ">
+          📝<span class="highlight">Pending Reviews</span> 
+        </div>
+        </a>
         <div class="card">🎉 <span class="highlight">New Joiners This Month:</span> 6</div>
         <div class="card">⚠️ <span class="highlight">Documents Expiring Soon:</span> 4</div>
         <div class="card">📊 <span class="highlight">Attrition Rate:</span> 3.2%</div>
@@ -293,12 +238,11 @@ if (isset($_SESSION['type']) && $_SESSION['type'] === 'hr') {
       
 <div style="display: flex; gap: 40px; align-items: flex-start;">
 
-  <!-- Pie Chart -->
   <div class="chart-section" >
     <canvas id="orgHealthChart" width="300" height="300"></canvas>
   </div>
 
-  <!-- Employee Performance Table -->
+  
   <div style="flex: 1;">
     <h2 style="color:#454d42;">Employee Performance</h2>
     <table border="0" style="width: 100%; border-collapse: collapse; font-family: Arial, sans-serif; text-align:center" >
@@ -306,7 +250,7 @@ if (isset($_SESSION['type']) && $_SESSION['type'] === 'hr') {
       <tbody style="font-weight: bold;">
         <tr>
           <td style="padding: 8px; border: 0px solid #ddd;">Top Performer</td>
-          <td style="padding: 8px; border: 0px solid #ddd;">Sarah Ahmed (95%)</td>
+          <td style="padding: 8px; border: 0px solid #ddd;">Jeba Shajida (95%)</td>
         </tr>
         <tr style="background-color: #f9f9f9;">
           <td style="padding: 8px; border: 0px solid #ddd;">Avg Task Completion</td>
@@ -326,30 +270,25 @@ if (isset($_SESSION['type']) && $_SESSION['type'] === 'hr') {
     <h3 style="color:#454d42; margin-top: 20px;">Top 3 Employee Scores</h3>
     
     <div style="margin-bottom: 15px;">
-      <div style="color:#333;">Sarah Ahmed</div>
+      <div style="color:#333;">Jeba Shajida</div>
       <div style="background:#ddd; border-radius:10px; overflow:hidden;">
         <div style="width:95%; background:#60a5fa; padding:5px 0; color:white; text-align:center;">95%</div>
       </div>
     </div>
     <div style="margin-bottom: 15px;">
-      <div style="color:#333;">Mehedi Hasan</div>
+      <div style="color:#333;">Niloy Gomes</div>
       <div style="background:#ddd; border-radius:10px; overflow:hidden;">
         <div style="width:90%; background:#fcd34d; padding:5px 0; color:black; text-align:center;">90%</div>
       </div>
     </div>
     <div style="margin-bottom: 15px;">
-      <div style="color:#333;">Fatima Noor</div>
+      <div style="color:#333;">Sabiha Eitu</div>
       <div style="background:#ddd; border-radius:10px; overflow:hidden;">
         <div style="width:88%; background:#ef4444; padding:5px 0; color:white; text-align:center;">88%</div>
       </div>
     </div>
   </div>
-
-</div>
-
-      
-
-    
+</div>  
   </form>
 
   <script>
@@ -377,25 +316,32 @@ if (isset($_SESSION['type']) && $_SESSION['type'] === 'hr') {
       ctx.fillText("Org Health", 100, 280);
     };
 
-    function toggleDepartments() {
-      const deptList = document.getElementById("departmentList");
-      if (deptList.style.display === "none") {
-        deptList.style.display = "block";
-      } else {
-        deptList.style.display = "none"; 
-      }
-    }
+  function searchEmployee() {
+const search = document.getElementById('searchBar');
+  console.log("Typed:", search.value);  // Now works properly
 
-  
-  </script> 
+  let keyword = search.value;
+  let json = { "keyword": keyword };
+  let data = JSON.stringify(json);
+
+  let xhttp = new XMLHttpRequest();
+  xhttp.open('POST', '../Controller/SearchEmployee.php', true);
+  xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+  xhttp.send('json=' + data);
+
+  xhttp.onreadystatechange = function () {
+    if (this.readyState == 4 && this.status == 200) {
+      document.getElementById('employeeResults').innerHTML = this.responseText;
+    }
+  };
+}
+</script>
+
 </body>
 </html>
 
-
-
 <?php
 } else {
-  // Redirect non-HR users
   header("Location: UserAuth.html");
   exit();
 }

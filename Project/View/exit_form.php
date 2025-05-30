@@ -41,7 +41,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <head>
     <meta charset="UTF-8">
     <title>Exit Interview Form</title>
-    <link rel="stylesheet" href="../View/ExitInterview/exitform.css">
+    <link rel="stylesheet" href="../ExitInterview/exitform.css">
     <style>.error { color: red; }</style>
 </head>
 <body>

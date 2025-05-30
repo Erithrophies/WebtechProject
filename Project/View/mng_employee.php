@@ -1,8 +1,10 @@
 <?php
 session_start();
 
+include('../Controller/mngDir_mng.php');
+
 if (isset($_SESSION['type']) && $_SESSION['type'] === 'manager') {
-  // Manager is allowed to view this page
+  
   ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -211,70 +213,41 @@ if (isset($_SESSION['type']) && $_SESSION['type'] === 'manager') {
 
         <div class="card">
           <h2>Employee List</h2>
-          <div class="table-container">
-            <table class="employee-table">
-              <thead>
-                <tr>
-                  <th>Employee ID</th>
-                  <th>Name</th>
-                  <th>Department</th>
-                  <th>Position</th>
-                  <th>Status</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>EMP001</td>
-                  <td>John Doe</td>
-                  <td>
-                    <div style="display: flex; align-items: center; gap: 10px;">
-                      <div class="circle dev"></div>Development
-                    </div>
-                  </td>
-
-                  <td>Senior Developer</td>
-                  <td><span class="status-badge status-active">Active</span></td>
-                </tr>
-                <tr>
-                  <td>EMP002</td>
-                  <td>Jane Smith</td>
-                  <td>
-                    <div style="display: flex; align-items: center; gap: 10px;">
-                      <div class="circle art"></div>Art & Design
-                    </div>
-                  </td>
-
-                  <td>UI Designer</td>
-                  <td><span class="status-badge status-active">Active</span></td>
-                </tr>
-                <tr>
-                  <td>EMP003</td>
-                  <td>Mike Johnson</td>
-                  <td>
-                    <div style="display: flex; align-items: center; gap: 10px;">
-                      <div class="circle dev"></div>Development
-                    </div>
-                  </td>
-
-                  <td>Project Manager</td>
-                  <td><span class="status-badge status-leave">On Leave</span></td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
+ <?php if (!empty($employees)): ?>
+  <div class="table-container">
+    <table class="employee-table">
+      <thead>
+        <tr>
+          <th>Employee ID</th>
+          <th>Name</th>
+          <th>Department</th>
+        </tr>
+      </thead>
+      <tbody>
+        <?php foreach ($employees as $emp): ?>
+          <tr>
+            <td><?= $emp['id'] ?></td>
+            <td><?= $emp['username'] ?></td>
+            <td>
+              <div style="display: flex; align-items: center; gap: 10px;">
+                <div class="circle" style="background-color: <?= $emp['color_code'] ?>;"></div>
+          <?= $emp['department'] ?>
+              </div>
+            </td>
+          </tr>
+        <?php endforeach; ?>
+      </tbody>
+    </table>
+  </div>
+<?php else: ?>
+  <p>No employee records found.</p>
+<?php endif; ?>
         </div>
       </div>
     </div>
 
     <script>
-        function toggleDepartments() {
-          const deptList = document.getElementById("departmentList");
-          if (deptList.style.display === "none") {
-            deptList.style.display = "block";
-          } else {
-            deptList.style.display = "none"; 
-          }    
-        }
+
 
          document.getElementById("searchInput").addEventListener("keyup", function () {
           const filter = this.value.toLowerCase();
@@ -292,7 +265,7 @@ if (isset($_SESSION['type']) && $_SESSION['type'] === 'manager') {
 
 <?php
 } else {
-  // Redirect non-manager users
+ 
   header("Location: UserAuth.html");
   exit();
 }

@@ -1,8 +1,9 @@
 <?php
-session_start();
+//session_start();
+ include '../Controller/manager_leaveC.php';
 
 if (isset($_SESSION['type']) && $_SESSION['type'] === 'manager') {
-  // Manager is allowed to view this page
+ 
   ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -83,81 +84,60 @@ if (isset($_SESSION['type']) && $_SESSION['type'] === 'manager') {
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td>John Doe</td>
-          <td>May 15-17</td>
-          <td>Annual</td>
-          <td><textarea placeholder="Add comment" id="comment1"></textarea><div class="error" id="error1"></div></td>
-          <td>
-            <button onclick="approveLeave(1)">Approve</button>
-            <button onclick="rejectLeave(1)">Reject</button>
-          </td>
-          <td id="status1">Pending</td>
-        </tr>
-        <tr>
-          <td>Jane Smith</td>
-          <td>May 20</td>
-          <td>Sick</td>
-          <td><textarea placeholder="Add comment" id="comment2"></textarea><div class="error" id="error2"></div></td>
-          <td>
-            <button onclick="approveLeave(2)">Approve</button>
-            <button onclick="rejectLeave(2)">Reject</button>
-          </td>
-          <td id="status2">Pending</td>
-        </tr>
-      </tbody>
+  <?php foreach ($leaveRequests as $index => $leave): ?>
+  <tr>
+  <form method="post" action="../Controller/manager_leaveC.php" onsubmit="return check()">
+    <input type="hidden" name="leave_id" value="<?php echo $leave['id']; ?>">
+    <td><?php echo $leave['employee_name']; ?></td>
+    <td><?php echo $leave['from_date']; ?> to <?php echo $leave['to_date']; ?></td>
+    <td><?php echo $leave['leave_type']; ?></td>
+    <td>
+      <textarea placeholder="Add comment" id="comment" name="manager_comment"><?php echo isset($leave['manager_comment']) ? $leave['manager_comment'] : ''; ?></textarea>
+      <i><p id="msg" class="msg"></p></i>
+    </td>
+    <td>
+      <button type="submit" name="action" value="Approved" >Approve</button>
+      <button type="submit" name="action" value="Rejected">Reject</button>
+    </td>
+    <td id="status"><?php echo $leave['status']; ?></td>
+  </form>
+</tr>
+
+  <?php endforeach; ?>
+</tbody>
+
+
     </table>
   </div>
 </div>
 
 <script>
- 
-  function toggleDepartments() {
-    var deptList = document.getElementById('departmentList');
-    if (deptList.style.display === 'block') {
-      deptList.style.display = 'none';
-    } else {
-      deptList.style.display = 'block';
-    }
-  }
+  
+           document.getElementById("comment").oninput = function () {
+            document.getElementById("msg").innerHTML = "";
+        };
+
+
+        function check() {
+            let commment = document.getElementById('comment').value;
+            let msg = document.getElementById('msg');
+
+            if (comment === "") {
+                msg.innerHTML = "Please add a comment ";
+                return false;
+            }
+
+            return true;
+        }
+</script>
 
   
-  function approveLeave(row) {
-    var commentBox = document.getElementById('comment' + row);
-    var errorBox = document.getElementById('error' + row);
-    var statusCell = document.getElementById('status' + row);
-
-    var comment = commentBox.value.trim();
-    if (comment === '') {
-      errorBox.textContent = "Please add a comment before approving.";
-    } else {
-      errorBox.textContent = "";
-      statusCell.textContent = "Approved";
-      statusCell.style.color = "green";
-    }
-  }
-
- 
-  function rejectLeave(row) {
-    var commentBox = document.getElementById('comment' + row);
-    var errorBox = document.getElementById('error' + row);
-    var statusCell = document.getElementById('status' + row);
-
-    var comment = commentBox.value.trim();
-    if (comment === '') {
-      errorBox.textContent = "Please add a comment before rejecting.";
-    } else {
-      errorBox.textContent = "";
-      statusCell.textContent = "Rejected";
-      statusCell.style.color = "red";
-    }
-  }
 </script>
 </body>
 </html>
 <?php
 } else {
-  // Redirect non-manager users
+ 
   header("Location: UserAuth.html");
   exit();
 }

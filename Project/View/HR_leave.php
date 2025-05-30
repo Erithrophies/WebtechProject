@@ -61,9 +61,9 @@
   .dev { background-color: #70a1ff; }
   .bottom-section { margin-top: auto; }
 
-  /* Page content styles */
+  
   .content {
-    margin-left: 270px; /* To avoid overlap with sidebar */
+    margin-left: 270px; 
     padding: 20px;
     width: 100%;
     color: #333;
@@ -99,8 +99,8 @@
 </head>
 <body>
 
-<!-- Sidebar -->
-<div class="sidebar">
+
+<div class="sidebar.php">
   <div class="top-section">
     <h2>Workos</h2>
     <ul>
@@ -192,7 +192,7 @@ function validateSearch() {
   var error = document.getElementById('searchError');
   error.innerHTML = '';
 
-  // Manual check for empty or spaces only input (no built-in trim)
+ 
   var allSpaces = true;
   for(var i=0; i < input.length; i++) {
     if(input.charAt(i) !== ' ') {

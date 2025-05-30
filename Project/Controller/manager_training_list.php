@@ -3,9 +3,9 @@ session_start();
 require_once('../Model/db.php');
 require_once('../Model/userModel.php');
 
-// Manager dashboard: show assigned trainings
+
 if (isset($_SESSION['id']) && $_SESSION['type'] === 'manager') {
-    $trainings = getManagerAssignedTrainings($_SESSION['id']);
+   // $trainings = getManagerAssignedTrainings($_SESSION['id']);
     echo "<h2>Assigned Trainings</h2>";
     echo "<table border='1'><tr><th>Employee</th><th>Training</th><th>Date</th></tr>";
     foreach ($trainings as $t) {

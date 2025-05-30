@@ -1,28 +1,8 @@
      <?php
     session_start();
-    if (isset($_COOKIE['status'])){
-      //$role = $_COOKIE['emp'];
-      if (isset($_COOKIE['emp'])){
-        header('Location: Employee_dashboard.php');}
-        if (isset($_COOKIE['mng'])){
-        header('Location: manager_dashboard.php');}
-        if (isset($_COOKIE['emp_doc'])){
-        header('Location: emp_document.php');}
-        if (isset($_COOKIE['emp_emp'])){
-        header('Location: Emp_employee.php');}
-        if (isset($_COOKIE['emp_leave'])){
-        header('Location: employee_leave.php');}
-        // if (isset($_COOKIE['hr_perfomance'])){
-        // header('Location: HR_perfomance.php');}
-        if (isset($_COOKIE['mng_leave'])){
-        header('Location: Leave_manager.php');}
-        if (isset($_COOKIE['mng_doc'])){
-        header('Location: mng_document');}
-        if (isset($_COOKIE['mng_emp'])){
-        header('Location: mng_employee.php');}
-       if (isset($_COOKIE['hr'])){
-       
-        //header('Location: Employee_dashboard.php');
+    include('../Controller/hr_emp_dir.php');
+
+if (isset($_SESSION['type']) && $_SESSION['type'] === 'hr') {
        
 ?>
 <!DOCTYPE html>
@@ -216,7 +196,7 @@
 <body>
   <form>
     <div class="container">
-      <?php include 'sidebar.html'; ?>
+      <?php include 'sidebar.php'; ?>
       
       <div class="main">
         <div class="topbar">
@@ -229,81 +209,48 @@
         </div>
 
         <div style="margin-bottom: 20px">
-          <a href="AddEmployee.html" class="action-btn edit-btn" style="font-size: 14px; padding: 10px 20px; text-decoration: none; display: inline-block;">
+          <a href="AddEmployee.php" class="action-btn edit-btn" style="font-size: 14px; padding: 10px 20px; text-decoration: none; display: inline-block;">
             + Add Employee
           </a>
         </div>
 
         <div class="card">
-          <h2>Employee List</h2>
-          <div class="table-container">
-            <table class="employee-table">
-              <thead>
-                <tr>
-                  <th>Employee ID</th>
-                  <th>Name</th>
-                  <th>Department</th>
-                  <th>Position</th>
-                  <th>Status</th>
-                  <th>Actions</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>EMP001</td>
-                  <td>John Doe</td>
-                  <td>
-                    <div style="display: flex; align-items: center; gap: 10px;">
-                      <div class="circle dev"></div>Development
-                    </div>
-                  </td>
+  <h2>Employee List</h2>
+  <div class="table-container">
+    <table class="employee-table">
+      <thead>
+        <tr>
+          <th>Employee ID</th>
+          <th>Name</th>
+          <th>Department</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <?php foreach ($employees as $emp): ?>
+          <tr>
+            <td><?= $emp['id'] ?></td>
+            <td><?= $emp['username'] ?></td>
+            <td>
+              <div style="display: flex; align-items: center; gap: 10px;">
+                <div class="circle" style="background-color: <?= $emp['color_code'] ?>;"></div>
+          <?= $emp['department'] ?>
+              </div>
+            </td>
+            <td>
+              <a class="action-btn edit-btn" href="EditEmployee.php?id=<?= $emp['id'] ?>">Edit</a>
+              <form method="POST" action="../Controller/deleteUserHr.php" style="display:inline;" onsubmit="return confirm('Delete this employee?');">
+                <input type="hidden" name="id" value="<?= $emp['id'] ?>">
+                <button type="submit" name = "submit" class="action-btn delete-btn">Delete</button>
+              </form>
+            </td>
+          </tr>
+        <?php endforeach; ?>
+      </tbody>
+    </table>
+  </div>
+</div>
 
-                  <td>Senior Developer</td>
-                  <td><span class="status-badge status-active">Active</span></td>
-                  <td>
-                    <a class="action-btn edit-btn" href="EditEmployee.html">Edit</a>
-
-                    <button class="action-btn delete-btn">Delete</button>
-                  </td>
-                </tr>
-                <tr>
-                  <td>EMP002</td>
-                  <td>Jane Smith</td>
-                  <td>
-                    <div style="display: flex; align-items: center; gap: 10px;">
-                      <div class="circle art"></div>Art & Design
-                    </div>
-                  </td>
-
-                  <td>UI Designer</td>
-                  <td><span class="status-badge status-active">Active</span></td>
-                  <td>
-                    <a class="action-btn edit-btn" href="EditEmployee.html">Edit</a>
-
-                    <button class="action-btn delete-btn">Delete</button>
-                  </td>
-                </tr>
-                <tr>
-                  <td>EMP003</td>
-                  <td>Mike Johnson</td>
-                  <td>
-                    <div style="display: flex; align-items: center; gap: 10px;">
-                      <div class="circle dev"></div>Development
-                    </div>
-                  </td>
-
-                  <td>Project Manager</td>
-                  <td><span class="status-badge status-leave">On Leave</span></td>
-                  <td>
-                    <a class="action-btn edit-btn" href="EditEmployee.html">Edit</a>
-
-                    <button class="action-btn delete-btn">Delete</button>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
       </div>
     </div>
 
@@ -333,7 +280,7 @@
 
 <?php
       }
-  }else{
+  else{
         header('location: UserAuth.html');
     }
 

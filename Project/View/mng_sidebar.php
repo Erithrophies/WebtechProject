@@ -1,7 +1,8 @@
   <?php 
 
- include_once("../Controller/departmentAccess.php"); 
- ?>
+ include_once("../Controller/departmentAccess.php");
+//  if (isset($_SESSION['type']) && $_SESSION['type'] === 'manager') { 
+//  ?>
   <style>
     * { box-sizing: border-box; }
     html, body {
@@ -150,9 +151,6 @@
   </div>
 
   <script>
-    function toggleDepartments() {
-      const departmentList = document.getElementById('departmentList');
-      departmentList.style.display = departmentList.style.display === 'block' ? 'none' : 'block';
-    }
+
   </script>
 
