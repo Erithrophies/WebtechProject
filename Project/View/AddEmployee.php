@@ -183,7 +183,7 @@ if (isset($_SESSION['type']) && $_SESSION['type'] === 'hr') {
 
     <div class="department-header">
       <span>Department</span>
-      <button onclick="toggleDepartments()">+</button>
+      <button>+</button>
     </div>
     <ul id="departmentList" class="department-list" style="display: block;">
       <li><div class="circle art"></div><a href="art&design.html">Art & Design</a></li>
@@ -232,12 +232,7 @@ if (isset($_SESSION['type']) && $_SESSION['type'] === 'hr') {
 </div>
 
 <script>
-  function toggleDepartments() {
-    const departmentList = document.getElementById('departmentList');
-    departmentList.style.display = departmentList.style.display === 'block' ? 'none' : 'block';
-  }
-
-  function validateForm() {
+    function validateForm() {
     let isValid = true;
 
    

@@ -133,8 +133,6 @@
   .drop-zone.over {
     background-color: rgba(133, 135, 106, 0.3);
   }
-
-  /* Departments matching your sidebar colors */
   .department {
     width: 150px;
     padding: 15px;
@@ -172,7 +170,7 @@
 
     <div class="department-header">
       <span>Department</span>
-      <button onclick="toggleDepartments()">+</button>
+      <button>+</button>
     </div>
     <ul id="departmentList" class="department-list" style="display: block;">
       <li><div class="circle art"></div><a href="art&design.html">Art & Design</a></li>
@@ -208,11 +206,6 @@
 </div>
 
 <script>
-  function toggleDepartments() {
-    const departmentList = document.getElementById('departmentList');
-    departmentList.style.display = departmentList.style.display === 'block' ? 'none' : 'block';
-  }
-
   function allowDrop(event) {
     event.preventDefault();
   }

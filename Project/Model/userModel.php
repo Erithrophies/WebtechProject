@@ -56,13 +56,13 @@ function updateUserRoleAndDepartment($id, $role, $deptId) {
 
     if (mysqli_num_rows($checkResult) > 0) {
         
-        $updateDept = "UPDATE employee_department SET dept_id = $deptId WHERE employee_id = $id";
-        mysqli_query($con, $updateDept);
+        $sql = "UPDATE employee_department SET dept_id = $deptId WHERE employee_id = $id";
+        mysqli_query($con, $sql);
     } else {
         
         $joinDate = date("Y-m-d");
-        $insertDept = "INSERT INTO employee_department (employee_id, dept_id, join_date) VALUES ($id, $deptId, '$joinDate')";
-        mysqli_query($con, $insertDept);
+        $sql = "INSERT INTO employee_department (employee_id, dept_id, join_date) VALUES ($id, $deptId, '$joinDate')";
+        mysqli_query($con, $sql);
     }
 }
 

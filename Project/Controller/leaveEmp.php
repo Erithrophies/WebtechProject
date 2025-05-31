@@ -4,9 +4,6 @@ require_once('../Model/userModel.php');
 
 
 if (isset($_POST['submit']) && isset($_SESSION['id']) && $_SESSION['type'] === 'employee') {
-    // if (!isset($_SESSION['id'])) {
-    //     echo "Unauthorized access.";
-    // }
 
     $employee_id = $_SESSION['id'];
     $from_date = $_POST['fromDate'];

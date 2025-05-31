@@ -107,7 +107,7 @@
 
       <div class="department-header">
         <span>Department</span>
-        <button onclick="toggleDepartments()">+</button>
+        <button>+</button>
       </div>
       <ul id="departmentList" class="department-list" style="display: block;">
         <?php if ($departmentName == "art & design"): ?>
@@ -134,9 +134,4 @@
     </div>
   </div>
 
-  <script>
-    function toggleDepartments() {
-      const departmentList = document.getElementById('departmentList');
-      departmentList.style.display = departmentList.style.display === 'block' ? 'none' : 'block';
-    }
-  </script>
+  

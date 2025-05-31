@@ -64,7 +64,7 @@ if (isset($_SESSION['type']) && $_SESSION['type'] === 'employee') {
 <body>
 
 <div class="container">
-  <?php include 'mng_sidebar.php'; ?>
+  <?php include 'Emp_sidebar.php'; ?>
   <div class="main">
 
     <h3><i>Trainings:  -</i></h3>

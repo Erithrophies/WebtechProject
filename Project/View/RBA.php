@@ -1,4 +1,10 @@
-<<?php include("../Controller/rbaController.php"); ?>
+<<?php include("../Controller/rbaController.php");
+
+session_start();
+if (isset($_SESSION['type']) && $_SESSION['type'] === 'admin') {
+  
+  ?>
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -244,3 +250,11 @@ document.getElementById("addUserForm").addEventListener("submit", function (e) {
 
 </body>
 </html>
+
+<?php
+} else {
+ 
+  header("Location: UserAuth.html");
+  exit();
+}
+?>

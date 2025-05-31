@@ -153,28 +153,27 @@ if (isset($_SESSION['type']) && $_SESSION['type'] === 'employee') {
         </div>
       </div>
     </div>
+    </form>
 
-    <script>
-        function toggleDepartments() {
-          const deptList = document.getElementById("departmentList");
-          if (deptList.style.display === "none") {
-            deptList.style.display = "block";
-          } else {
-            deptList.style.display = "none"; 
-          }    
-        }
+<script>
 
-         document.getElementById("searchInput").addEventListener("keyup", function () {
-          const filter = this.value.toLowerCase();
-          const rows = document.querySelectorAll(".employee-table tbody tr");
+  var searchInput = document.getElementById("searchInput");
+  var rows = document.querySelectorAll(".employee-table tbody tr");
 
-          rows.forEach(row => {
-            const text = row.innerText.toLowerCase();
-            row.style.display = text.includes(filter) ? "" : "none";
-          });
-        });
-      </script>
-      </form>
+  searchInput.onkeyup = function () {
+    var filter = searchInput.value.toLowerCase();
+
+    for (var i = 0; i < rows.length; i++) {
+      var rowText = rows[i].innerText.toLowerCase();
+      if (rowText.includes(filter)) {
+        rows[i].style.display = "";
+      } else {
+        rows[i].style.display = "none";
+      }
+    }
+  };
+</script>
+      
 </body>
 </html>
 

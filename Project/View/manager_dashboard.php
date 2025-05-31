@@ -326,7 +326,8 @@ if (isset($_SESSION['type']) && $_SESSION['type'] === 'manager') {
   <div class="main">
     
     <div class="topbar">
-      <input type="text" id="searchBar" placeholder="Search employees...">
+       <input type="text" id="searchBar" placeholder="Search employees..." oninput="searchEmployee()" />
+<div id="employeeResults"></div>
       <div class="notification" title="Notifications">🔔</div>
       <div class="profile-btn" style="color:#85876a; font-weight: bold; margin-right:20px">
           <?php echo $_SESSION['username']; ?>
@@ -338,11 +339,19 @@ if (isset($_SESSION['type']) && $_SESSION['type'] === 'manager') {
     <div class="dashboard-grid">
       <<a href="mng_employee.php" style="text-decoration: none; color: inherit;">
         <div class="card" id="Totalemployee" style="cursor:pointer;">
-          ⚠️ <span class="highlight">Total Employees:</span> <?php echo $emps; ?>
+          🤵🏻 <span class="highlight">Total Employees:</span> <?php echo $emps; ?>
         </div>
         </a>
-      <div class="card">🌿 <span class="highlight">Active Leaves:</span> 8</div>
-      <div class="card">📝 <span class="highlight">Documents Expiring Soon:</span> 3</div>
+      <<a href="Leave_manager.php" style="text-decoration: none; color: inherit;">
+        <div class="card" id="leaves" style="cursor:pointer;">
+          📜 <span class="highlight">Leaves</span> 
+        </div>
+        </a>
+      <<a href="mng_document.php" style="text-decoration: none; color: inherit;">
+        <div class="card" id="doc" style="cursor:pointer;">
+          📝 <span class="highlight">Documents</span> 
+        </div>
+        </a>
     </div>
     
     <section id="training-program" style="margin-top:30px;">
@@ -375,16 +384,16 @@ if (isset($_SESSION['type']) && $_SESSION['type'] === 'manager') {
     </section>
     
     <h2>Assign Teams</h2>
-    <form id="assignTeamForm" autocomplete="off" aria-label="Assign team to employee">
+    <form id="assignTeamForm">
       <select id="employeeSelect" aria-label="Select employee">
         <option value="" disabled selected>Select Employee</option>
-        <option value="John Doe">John Doe</option>
-        <option value="Jane Smith">Jane Smith</option>
-        <option value="Mike Johnson">Mike Johnson</option>
+        <option value="Niloy Gomes">Niloy Gomes</option>
+        <option value="Jeba Shajida">Jeba Shajida</option>
+        <option value="Sabiha Eitu">Sabiha Eitu</option>
       </select>
         <span id="msg-employee" class="error-message"></span>
 
-      <select id="teamSelect" aria-label="Select team">
+      <select id="teamSelect">
         <option value="" disabled selected>Select Team</option>
         <option value="Art & Design">Art & Design</option>
         <option value="UI">UI</option>
@@ -395,13 +404,13 @@ if (isset($_SESSION['type']) && $_SESSION['type'] === 'manager') {
       <button type="submit">Assign</button>
     </form>
 
-    <ul id="teamAssignments" aria-live="polite" aria-label="Team assignments list"></ul>
+    <ul id="teamAssignments"></ul>
 
     <h2>Employee Directory</h2>
     <div class="directory-summary-row">
       <div class="employee-directory-col">
-        <input type="text" id="employeeSearch" placeholder="Search employees by name..." aria-label="Search employee directory">
-        <ul id="employeeList" aria-label="Employee list">
+        <input type="text" id="employeeSearch" placeholder="Search employees by name...">
+        <ul id="employeeList">
             <?php foreach ($employees as $employee) { ?>
              <li><?= $employee['username'] ?></li>
               <?php } ?>
@@ -437,7 +446,33 @@ if (isset($_SESSION['type']) && $_SESSION['type'] === 'manager') {
   
  <script>
 
- 
+  document.getElementById("assignTeamForm").onsubmit = function (e) {
+    var employee = document.getElementById("employeeSelect").value;
+    var team = document.getElementById("teamSelect").value;
+
+    var employeeMsg = document.getElementById("msg-employee");
+    var teamMsg = document.getElementById("msg-team");
+
+    
+    employeeMsg.innerHTML = "";
+    teamMsg.innerHTML = "";
+
+    var valid = true;
+
+    if (employee === "") {
+      employeeMsg.innerHTML = "Please select an employee.";
+      valid = false;
+    }
+
+    if (team === "") {
+      teamMsg.innerHTML = "Please select a team.";
+      valid = false;
+    }
+
+    if (!valid) {
+      e.preventDefault();
+    }
+  };
 
  function validateTrainingForm() {
     let name = document.getElementById("empNameTrain").value.trim();
@@ -467,6 +502,41 @@ if (isset($_SESSION['type']) && $_SESSION['type'] === 'manager') {
     //             }
     return valid; 
 }
+
+function searchEmployee() {
+const search = document.getElementById('searchBar');
+  console.log("Typed:", search.value);  
+  let keyword = search.value;
+  let json = { "keyword": keyword };
+  let data = JSON.stringify(json);
+
+  let xhttp = new XMLHttpRequest();
+  xhttp.open('POST', '../Controller/SearchEmployee.php', true);
+  xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+  xhttp.send('json=' + data);
+
+  xhttp.onreadystatechange = function () {
+    if (this.readyState == 4 && this.status == 200) {
+      document.getElementById('employeeResults').innerHTML = this.responseText;
+    }
+  };
+}
+
+  var searchInput = document.getElementById("employeeSearch");
+  var listItems = document.querySelectorAll("#employeeList li");
+
+  searchInput.onkeyup = function () {
+    var filter = searchInput.value.toLowerCase();
+
+    for (var i = 0; i < listItems.length; i++) {
+      var text = listItems[i].textContent.toLowerCase();
+      if (text.includes(filter)) {
+        listItems[i].style.display = "";
+      } else {
+        listItems[i].style.display = "none";
+      }
+    }
+  };
 
 </script>
 

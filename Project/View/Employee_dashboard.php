@@ -185,7 +185,8 @@ if (isset($_SESSION['type']) && $_SESSION['type'] === 'employee') {
     <div class="main">
       
       <div class="topbar">
-        <input type="text" id="searchBar" placeholder="Search teammates...">
+        <input type="text" id="searchBar" placeholder="Search employees..." oninput="searchEmployee()" />
+        <div id="employeeResults"></div>
         <div class="notification">🔔</div>
         <div class="profile-btn" style="color:#85876a; font-weight: bold; margin-right:20px">
           <?php echo $_SESSION['username']; ?>
@@ -197,11 +198,11 @@ if (isset($_SESSION['type']) && $_SESSION['type'] === 'employee') {
       <div class="dashboard-grid">
         <a href="Emp_employee.php" style="text-decoration: none; color: inherit;">
         <div class="card" id="Totalemployee" style="cursor:pointer;">
-          ⚠️ <span class="highlight">Total Employees:</span> <?php echo $emps; ?>
+          🤵🏻 <span class="highlight">Total Employees:</span> <?php echo $emps; ?>
         </div>
         </a>
-        <div class="card">📅 <span class="highlight">Tasks Due Today:</span> 3</div>
-        <div class="card">🏢 <span class="highlight">Your Teams:</span> 2</div>
+        <div class="card">📅 <span class="highlight">Tasks Due </span> 3</div>
+        <div class="card">🏢 <span class="highlight">Your Teams</span> 2</div>
        <div class="card" id="pendingApprovalsCard" style="cursor:pointer;">
     🕓 <span class="highlight">Pending Approvals:</span> <?php echo $pendingApprovals; ?>
         </div>
@@ -212,7 +213,7 @@ if (isset($_SESSION['type']) && $_SESSION['type'] === 'employee') {
         <div class="card" id="upcomingTrainingCard" style="cursor:pointer;">
           ⚠️ <span class="highlight">Upcoming Trainings:</span> <?php echo $upcomingTrainingsCount; ?>
         </div>
-  </a>
+        </a>
 
         <div class="card">📊 <span class="highlight">Your Performance:</span> 88%</div>
         <div class="card">📚 <span class="highlight">Completed Projects:</span> 4</div>
@@ -275,12 +276,25 @@ if (isset($_SESSION['type']) && $_SESSION['type'] === 'employee') {
 
   <script>
 
-    document.getElementById('upcomingTrainingCard').addEventListener('click', function() {
-    
-    window.location.href = 'employee_upcoming_training.php';
+function searchEmployee() {
+const search = document.getElementById('searchBar');
+  console.log("Typed:", search.value); 
 
-    
-});
+  let keyword = search.value;
+  let json = { "keyword": keyword };
+  let data = JSON.stringify(json);
+
+  let xhttp = new XMLHttpRequest();
+  xhttp.open('POST', '../Controller/SearchEmployee.php', true);
+  xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+  xhttp.send('json=' + data);
+
+  xhttp.onreadystatechange = function () {
+    if (this.readyState == 4 && this.status == 200) {
+      document.getElementById('employeeResults').innerHTML = this.responseText;
+    }
+  };
+}
   
   </script>
 </body>

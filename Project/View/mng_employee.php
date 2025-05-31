@@ -245,21 +245,26 @@ if (isset($_SESSION['type']) && $_SESSION['type'] === 'manager') {
         </div>
       </div>
     </div>
+     </form>
 
     <script>
 
+  var searchInput = document.getElementById("searchInput");
+  var rows = document.querySelectorAll(".employee-table tbody tr");
 
-         document.getElementById("searchInput").addEventListener("keyup", function () {
-          const filter = this.value.toLowerCase();
-          const rows = document.querySelectorAll(".employee-table tbody tr");
+  searchInput.onkeyup = function () {
+    var filter = searchInput.value.toLowerCase();
 
-          rows.forEach(row => {
-            const text = row.innerText.toLowerCase();
-            row.style.display = text.includes(filter) ? "" : "none";
-          });
-        });
+    for (var i = 0; i < rows.length; i++) {
+      var rowText = rows[i].innerText.toLowerCase();
+      if (rowText.includes(filter)) {
+        rows[i].style.display = "";
+      } else {
+        rows[i].style.display = "none";
+      }
+    }
+  };
       </script>
-      </form>
 </body>
 </html>
 

@@ -222,7 +222,11 @@ if (isset($_SESSION['type']) && $_SESSION['type'] === 'hr') {
           ⚠️ <span class="highlight">Total Employees:</span> <?php echo $emps; ?>
         </div>
         </a>
-        <div class="card">📅 <span class="highlight">On Leave Today:</span> 8</div>
+        <a href="HR_leave.php" style="text-decoration: none; color: inherit;">
+        <div class="card" id="leave" style="cursor:pointer;">
+           📅<span class="highlight">On leave</span>
+        </div>
+        </a>
         <div class="card">🏢 <span class="highlight">Departments:</span> 5 Active</div>
         <a href="HR_performance.php" style="text-decoration: none; color: inherit;">
         <div class="card" id="" style="cursor:pointer; ">
@@ -318,7 +322,7 @@ if (isset($_SESSION['type']) && $_SESSION['type'] === 'hr') {
 
   function searchEmployee() {
 const search = document.getElementById('searchBar');
-  console.log("Typed:", search.value);  // Now works properly
+  console.log("Typed:", search.value);  
 
   let keyword = search.value;
   let json = { "keyword": keyword };
@@ -336,7 +340,6 @@ const search = document.getElementById('searchBar');
   };
 }
 </script>
-
 </body>
 </html>
 
