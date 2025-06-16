@@ -165,14 +165,18 @@ main {
 }
 
 .modal-content {
+  position: relative;
   background: #fff;
   border-radius: 14px;
   padding: 32px 28px;
   box-shadow: 0 6px 32px rgba(44,62,80,0.18);
-  min-width: 260px;
-  max-width: 90vw;
+  height: 50%;
+  width: 50%;
   text-align: center;
-  position: relative;
+  margin-left: 25%;
+  margin-top: 5%;
+  
+  
 }
 
 .close {

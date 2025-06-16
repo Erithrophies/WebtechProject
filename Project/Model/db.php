@@ -3,7 +3,7 @@
     $host = "127.0.0.1";
     $dbuser = "root";
     $dbpass = "";
-    $dbname = "EMS1";
+    $dbname = "timesheet_db";
 
     function getConnection(){
         global $dbname;

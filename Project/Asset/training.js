@@ -32,22 +32,22 @@ function generateGapReport() {
   report.textContent = "📊 Skills Gap Report: Needs improvement in JavaScript and Database Systems.";
 }
 
-// --- Training Records JS (merged from training.js) ---
+
 document.addEventListener('DOMContentLoaded', function() {
   let registeredCourses = [];
-  // Each course expires 3 months after registration
+  
   let courseExpiries = {};
 
-  // Example required skills for gap report
+  
   const requiredSkills = ["C++", "Python", "Java", "Blender", "Unreal Engine", "AWS Certified", "Scrum Master"];
 
-  // Register button logic
+ 
   document.querySelectorAll('.register-btn').forEach(function(btn) {
     btn.addEventListener('click', function() {
       const course = btn.getAttribute('data-course');
       if (!registeredCourses.includes(course)) {
         registeredCourses.push(course);
-        // Set expiry date 3 months from now
+        
         const now = new Date();
         const expiry = new Date(now.setMonth(now.getMonth() + 3));
         courseExpiries[course] = expiry.toISOString().split('T')[0];
@@ -59,7 +59,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
 
-  // Update transcripts section
+  
   function updateTranscripts() {
     const completedCourses = document.getElementById('completedCourses');
     const noCoursesMsg = document.getElementById('noCoursesMsg');
@@ -69,8 +69,8 @@ document.addEventListener('DOMContentLoaded', function() {
     } else {
       noCoursesMsg.textContent = "";
       registeredCourses.forEach(function(course) {
-        // For demo, assign a random score
-        const score = Math.floor(Math.random() * 21) + 80; // 80-100
+        
+        const score = Math.floor(Math.random() * 21) + 80; 
         const expiry = courseExpiries[course] ? ` (Expires: ${courseExpiries[course]})` : "";
         const li = document.createElement('li');
         li.textContent = `${course} - Score: ${score}${expiry}`;
@@ -79,21 +79,21 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   }
 
-  // Tab switching logic for screens
+
   document.querySelectorAll('.screen-card').forEach(function(card) {
     card.addEventListener('click', function() {
       document.querySelectorAll('.screen-content').forEach(function(content) {
         content.classList.add('hidden');
       });
       document.getElementById(card.getAttribute('data-screen')).classList.remove('hidden');
-      // Update transcripts when switching to it
+     
       if (card.getAttribute('data-screen') === 'transcripts') {
         updateTranscripts();
       }
     });
   });
 
-  // Expiry alert for registered courses
+
   document.getElementById('alertBtn').addEventListener('click', function() {
     if (registeredCourses.length === 0) {
       alert("No registered courses.");
@@ -106,9 +106,9 @@ document.addEventListener('DOMContentLoaded', function() {
     alert(msg.trim());
   });
 
-  // Skills gap report
+  
   document.getElementById('gapReportBtn').addEventListener('click', function() {
-    // Use registeredCourses as completed skills
+    
     const missing = requiredSkills.filter(skill => !registeredCourses.includes(skill));
     const gapReport = document.getElementById('gapReport');
     if (missing.length > 0) {
@@ -120,4 +120,4 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   });
 });
-// ...add any other JS for this page below...
+

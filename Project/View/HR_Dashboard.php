@@ -207,7 +207,8 @@ if (isset($_SESSION['type']) && $_SESSION['type'] === 'hr') {
         <input type="text" id="searchBar" placeholder="Search employees..." oninput="searchEmployee()" />
 <div id="employeeResults"></div>
 
-        <div class="notification">🔔</div>
+        <div class="notification"><a href="notification.html" style="background-color: #85876a; color: white; text-decoration: none; padding: 5px 10px; border-radius: 5px;">🔔</a></div>
+        
           <div class="profile-btn" style="color:#85876a; font-weight: bold; margin-right:20px">
           <?php echo $_SESSION['username']; ?>
         </div>
