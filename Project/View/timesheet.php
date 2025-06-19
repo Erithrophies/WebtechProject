@@ -1,4 +1,5 @@
 <?php
+session_start(); 
 $errors = [];
 include_once('../Model/db.php');
 

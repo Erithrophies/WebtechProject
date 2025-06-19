@@ -1,5 +1,5 @@
 <?php
-session_start(); // Start the session at the very top
+session_start(); 
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -79,5 +79,76 @@ session_start(); // Start the session at the very top
   </div>
 
   <script src="../Asset/training.js"></script>
+  <script>
+  document.addEventListener('DOMContentLoaded', function() {
+   
+    document.querySelectorAll('.register-btn').forEach(function(btn) {
+        btn.addEventListener('click', function() {
+            const course = btn.getAttribute('data-course');
+            fetch('../Controller/register_training.php', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: 'course_name=' + encodeURIComponent(course)
+            })
+            .then(response => response.json())
+            .then(data => {
+                const msgDiv = document.getElementById('registerMessage');
+                msgDiv.textContent = data.message;
+                msgDiv.style.color = data.success ? '#27ae60' : '#ff4d4d';
+                if (data.success) loadTranscripts(); 
+            })
+            .catch(() => {
+                const msgDiv = document.getElementById('registerMessage');
+                msgDiv.textContent = 'An error occurred. Please try again.';
+                msgDiv.style.color = '#ff4d4d';
+            });
+        });
+    });
+
+   
+    document.querySelector('[data-screen="transcripts"]').addEventListener('click', loadTranscripts);
+
+    function loadTranscripts() {
+      fetch('../Controller/get_transcripts.php')
+        .then(response => response.json())
+        .then(data => {
+          const ul = document.getElementById('completedCourses');
+          ul.innerHTML = '';
+          if (data.success && data.transcripts.length > 0) {
+            data.transcripts.forEach(function(item) {
+              const li = document.createElement('li');
+              li.innerHTML = `<b>${item.course_name}</b> | Registered: ${item.registered_at} | Score: <span style='color:#27ae60;'>${item.score}</span>`;
+              ul.appendChild(li);
+            });
+            document.getElementById('noCoursesMsg').textContent = '';
+          } else {
+            document.getElementById('noCoursesMsg').textContent = 'No completed courses.';
+          }
+        });
+    }
+
+    
+    // Certification Tracker buttons
+    document.getElementById('alertBtn').addEventListener('click', function() {
+      fetch('../Controller/check_expiry_alert.php')
+        .then(response => response.json())
+        .then(data => {
+          const alertP = document.getElementById('expiryAlert');
+          alertP.textContent = data.message;
+          alertP.style.color = data.success ? '#27ae60' : '#ff4d4d';
+        });
+    });
+
+    document.getElementById('gapReportBtn').addEventListener('click', function() {
+      fetch('../Controller/skills_gap_report.php')
+        .then(response => response.json())
+        .then(data => {
+          const reportP = document.getElementById('gapReport');
+          reportP.textContent = data.message;
+          reportP.style.color = data.success ? '#27ae60' : '#ff4d4d';
+        });
+    });
+  });
+  </script>
 </body>
 </html>

@@ -49,11 +49,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <main>
         <h1>Exit Interview Form</h1>
         
-        <?php if (!empty($errors)): ?>
-            <div class="error">
-                <?php foreach ($errors as $err) echo $err . "<br>"; ?>
-            </div>
-        <?php endif; ?>
+        
     
         <form id="exitInterviewForm" method="post" action="">
             <section>

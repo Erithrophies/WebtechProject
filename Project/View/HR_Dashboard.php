@@ -1,4 +1,3 @@
-
 <?php
 session_start();
 
@@ -200,7 +199,7 @@ if (isset($_SESSION['type']) && $_SESSION['type'] === 'hr') {
 <body>
   <form>
 
-    <?php include 'sidebar.php'; ?>
+    <?php include 'HRsidebar.php'; ?>
 
     <div class="main">
       <div class="topbar">
@@ -210,7 +209,8 @@ if (isset($_SESSION['type']) && $_SESSION['type'] === 'hr') {
         <div class="notification"><a href="notification.html" style="background-color: #85876a; color: white; text-decoration: none; padding: 5px 10px; border-radius: 5px;">🔔</a></div>
         
           <div class="profile-btn" style="color:#85876a; font-weight: bold; margin-right:20px">
-          <?php echo $_SESSION['username']; ?>
+            <a href="profile.php" style="color: inherit; text-decoration: none;"><?php echo $_SESSION['username']; ?></a>
+          
         </div>
       </div>
       

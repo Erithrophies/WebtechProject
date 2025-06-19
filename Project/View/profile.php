@@ -1,11 +1,31 @@
 <?php
+session_start();
+include_once("../Model/db.php");
+
 $name = $email = "";
 $errors = [];
 $success = false;
 
+
+if (isset($_SESSION['id'])) {
+    $user_id = $_SESSION['id'];
+    $con = getConnection();
+    $stmt = $con->prepare("SELECT username, email, password FROM employee WHERE id = ?");
+    $stmt->bind_param("i", $user_id);
+    $stmt->execute();
+    $stmt->bind_result($db_name, $db_email, $db_password);
+    if ($stmt->fetch()) {
+        $name = $db_name;
+        $email = $db_email;
+        $_SESSION['db_password'] = $db_password; // Store current password in session for password check
+    }
+    $stmt->close();
+    $con->close();
+}
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $name = isset($_POST['name']) ? trim($_POST['name']) : "";
-    $email = isset($_POST['email']) ? trim($_POST['email']) : "";
+    $name = isset($_POST['name']) ? trim($_POST['name']) : $name;
+    $email = isset($_POST['email']) ? trim($_POST['email']) : $email;
 
     if ($name == "") {
         $errors['name'] = "Name is required.";
@@ -62,14 +82,47 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       </form>
 
       <h3>Update Password</h3>
-      <form id="update-password-form">
-        <input type="password" id="current-password" placeholder="Current Password" required />
-        <input type="password" id="new-password" placeholder="New Password" required />
-        <input type="password" id="confirm-password" placeholder="Confirm New Password" required />
+      <form id="update-password-form" method="post" autocomplete="off">
+        <input type="password" id="current-password" name="current_password" placeholder="Current Password" required />
+        <input type="password" id="new-password" name="new_password" placeholder="New Password" required />
+        <input type="password" id="confirm-password" name="confirm_password" placeholder="Confirm New Password" required />
         <button type="submit">Update Password</button>
+        <div id="password-message" style="color:red;margin-top:8px;"></div>
       </form>
     </div>
   </div>
   <script src="../Asset/profileedit.js"></script>
+  <script>
+  document.addEventListener('DOMContentLoaded', function() {
+    document.getElementById('update-password-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const currentPassword = document.getElementById('current-password').value;
+      const newPassword = document.getElementById('new-password').value;
+      const confirmPassword = document.getElementById('confirm-password').value;
+      const msgDiv = document.getElementById('password-message');
+      msgDiv.style.color = 'red';
+      if (newPassword !== confirmPassword) {
+        msgDiv.textContent = 'New passwords do not match!';
+        return;
+      }
+      fetch('../Controller/update_password.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: 'current_password=' + encodeURIComponent(currentPassword) + '&new_password=' + encodeURIComponent(newPassword)
+      })
+      .then(response => response.json())
+      .then(data => {
+        msgDiv.textContent = data.message;
+        msgDiv.style.color = data.success ? '#27ae60' : 'red';
+        if (data.success) {
+          document.getElementById('update-password-form').reset();
+        }
+      })
+      .catch(() => {
+        msgDiv.textContent = 'An error occurred. Please try again.';
+      });
+    });
+  });
+  </script>
 </body>
 </html>
